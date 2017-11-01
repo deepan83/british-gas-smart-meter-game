@@ -1,5 +1,5 @@
 <template>
-  <div id='gameScreen' :style="{ width: width + 'px', height: height + 'px' }"></div>
+  <div id='gameScreen'></div>
 </template>
 
 <script>
