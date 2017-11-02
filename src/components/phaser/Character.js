@@ -1,5 +1,84 @@
+import Phaser from 'phaser'
+import character from 'img/character.png'
+
 export default class Character {
-  constructor() {
-    console.log('constructor');
+  constructor(phaser) {
+    this.phaser = phaser;
+    this.phaser.load.image('character', character);
+  }
+  create() {
+    this.sprite = this.phaser.add.sprite(60, 100, 'character');
+    this.sprite.anchor.set(0.5);
+    this.phaser.physics.arcade.enable(this.sprite);
+    this.move(Phaser.DOWN);
+  }
+  update() {
+    this.phaser.physics.arcade.collide(this.sprite, this.phaser.map.tileLayer);
+    this.phaser.marker.x = this.phaser.math.snapToFloor(Math.floor(this.sprite.x), this.phaser.gridsize) / this.phaser.gridsize;
+    this.phaser.marker.y = this.phaser.math.snapToFloor(Math.floor(this.sprite.y), this.phaser.gridsize) / this.phaser.gridsize;
+    //  Update our grid sensors
+    this.phaser.directions[1] = this.phaser.map.map.getTileLeft(this.phaser.map.tileLayer.index, this.phaser.marker.x, this.phaser.marker.y);
+    this.phaser.directions[2] = this.phaser.map.map.getTileRight(this.phaser.map.tileLayer.index, this.phaser.marker.x, this.phaser.marker.y);
+    this.phaser.directions[3] = this.phaser.map.map.getTileAbove(this.phaser.map.tileLayer.index, this.phaser.marker.x, this.phaser.marker.y);
+    this.phaser.directions[4] = this.phaser.map.map.getTileBelow(this.phaser.map.tileLayer.index, this.phaser.marker.x, this.phaser.marker.y);
+    this.checkKeys();
+    if (this.phaser.turning !== Phaser.NONE) {
+      this.turn();
+    }
+  }
+  checkKeys() {
+    if (this.phaser.cursors.left.isDown && this.phaser.current !== Phaser.LEFT) {
+      this.checkDirection(Phaser.LEFT);
+    } else if (this.phaser.cursors.right.isDown && this.phaser.current !== Phaser.RIGHT) {
+      this.checkDirection(Phaser.RIGHT);
+    } else if (this.phaser.cursors.up.isDown && this.phaser.current !== Phaser.UP) {
+      this.checkDirection(Phaser.UP);
+    } else if (this.phaser.cursors.down.isDown && this.phaser.current !== Phaser.DOWN) {
+      this.checkDirection(Phaser.DOWN);
+    } else {
+      //  phaser forces them to hold the key down to turn the corner
+      this.phaser.turning = Phaser.NONE;
+    }
+  }
+  checkDirection(turnTo) {
+    if (this.phaser.turning === turnTo || this.phaser.directions[turnTo] === null || this.phaser.directions[turnTo].index !== this.phaser.safetile) {
+      //  Invalid direction if they're already set to turn that way
+      //  Or there is no tile there, or the tile isn't index a floor tile
+      return;
+    }
+    //  Check if they want to turn around and can
+    if (this.phaser.current === this.phaser.opposites[turnTo]) {
+      this.move(turnTo);
+    } else {
+      this.phaser.turning = turnTo;
+      this.phaser.turnPoint.x = (this.phaser.marker.x * this.phaser.gridsize) + (this.phaser.gridsize / 2);
+      this.phaser.turnPoint.y = (this.phaser.marker.y * this.phaser.gridsize) + (this.phaser.gridsize / 2);
+    }
+  }
+  move(direction) {
+    var speed = this.phaser.speed;
+    if (direction === Phaser.LEFT || direction === Phaser.UP) {
+        speed = -speed;
+    }
+    if (direction === Phaser.LEFT || direction === Phaser.RIGHT) {
+        this.sprite.body.velocity.x = speed;
+    } else {
+        this.sprite.body.velocity.y = speed;
+    }
+    this.phaser.current = direction;
+  }
+  turn() {
+    var cx = Math.floor(this.sprite.x);
+    var cy = Math.floor(this.sprite.y);
+    //  phaser needs a threshold, because at high speeds you can't turn because the coordinates skip past
+    if (!this.phaser.math.fuzzyEqual(cx, this.phaser.turnPoint.x, this.phaser.threshold) || !this.phaser.math.fuzzyEqual(cy, this.phaser.turnPoint.y, this.phaser.threshold)) {
+      return false;
+    }
+    this.sprite.x = this.phaser.turnPoint.x;
+    this.sprite.y = this.phaser.turnPoint.y;
+    this.sprite.body.reset(this.phaser.turnPoint.x, this.phaser.turnPoint.y);
+    this.move(this.phaser.turning);
+    this.phaser.turning = Phaser.NONE;
+    return true;
   }
 }

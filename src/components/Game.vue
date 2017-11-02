@@ -1,5 +1,8 @@
 <template>
-  <div id='gameScreen'></div>
+  <div>
+    <div>{{ score }}</div>
+    <div id='gameScreen'></div>
+  </div>
 </template>
 
 <script>
@@ -42,7 +45,8 @@
     },
     data () {
       return {
-        game: null
+        game: null,
+        score: 0
       }
     }
   }

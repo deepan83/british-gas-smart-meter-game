@@ -1,10 +1,7 @@
 import Phaser from 'phaser'
 
-export default function gameSetup(phaser, direction) {
+export default function gameSetup(phaser) {
   phaser.physics.startSystem(Phaser.Physics.ARCADE);
-  phaser.map = null;
-  phaser.tileLayer = null;
-  phaser.character = null;
   phaser.safetile = -1;
   phaser.gridsize = 40;
   phaser.speed = 120;
