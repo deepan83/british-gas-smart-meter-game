@@ -21,8 +21,10 @@ export default class {
     this.onHit();
   }
   update() {
-    if (!this.hitting) {
-      this.phaser.physics.arcade.overlap(this.sprite, this.phaser.character.sprite, this.hit, null, this);
+    if (!this.hitting && this.phaser.physics.arcade.overlap(this.sprite, this.phaser.character.sprite)) {
+      this.hit();
+    } else if (this.hitting && !this.phaser.physics.arcade.overlap(this.sprite, this.phaser.character.sprite)) {
+      this.hitting = false;
     }
   }
 }

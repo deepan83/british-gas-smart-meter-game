@@ -16,7 +16,7 @@ export default class {
     this.foreach(object => {
       this.objects[object].create();
       this.objects[object].onHit = () => {
-        console.log('hit')
+        // console.log('hit')
         // delete this.objects[object];
         // this.onScore(30);
       }
