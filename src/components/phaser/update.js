@@ -5,4 +5,5 @@ import turn from './turn'
 export default function update(phaser) {
   phaser.character.update();
   phaser.objects.update();
+  phaser.switchCollection.update();
 }

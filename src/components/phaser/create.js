@@ -11,5 +11,6 @@ export default function create(phaser) {
   phaser.objects.onScore = (score) => {
     this.score += score;
   };
+  phaser.switchCollection.create();
   phaser.cursors = phaser.input.keyboard.createCursorKeys();
 }
