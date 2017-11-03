@@ -10,7 +10,10 @@ export default class {
   create() {
     this.sprite = this.phaser.add.sprite(60, 100, 'character');
     this.sprite.anchor.set(0.5);
-    // this.sprite.animations.add('walk');
+    this.sprite.animations.add('walk' + Phaser.LEFT, [0,1,2]);
+    this.sprite.animations.add('walk' + Phaser.RIGHT, [3,4,5]);
+    this.sprite.animations.add('walk' + Phaser.UP, [0,1,4,5]);
+    this.sprite.animations.add('walk' + Phaser.DOWN, [0,1,4,5]);
     this.phaser.physics.arcade.enable(this.sprite);
     this.move(Phaser.DOWN)
   }
@@ -20,7 +23,6 @@ export default class {
   }
   update() {
     this.activateCollision();
-
 
     this.phaser.marker.x = this.phaser.math.snapToFloor(Math.floor(this.sprite.x), this.phaser.gridsize) / this.phaser.gridsize;
     this.phaser.marker.y = this.phaser.math.snapToFloor(Math.floor(this.sprite.y), this.phaser.gridsize) / this.phaser.gridsize;
@@ -84,6 +86,8 @@ export default class {
     } else {
         this.sprite.body.velocity.y = speed;
     }
+
+    this.sprite.animations.play('walk'+direction, 30, true);
 
     this.currentDirection = direction;
   }
