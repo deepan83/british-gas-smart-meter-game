@@ -12,5 +12,8 @@ export default function create(phaser) {
     this.score += score;
   };
   phaser.switchCollection.create();
+  phaser.input.keyboard.onPressCallback = function() {
+    console.log('press')
+  }
   phaser.cursors = phaser.input.keyboard.createCursorKeys();
 }
