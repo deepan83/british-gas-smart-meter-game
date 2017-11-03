@@ -17,12 +17,10 @@ export default class {
     this.phaser.physics.arcade.enable(this.sprite);
     this.move(Phaser.DOWN)
   }
-  stop() {
-    console.log('blah')
-    this.sprite.animations.stop('walk');
-  }
   update() {
-    this.activateCollision();
+    if (this.activateCollision()) {
+      this.sprite.animations.stop();
+    }
 
     this.phaser.marker.x = this.phaser.math.snapToFloor(Math.floor(this.sprite.x), this.phaser.gridsize) / this.phaser.gridsize;
     this.phaser.marker.y = this.phaser.math.snapToFloor(Math.floor(this.sprite.y), this.phaser.gridsize) / this.phaser.gridsize;
