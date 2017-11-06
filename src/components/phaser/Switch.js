@@ -15,7 +15,6 @@ export default class {
     this.phaser.physics.enable(this.sprite, Phaser.Physics.ARCADE);
   }
   hit() {
-    console.log('hit')
     this.hitting = true;
     this.sprite.frame = 1;
     this.onHit();

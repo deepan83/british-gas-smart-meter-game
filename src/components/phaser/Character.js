@@ -8,7 +8,11 @@ export default class {
     this.phaser.load.spritesheet('character', character, 40, 40);
   }
   create() {
-    this.sprite = this.phaser.add.sprite(60, 100, 'character');
+    var spritePosition = {
+      x: this.phaser.map.getFriendlySpawn().worldX + (this.phaser.gridsize / 2),
+      y: this.phaser.map.getFriendlySpawn().worldY + (this.phaser.gridsize / 2),
+    }
+    this.sprite = this.phaser.add.sprite(spritePosition.x, spritePosition.y, 'character');
     this.sprite.anchor.set(0.5);
     this.sprite.animations.add('walk' + Phaser.LEFT, [0,1,2]);
     this.sprite.animations.add('walk' + Phaser.RIGHT, [3,4,5]);
