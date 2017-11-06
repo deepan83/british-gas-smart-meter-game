@@ -10,8 +10,8 @@ export default class {
     this.speed = 80;
     this.phaser.load.spritesheet('enemy', enemy, 40, 40);
   }
-  create() {
-    this.sprite = this.phaser.add.sprite(180, 100, 'enemy');
+  create(x, y) {
+    this.sprite = this.phaser.add.sprite(x, y, 'enemy');
     // this.sprite.anchor.set(0.5);
     this.sprite.animations.add('walk' + Phaser.LEFT, [0,1,2]);
     this.sprite.animations.add('walk' + Phaser.RIGHT, [3,4,5]);

@@ -27,9 +27,12 @@ export default class GameMap {
   }
   setSpawns() {
     this.spawns = {};
+    var id = 1;
     var tiles = this.tileLayer.getTiles(0,0, this.tileLayer.width, this.tileLayer.height)
     tiles.forEach(tile => {
       if (tile.properties.hasOwnProperty('spawn')) {
+        tile.id = id;
+        id++;
         if (typeof this.spawns[tile.properties.spawn] === 'undefined') {
           this.spawns[tile.properties.spawn] = [];
         }
@@ -42,6 +45,13 @@ export default class GameMap {
   }
   getSpawnsByType(type) {
     return this.spawns[type];
+  }
+  getRandomSpawnsByType(type, quantity) {
+    // Shuffle the array to be randomly ordered
+    var spawns = this.spawns[type].slice(0);
+    spawns.sort(function() { return 0.5 - Math.random() });
+
+    return spawns.slice(0, quantity);
   }
   getFriendlySpawn() {
     return this.spawns.friendly[0];

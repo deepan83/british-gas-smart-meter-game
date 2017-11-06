@@ -4,5 +4,5 @@ export default function update(phaser) {
   phaser.character.update();
   phaser.objects.update();
   phaser.switchCollection.update();
-  phaser.enemy.update();
+  phaser.enemyCollection.update();
 }
