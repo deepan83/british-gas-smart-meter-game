@@ -1,0 +1,52 @@
+{"frames": {
+
+"microwave/1":
+{
+	"frame": {"x":1,"y":1,"w":40,"h":23},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":23},
+	"sourceSize": {"w":40,"h":23}
+},
+"microwave/2":
+{
+	"frame": {"x":20,"y":26,"w":19,"h":11},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":19,"h":11},
+	"sourceSize": {"w":19,"h":11}
+},
+"microwave/3":
+{
+	"frame": {"x":20,"y":39,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":2,"w":11,"h":7},
+	"sourceSize": {"w":19,"h":11}
+},
+"washing-machine/1":
+{
+	"frame": {"x":43,"y":1,"w":33,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":33,"h":40},
+	"sourceSize": {"w":33,"h":40}
+},
+"washing-machine/2":
+{
+	"frame": {"x":1,"y":26,"w":17,"h":20},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":17,"h":20},
+	"sourceSize": {"w":17,"h":20}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "objects.png",
+	"format": "RGBA8888",
+	"size": {"w":77,"h":47},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:1528a29dec44a64063bc0d58afb91d10:0586f62143fb4563aeebe08eb1ed7d2e:8d6d12ff4d5234f2a4b19e0a906dbf52$"
+}
+}

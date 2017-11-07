@@ -6,12 +6,13 @@ export default class {
   objects = {};
   constructor(phaser) {
     this.phaser = phaser;
+    this.phaser.load.atlasJSONHash('objects', '/static/objects.png', '/static/objects.json');
     this.add()
-    this.add(200, 180)
-    this.add(260, 340)
+    this.add()
+    this.add()
   }
-  add(x, y) {
-    this.objects[this.lastObjectIndex] = new Bonus(this.phaser, x, y);
+  add() {
+    this.objects[this.lastObjectIndex] = new Bonus(this.phaser);
     this.lastObjectIndex++;
   }
   create() {

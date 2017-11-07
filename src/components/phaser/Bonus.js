@@ -1,16 +1,15 @@
 import Phaser from 'phaser'
-import object from 'img/object.png'
+import getFrameKeys from './util/getFrameKeys'
 
 export default class {
-  constructor(phaser, x = 100, y = 60) {
+  constructor(phaser) {
     this.phaser = phaser;
-    this.phaser.load.image('object', object);
-    this.x = x;
-    this.y = y;
   }
   create() {
-    this.sprite = this.phaser.add.sprite(this.x, this.y, 'object');
-    this.sprite.anchor.set(0.5);
+    this.sprite = this.phaser.add.sprite(this.x, this.y, 'objects', 'microwave/1');
+    this.sprite.animations.add('puls', getFrameKeys('microwave', this.phaser.cache.getFrameData('objects')), 2, true, false);
+    this.sprite.animations.play('puls');
+    // this.sprite.anchor.set(0.5);
     this.phaser.physics.enable(this.sprite, Phaser.Physics.ARCADE);
   }
   hit() {
