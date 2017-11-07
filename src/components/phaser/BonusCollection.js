@@ -18,7 +18,7 @@ export default class {
   create() {
     var spawns = this.phaser.map.getRandomSpawnsByType('bonus', 3);
     this.foreach((object, index) => {
-      this.objects[object].create(spawns[index].worldX, spawns[index].worldY, index % 2 == 0 ? 'microwave': 'washing-machine');
+      this.objects[object].create(spawns[index].worldX + (this.phaser.gridsize / 2), spawns[index].worldY + (this.phaser.gridsize / 2), index % 2 == 0 ? 'microwave': 'washing-machine');
       this.objects[object].onHit = () => {
         delete this.objects[object];
         this.onScore(30);

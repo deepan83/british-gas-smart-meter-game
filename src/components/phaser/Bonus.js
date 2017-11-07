@@ -9,6 +9,7 @@ export default class {
   create(x, y, type) {
     this.sprite = this.phaser.add.sprite(x, y, 'objects', type + '/1');
     this.animations.puls = this.sprite.animations.add('puls', getFrameKeys(type, this.phaser.cache.getFrameData('objects')));
+    this.sprite.anchor.set(0.5);
     this.animations.puls.onComplete.add(() => {
       this.sprite.kill();
     });
@@ -16,7 +17,7 @@ export default class {
   }
   hit() {
     this.hitting = true;
-    this.sprite.animations.play('puls', 10);
+    this.sprite.animations.play('puls', 2);
     this.onHit();
   }
   update() {

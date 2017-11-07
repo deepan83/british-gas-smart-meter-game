@@ -2,7 +2,7 @@
 
 "microwave/1":
 {
-	"frame": {"x":1,"y":1,"w":40,"h":23},
+	"frame": {"x":1,"y":38,"w":40,"h":23},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":23},
@@ -10,7 +10,7 @@
 },
 "microwave/2":
 {
-	"frame": {"x":20,"y":26,"w":19,"h":11},
+	"frame": {"x":62,"y":43,"w":19,"h":11},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":19,"h":11},
@@ -18,15 +18,23 @@
 },
 "microwave/3":
 {
-	"frame": {"x":20,"y":39,"w":11,"h":7},
+	"frame": {"x":83,"y":43,"w":11,"h":7},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":4,"y":2,"w":11,"h":7},
 	"sourceSize": {"w":19,"h":11}
 },
+"microwave/4":
+{
+	"frame": {"x":1,"y":1,"w":60,"h":35},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":7,"w":60,"h":35},
+	"sourceSize": {"w":60,"h":50}
+},
 "washing-machine/1":
 {
-	"frame": {"x":43,"y":1,"w":33,"h":40},
+	"frame": {"x":63,"y":1,"w":33,"h":40},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":33,"h":40},
@@ -34,7 +42,7 @@
 },
 "washing-machine/2":
 {
-	"frame": {"x":1,"y":26,"w":17,"h":20},
+	"frame": {"x":43,"y":38,"w":17,"h":20},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":17,"h":20},
@@ -45,8 +53,8 @@
 	"version": "1.0",
 	"image": "objects.png",
 	"format": "RGBA8888",
-	"size": {"w":77,"h":47},
+	"size": {"w":97,"h":62},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:1528a29dec44a64063bc0d58afb91d10:0586f62143fb4563aeebe08eb1ed7d2e:8d6d12ff4d5234f2a4b19e0a906dbf52$"
+	"smartupdate": "$TexturePacker:SmartUpdate:77099272051a91c34efccf6237eaadae:a7786f2d1c79086ee7b3aa9766bff978:8d6d12ff4d5234f2a4b19e0a906dbf52$"
 }
 }
