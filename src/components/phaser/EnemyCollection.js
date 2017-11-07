@@ -16,12 +16,15 @@ export default class {
   }
   create() {
     var spawns = this.phaser.map.getRandomSpawnsByType('enemy', 3);
+    this.group = this.phaser.add.physicsGroup();
     this.foreach((object, index) => {
-      this.objects[object].create(spawns[index].worldX, spawns[index].worldY);
-      this.objects[object].onHit = () => {
-        delete this.objects[object];
-        this.onScore(30);
-      }
+      object = this.objects[object];
+      object.create(spawns[index].worldX, spawns[index].worldY);
+      this.group.add(object.sprite);
+      // object.onHit = () => {
+      //   delete this.objects[object];
+      //   this.onScore(30);
+      // }
     });
   }
   update() {

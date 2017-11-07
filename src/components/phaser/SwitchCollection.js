@@ -6,20 +6,21 @@ export default class {
   objects = {};
   constructor(phaser) {
     this.phaser = phaser;
+    this.hittingCharacter = false;
     this.add(60, 180)
+    this.add(180, 60)
   }
   add(x, y) {
     this.objects[this.lastObjectIndex] = new Switch(this.phaser, x, y);
     this.lastObjectIndex++;
   }
   create() {
+    this.group = this.phaser.add.physicsGroup();
     this.foreach(object => {
-      this.objects[object].create();
-      this.objects[object].onHit = () => {
-        // console.log('hit')
-        // delete this.objects[object];
-        // this.onScore(30);
-      }
+      object = this.objects[object];
+      object.create();
+      this.group.z = 50
+      this.group.add(object.sprite);
     });
   }
   update() {
