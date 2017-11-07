@@ -4,6 +4,7 @@ import Switch from './Switch'
 export default class {
   lastObjectIndex = 0;
   objects = {};
+  switchesOff = 0;
   constructor(phaser) {
     this.phaser = phaser;
     this.hittingCharacter = false;
@@ -21,6 +22,17 @@ export default class {
       object = this.objects[object];
       object.create(spawns[index].worldX + (this.phaser.gridsize / 2), spawns[index].worldY + (this.phaser.gridsize / 2));
       this.group.add(object.sprite);
+      object.onOff = () => {
+        this.switchesOff++;
+        if (this.switchesOff == 2) {
+          if (typeof this.onAllOff == 'function') {
+            this.onAllOff();
+          }
+        }
+      }
+      object.onOn = () => {
+        this.switchesOff--;
+      }
     });
   }
   update() {

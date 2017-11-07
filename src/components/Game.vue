@@ -38,9 +38,12 @@
     methods: {
       preload,
       create,
-      update
+      update,
+      finished() {
+        console.log('Fin')
+      }
     },
-    destroyed () {
+    destroyed() {
       this.game.destroy()
     },
     data () {

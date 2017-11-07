@@ -8,6 +8,7 @@ export default class {
       character: false,
       enemy: false,
     }
+    this.isOn = true;
     this.phaser.load.spritesheet('bulb', bulb, 40, 40);
   }
   create(x, y) {
@@ -17,10 +18,22 @@ export default class {
     this.phaser.physics.enable(this.sprite, Phaser.Physics.ARCADE);
   }
   off() {
-    this.sprite.frame = 1;
+    if (this.isOn) {
+      this.sprite.frame = 1;
+      this.isOn = false;
+      if (typeof this.onOff == 'function') {
+        this.onOff();
+      }
+    }
   }
   on() {
-    this.sprite.frame = 0;
+    if (!this.isOn) {
+      this.sprite.frame = 0;
+      this.isOn = true;
+      if (typeof this.onOn == 'function') {
+        this.onOn();
+      }
+    }
   }
   update() {
     this.checkHitting(this.phaser.character.sprite, 'character', this.off)
