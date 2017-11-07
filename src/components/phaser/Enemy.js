@@ -55,8 +55,8 @@ export default class {
         return;
     }
 
-    var x = (next.x * this.phaser.gridsize) + 2;
-    var y = (next.y * this.phaser.gridsize) + 2;
+    var x = (next.x * this.phaser.gridsize);
+    var y = (next.y * this.phaser.gridsize);
     // console.log("moving to", x, y, next);
     this.followingPath = true;
     this.movingTween.target = this.sprite;
