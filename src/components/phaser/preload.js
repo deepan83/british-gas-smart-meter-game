@@ -9,9 +9,16 @@ import EnemyCollection from './EnemyCollection'
 export default function preload(phaser) {
     phaser.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     phaser.map = new GameMap(phaser);
-    phaser.character = new Character(phaser);
     phaser.objects = new BonusCollection(phaser);
     phaser.switchCollection = new SwitchCollection(phaser);
+    phaser.character = new Character(phaser);
     phaser.enemyCollection = new EnemyCollection(phaser);
+    phaser.lifeCycleListeners = [
+      phaser.map,
+      phaser.objects,
+      phaser.switchCollection,
+      phaser.character,
+      phaser.enemyCollection
+    ];
     phaser.load.image('background', background);
 }

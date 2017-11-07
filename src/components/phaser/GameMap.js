@@ -56,4 +56,7 @@ export default class GameMap {
   getFriendlySpawn() {
     return this.spawns.friendly[0];
   }
+  update() {
+    return;
+  }
 }
