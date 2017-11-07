@@ -10,8 +10,8 @@ export default class {
     this.add()
     this.add()
   }
-  add(x, y) {
-    this.objects[this.lastObjectIndex] = new Enemy(this.phaser, x, y);
+  add() {
+    this.objects[this.lastObjectIndex] = new Enemy(this.phaser);
     this.lastObjectIndex++;
   }
   create() {

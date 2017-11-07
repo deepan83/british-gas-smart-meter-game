@@ -9,7 +9,7 @@ export default function create(phaser) {
     phaser.lifeCycleListeners[i].create();
   }
 
-  phaser.objects.onScore = (score) => {
+  phaser.bonusCollection.onScore = (score) => {
     this.score += score;
   };
   phaser.cursors = phaser.input.keyboard.createCursorKeys();
