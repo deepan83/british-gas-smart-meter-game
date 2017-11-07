@@ -4,17 +4,19 @@ import getFrameKeys from './util/getFrameKeys'
 export default class {
   constructor(phaser) {
     this.phaser = phaser;
+    this.animations = {};
   }
-  create() {
-    this.sprite = this.phaser.add.sprite(this.x, this.y, 'objects', 'microwave/1');
-    this.sprite.animations.add('puls', getFrameKeys('microwave', this.phaser.cache.getFrameData('objects')), 2, true, false);
-    this.sprite.animations.play('puls');
-    // this.sprite.anchor.set(0.5);
+  create(x, y, type) {
+    this.sprite = this.phaser.add.sprite(x, y, 'objects', type + '/1');
+    this.animations.puls = this.sprite.animations.add('puls', getFrameKeys(type, this.phaser.cache.getFrameData('objects')));
+    this.animations.puls.onComplete.add(() => {
+      this.sprite.kill();
+    });
     this.phaser.physics.enable(this.sprite, Phaser.Physics.ARCADE);
   }
   hit() {
     this.hitting = true;
-    this.sprite.kill();
+    this.sprite.animations.play('puls', 10);
     this.onHit();
   }
   update() {
