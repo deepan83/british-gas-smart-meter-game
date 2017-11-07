@@ -4,7 +4,7 @@ import character from 'img/character.png'
 export default class {
   constructor(phaser) {
     this.phaser = phaser;
-    this.speed = 80;
+    this.speed = 160;
     this.phaser.load.spritesheet('character', character, 40, 40);
   }
   create() {
