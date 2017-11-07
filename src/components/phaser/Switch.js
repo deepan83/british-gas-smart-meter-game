@@ -2,18 +2,16 @@ import Phaser from 'phaser'
 import bulb from 'img/bulb.png'
 
 export default class {
-  constructor(phaser, x = 100, y = 60) {
+  constructor(phaser) {
     this.phaser = phaser;
     this.hitting = {
       character: false,
       enemy: false,
     }
     this.phaser.load.spritesheet('bulb', bulb, 40, 40);
-    this.x = x;
-    this.y = y;
   }
-  create() {
-    this.sprite = this.phaser.add.sprite(this.x, this.y, 'bulb');
+  create(x, y) {
+    this.sprite = this.phaser.add.sprite(x, y, 'bulb');
     this.sprite.anchor.set(0.5);
     this.on()
     this.phaser.physics.enable(this.sprite, Phaser.Physics.ARCADE);

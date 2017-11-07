@@ -15,11 +15,11 @@ export default class {
     this.lastObjectIndex++;
   }
   create() {
+    var spawns = this.phaser.map.getRandomSpawnsByType('bulb', 2);
     this.group = this.phaser.add.physicsGroup();
-    this.foreach(object => {
+    this.foreach((object, index) => {
       object = this.objects[object];
-      object.create();
-      this.group.z = 50
+      object.create(spawns[index].worldX + (this.phaser.gridsize / 2), spawns[index].worldY + (this.phaser.gridsize / 2));
       this.group.add(object.sprite);
     });
   }
