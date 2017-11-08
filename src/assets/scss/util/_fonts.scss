@@ -1,0 +1,20 @@
+$fonts-base-folder: '~fonts/';
+
+$fonts: (
+  'Minecraft': (
+    ( 'file': 'minecraft', 'weight': 'normal', 'style': 'normal' ),
+  )
+);
+
+@each $font, $fontInfo in $fonts {
+  @each $fontStyle in $fontInfo {
+    @font-face {
+      font-family: $font;
+      $fontFile: $fonts-base-folder + map-get($fontStyle, 'file');
+      src: url($fontFile + '.woff2') format('woff2'),
+         url($fontFile + '.woff') format('woff');
+      font-weight: #{map-get($fontStyle, 'weight')};
+      font-style: #{map-get($fontStyle, 'style')};
+    }
+  }
+}
