@@ -11,13 +11,15 @@
   import create from 'components/phaser/create'
   import preload from 'components/phaser/preload'
   import update from 'components/phaser/update'
+  import levelConfig from '@/assets/levels.json'
 
   export default {
     name: 'game',
     props: {
-      level: String
+      level: String,
     },
     mounted () {
+      this.levelConfig = levelConfig.levels[this.level];
       let self = this
       if (this.game == null) {
         this.game = new Phaser.Game(600, 560, Phaser.AUTO, 'game', {
@@ -44,12 +46,11 @@
     destroyed() {
       this.game.destroy()
     },
-    data () {
-      return {
-        game: null,
-        score: 0
-      }
-    }
+    data: () => ({
+      game: null,
+      score: 0,
+      levelConfig: false
+    })
   }
 </script>
 
