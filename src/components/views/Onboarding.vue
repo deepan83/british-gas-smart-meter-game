@@ -1,10 +1,13 @@
 <template>
   <div class="page">
-    <div class="my-slider owl-carousel">
-      <div v-for="instruction in instructions" class="slide">
-        <img class="slide__image" :src="instruction.img" alt="">
-        <p class="slide__instruction" v-html="instruction.text"></p>
+    <div class="my-slider">
+      <div class="owl-carousel">
+        <div v-for="instruction in instructions" class="slide">
+          <img class="slide__image" :src="instruction.img" alt="">
+          <p class="slide__instruction" v-html="instruction.text"></p>
+        </div>
       </div>
+      <router-link :to="{name: 'level', params: {level: 1}}" class="skip">Skip</router-link>
     </div>
   </div>
 </template>
@@ -37,7 +40,7 @@ export default {
     ]
   }),
   mounted() {
-    $('.my-slider').owlCarousel({
+    $('.owl-carousel').owlCarousel({
       loop:false,
       nav:true,
       autoplay: false,
@@ -85,5 +88,14 @@ export default {
       letter-spacing: 1.25px;
       text-align: center;
     }
+  }
+  .skip {
+    z-index: 2;
+    right: 14px;
+    color: #fff;
+    bottom: 17px;
+    position: absolute;
+    font: 14px/1.15 Gillsans;
+    text-transform: uppercase;
   }
 </style>
