@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="603px" height="604px" viewBox="0 0 603 604" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <linearGradient x1="100%" y1="100%" x2="0%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#00B8F0" offset="0%"></stop>
+            <stop stop-color="#0072BB" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle-5-Copy" fill="url(#linearGradient-1)" transform="translate(301.500000, 302.000000) scale(-1, 1) translate(-301.500000, -302.000000) " x="0" y="0" width="603" height="604"></rect>
+    </g>
+</svg>

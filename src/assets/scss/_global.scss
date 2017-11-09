@@ -2,6 +2,10 @@
 
 @import 'settings';
 @import 'util/fonts';
+@import 'owl.carousel/src/scss/core';
+@import 'owl.carousel/src/scss/animate';
+@import 'owl.carousel/src/scss/autoheight';
+@import 'components/owl';
 
 *, *:before, *:after {
   box-sizing: border-box;
