@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <div>{{ score }}</div>
-    <div id='gameScreen'></div>
+  <div id="game">
+    <div class="top-bar">{{ score }}</div>
   </div>
 </template>
 
@@ -13,16 +12,15 @@
   import preload from 'components/phaser/preload'
   import update from 'components/phaser/update'
 
-  export default{
+  export default {
     name: 'game',
     props: {
-      width: Number,
-      height: Number
+      level: String
     },
     mounted () {
       let self = this
       if (this.game == null) {
-        this.game = new Phaser.Game(this.width, this.height, Phaser.AUTO, this.$el, {
+        this.game = new Phaser.Game(600, 560, Phaser.AUTO, 'game', {
           preload: function preload () {
             self.preload(this)
           },
@@ -55,13 +53,8 @@
   }
 </script>
 
-<style>
-  #gameScreen {
-    margin: 0 auto;
-  }
-
-  #gameScreen canvas {
-    display: block;
-    margin: 0 auto;
+<style lang="scss" scoped>
+  .top-bar {
+    height: 40px;
   }
 </style>

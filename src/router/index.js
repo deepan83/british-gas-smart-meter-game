@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Landing from '@/components/views/Landing'
 import Onboarding from '@/components/views/Onboarding'
-import Level from '@/components/views/Level'
+import Game from '@/components/views/Game'
 
 Vue.use(Router)
 
@@ -21,9 +21,9 @@ const router = new Router({
       component: Onboarding,
     },
     {
-      path: '/level/:level',
-      name: 'level',
-      component: Level,
+      path: '/game/:level',
+      name: 'game',
+      component: Game,
       props: true,
     },
   ]

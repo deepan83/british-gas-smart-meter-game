@@ -7,7 +7,7 @@
           <p class="slide__instruction" v-html="instruction.text"></p>
         </div>
       </div>
-      <router-link :to="{name: 'level', params: {level: 1}}" class="skip">Skip</router-link>
+      <router-link :to="{name: 'game', params: {level: 1}}" class="skip">Skip</router-link>
     </div>
   </div>
 </template>
