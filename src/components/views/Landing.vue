@@ -14,7 +14,9 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie';
 export default {
+  props: ['onboarding_always'],
   data() {
     return {
       selected: 'female'
@@ -25,8 +27,12 @@ export default {
       this.selected = selection;
     },
     start() {
-      console.log('start')
-      console.log(this.selected)
+      if (!Cookies.get('onboarding') || this.onboarding_always) {
+        Cookies.set('onboarding', true, { expires: 365 });
+        this.$router.push({ name: 'onboarding'})
+      } else {
+        this.$router.push({ name: 'level', params: { level: 1 }})
+      }
     }
   }
 }
