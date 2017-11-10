@@ -3,6 +3,7 @@ import PathFinderPlugin from 'phaser_plugin_pathfinding/bin/phaser_pathfinding-0
 import enemy from 'img/enemy.png'
 
 export default class {
+  freeze = false;
   constructor(phaser, GameMap) {
     this.followingPath = false;
     this.pathToFollow = [];
@@ -23,12 +24,21 @@ export default class {
     this.pathfinder.setGrid(this.GameMap.getLayerData(), [this.GameMap.safetile]);
     this.phaser.physics.arcade.enable(this.sprite);
 
-
     this.movingTween = this.phaser.add.tween(this.sprite);
     this.movingTween.onComplete.add(() => {
         this.followingPath = false;
         this.followPath();
     });
+    let removeTimer = this.phaser.game.time.create(false);
+    removeTimer.create(5000, false, 0, () => {
+      this.freeze = true;
+      let removeTimer = this.phaser.game.time.create(false);
+      removeTimer.create(5000, false, 0, () => {
+        this.freeze = false;
+      });
+      removeTimer.start();
+    });
+    removeTimer.start();
   }
   update() {
     if (!this.followingPath) {
@@ -48,7 +58,7 @@ export default class {
     this.pathfinder.calculatePath();
   }
   followPath() {
-    if (!this.pathToFollow.length || this.followingPath) {
+    if (!this.pathToFollow.length || this.followingPath || this.freeze) {
         return;
     }
     var next = this.pathToFollow.shift();
