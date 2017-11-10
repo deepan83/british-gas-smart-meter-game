@@ -5,22 +5,25 @@ export default class {
   lastObjectIndex = 0;
   objects = {};
   switchesOff = 0;
-  constructor(phaser) {
+  constructor(phaser, {map, character, enemyCollection}) {
     this.phaser = phaser;
+    this.GameMap = map;
+    this.Character = character;
+    this.EnemyCollection = enemyCollection;
     this.hittingCharacter = false;
-    this.add(60, 180)
-    this.add(180, 60)
+    this.add()
+    this.add()
   }
-  add(x, y) {
-    this.objects[this.lastObjectIndex] = new Switch(this.phaser, x, y);
+  add() {
+    this.objects[this.lastObjectIndex] = new Switch(this.phaser, this.Character, this.EnemyCollection);
     this.lastObjectIndex++;
   }
   create() {
-    var spawns = this.phaser.map.getRandomSpawnsByType('bulb', 2);
+    var spawns = this.GameMap.getRandomSpawnsByType('bulb', 2);
     this.group = this.phaser.add.physicsGroup();
     this.foreach((object, index) => {
       object = this.objects[object];
-      object.create(spawns[index].worldX + (this.phaser.gridsize / 2), spawns[index].worldY + (this.phaser.gridsize / 2));
+      object.create(spawns[index].worldX + (this.GameMap.gridsize / 2), spawns[index].worldY + (this.GameMap.gridsize / 2));
       this.group.add(object.sprite);
       object.onOff = () => {
         this.switchesOff++;

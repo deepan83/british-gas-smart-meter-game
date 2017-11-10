@@ -4,21 +4,23 @@ import Bonus from './Bonus'
 export default class {
   lastObjectIndex = 0;
   objects = {};
-  constructor(phaser) {
+  constructor(phaser, {map, character}) {
     this.phaser = phaser;
+    this.GameMap = map;
+    this.Character = character;
     this.phaser.load.atlasJSONHash('objects', '/static/objects.png', '/static/objects.json');
     this.add()
     this.add()
     this.add()
   }
   add() {
-    this.objects[this.lastObjectIndex] = new Bonus(this.phaser);
+    this.objects[this.lastObjectIndex] = new Bonus(this.phaser, this.Character);
     this.lastObjectIndex++;
   }
   create() {
-    var spawns = this.phaser.map.getRandomSpawnsByType('bonus', 3);
+    var spawns = this.GameMap.getRandomSpawnsByType('bonus', 3);
     this.foreach((object, index) => {
-      this.objects[object].create(spawns[index].worldX + (this.phaser.gridsize / 2), spawns[index].worldY + (this.phaser.gridsize / 2), index % 2 == 0 ? 'microwave': 'washing-machine');
+      this.objects[object].create(spawns[index].worldX + (this.GameMap.gridsize / 2), spawns[index].worldY + (this.GameMap.gridsize / 2), index % 2 == 0 ? 'microwave': 'washing-machine');
       this.objects[object].onHit = () => {
         delete this.objects[object];
         this.onScore(30);

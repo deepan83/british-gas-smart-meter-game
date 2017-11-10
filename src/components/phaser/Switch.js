@@ -2,8 +2,10 @@ import Phaser from 'phaser'
 import bulb from 'img/bulb.png'
 
 export default class {
-  constructor(phaser) {
+  constructor(phaser, Character, EnemyCollection) {
     this.phaser = phaser;
+    this.Character = Character;
+    this.EnemyCollection = EnemyCollection;
     this.hitting = {
       character: false,
       enemy: false,
@@ -36,8 +38,8 @@ export default class {
     }
   }
   update() {
-    this.checkHitting(this.phaser.character.sprite, 'character', this.off)
-    this.checkHitting(this.phaser.enemyCollection.group, 'enemy', this.on)
+    this.checkHitting(this.Character.sprite, 'character', this.off)
+    this.checkHitting(this.EnemyCollection.group, 'enemy', this.on)
   }
   checkHitting(object, type, callback) {
     if (!this.hitting[type] && this.overlap(object)) {

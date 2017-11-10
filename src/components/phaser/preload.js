@@ -6,19 +6,19 @@ import BonusCollection from './BonusCollection'
 import SwitchCollection from './SwitchCollection'
 import EnemyCollection from './EnemyCollection'
 
-export default function preload(phaser) {
+export default function preload(phaser, vGame) {
     phaser.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-    phaser.map = new GameMap(phaser);
-    phaser.bonusCollection = new BonusCollection(phaser);
-    phaser.switchCollection = new SwitchCollection(phaser);
-    phaser.character = new Character(phaser);
-    phaser.enemyCollection = new EnemyCollection(phaser);
-    phaser.lifeCycleListeners = [
-      phaser.map,
-      phaser.bonusCollection,
-      phaser.switchCollection,
-      phaser.character,
-      phaser.enemyCollection
+    vGame.map = new GameMap(phaser);
+    vGame.character = new Character(phaser, vGame);
+    vGame.bonusCollection = new BonusCollection(phaser, vGame);
+    vGame.enemyCollection = new EnemyCollection(phaser, vGame);
+    vGame.switchCollection = new SwitchCollection(phaser, vGame);
+    vGame.lifeCycleListeners = [
+      vGame.map,
+      vGame.bonusCollection,
+      vGame.switchCollection,
+      vGame.character,
+      vGame.enemyCollection
     ];
     phaser.load.image('background', background);
 }

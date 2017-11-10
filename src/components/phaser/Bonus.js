@@ -2,8 +2,9 @@ import Phaser from 'phaser'
 import getFrameKeys from './util/getFrameKeys'
 
 export default class {
-  constructor(phaser) {
+  constructor(phaser, Character) {
     this.phaser = phaser;
+    this.Character = Character;
     this.animations = {};
   }
   create(x, y, type) {
@@ -22,7 +23,7 @@ export default class {
   }
   update() {
     if (!this.hitting) {
-      this.phaser.physics.arcade.overlap(this.sprite, this.phaser.character.sprite, this.hit, null, this);
+      this.phaser.physics.arcade.overlap(this.sprite, this.Character.sprite, this.hit, null, this);
     }
   }
 }

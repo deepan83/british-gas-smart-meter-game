@@ -1,6 +1,7 @@
 <template>
   <div id="game">
-    <div class="top-bar">{{ score }}</div>
+    <div v-if="showGame" class="top-bar">{{ score }} <router-link :to="{name: 'onboarding'}">Onboard</router-link></div>
+    <div v-if="!showGame" class="preload"></div>
   </div>
 </template>
 
@@ -15,32 +16,40 @@
 
   export default {
     name: 'game',
-    props: {
-      level: String,
-    },
+    props: ['level'],
     mounted () {
       this.levelConfig = levelConfig.levels[this.level];
       let self = this
       if (this.game == null) {
-        this.game = new Phaser.Game(600, 560, Phaser.AUTO, 'game', {
-          preload: function preload () {
-            self.preload(this)
+        this.game = new Phaser.Game(600, 560, Phaser.AUTO, this.$el)
+        this.game.state.add('preload', {
+          preload: function() {
+            preload(this, self)
           },
-          create: function create () {
-            self.create(this)
+          create: function() {
+            self.holdCreate(() => {
+              self.showGame = true;
+              this.game.state.start('game')
+            });
           },
-          update: function update () {
-            self.update(this)
+        })
+        this.game.state.add('game', {
+          create: function() {
+            create(this, self);
+          },
+          update: function() {
+            update(this, self)
           }
         })
+        this.game.state.start('preload');
       }
     },
     methods: {
-      preload,
-      create,
-      update,
       finished() {
         console.log('Fin')
+      },
+      holdCreate(callback) {
+        setTimeout(callback, 5000);
       }
     },
     destroyed() {
@@ -49,7 +58,8 @@
     data: () => ({
       game: null,
       score: 0,
-      levelConfig: false
+      levelConfig: false,
+      showGame: false
     })
   }
 </script>
@@ -57,5 +67,10 @@
 <style lang="scss" scoped>
   .top-bar {
     height: 40px;
+  }
+  .preload {
+    width: 600px;
+    height: 600px;
+    background-image: url('~img/gradient.svg');
   }
 </style>

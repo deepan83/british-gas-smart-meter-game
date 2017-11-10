@@ -31,7 +31,7 @@ export default {
         Cookies.set('onboarding', true, { expires: 365 });
         this.$router.push({ name: 'onboarding'})
       } else {
-        this.$router.push({ name: 'level', params: { level: 1 }})
+        this.$router.push({ name: 'game', params: { level: 1 }})
       }
     }
   }

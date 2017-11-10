@@ -1,20 +1,18 @@
 import Phaser from 'phaser'
-import gameSetup from './gameSetup'
 
-export default function create(phaser) {
-  gameSetup(phaser);
+export default function create(phaser, vGame) {
+  phaser.physics.startSystem(Phaser.Physics.ARCADE);
   phaser.add.sprite(0, 0, 'background');
 
-  for (var i = 0; i <= phaser.lifeCycleListeners.length - 1; i++) {
-    phaser.lifeCycleListeners[i].create();
+  for (var i = 0; i <= vGame.lifeCycleListeners.length - 1; i++) {
+    vGame.lifeCycleListeners[i].create();
   }
 
-  phaser.bonusCollection.onScore = (score) => {
-    this.score += score;
+  vGame.bonusCollection.onScore = (score) => {
+    vGame.score += score;
   };
 
-  phaser.switchCollection.onAllOff = () => {
-    this.finished();
+  vGame.switchCollection.onAllOff = () => {
+    vGame.finished();
   };
-  phaser.cursors = phaser.input.keyboard.createCursorKeys();
 }

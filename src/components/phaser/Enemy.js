@@ -3,10 +3,11 @@ import PathFinderPlugin from 'phaser_plugin_pathfinding/bin/phaser_pathfinding-0
 import enemy from 'img/enemy.png'
 
 export default class {
-  constructor(phaser) {
+  constructor(phaser, GameMap) {
     this.followingPath = false;
     this.pathToFollow = [];
     this.phaser = phaser;
+    this.GameMap = GameMap;
     this.speed = 80;
     this.phaser.load.spritesheet('enemy', enemy, 40, 40);
   }
@@ -19,7 +20,7 @@ export default class {
     this.sprite.animations.add('walk' + Phaser.DOWN, [0,1,4,5]);
 
     this.pathfinder = this.phaser.game.plugins.add(Phaser.Plugin.PathFinderPlugin);
-    this.pathfinder.setGrid(this.phaser.map.map.layers[0].data, [this.phaser.safetile]);
+    this.pathfinder.setGrid(this.GameMap.getLayerData(), [this.GameMap.safetile]);
     this.phaser.physics.arcade.enable(this.sprite);
 
 
@@ -31,7 +32,7 @@ export default class {
   }
   update() {
     if (!this.followingPath) {
-      let gotoTile = this.phaser.map.randomSafeTile()
+      let gotoTile = this.GameMap.randomSafeTile()
       this.findPathTo(gotoTile.x, gotoTile.y);
     }
     this.followPath();
@@ -43,7 +44,7 @@ export default class {
         }
         this.pathToFollow = path;
     });
-    this.pathfinder.preparePathCalculation([this.phaser.map.tileLayer.getTileX(this.sprite.x), this.phaser.map.tileLayer.getTileY(this.sprite.y)], [tilex,tiley]);
+    this.pathfinder.preparePathCalculation([this.GameMap.tileLayer.getTileX(this.sprite.x), this.GameMap.tileLayer.getTileY(this.sprite.y)], [tilex,tiley]);
     this.pathfinder.calculatePath();
   }
   followPath() {
@@ -55,8 +56,8 @@ export default class {
         return;
     }
 
-    var x = (next.x * this.phaser.gridsize);
-    var y = (next.y * this.phaser.gridsize);
+    var x = (next.x * this.GameMap.gridsize);
+    var y = (next.y * this.GameMap.gridsize);
     // console.log("moving to", x, y, next);
     this.followingPath = true;
     this.movingTween.target = this.sprite;

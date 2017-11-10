@@ -4,18 +4,19 @@ import Enemy from './Enemy'
 export default class {
   lastObjectIndex = 0;
   objects = {};
-  constructor(phaser) {
+  constructor(phaser, {map}) {
     this.phaser = phaser;
+    this.GameMap = map;
     this.add()
     this.add()
     this.add()
   }
   add() {
-    this.objects[this.lastObjectIndex] = new Enemy(this.phaser);
+    this.objects[this.lastObjectIndex] = new Enemy(this.phaser, this.GameMap);
     this.lastObjectIndex++;
   }
   create() {
-    var spawns = this.phaser.map.getRandomSpawnsByType('enemy', 3);
+    var spawns = this.GameMap.getRandomSpawnsByType('enemy', 3);
     this.group = this.phaser.add.physicsGroup();
     this.foreach((object, index) => {
       object = this.objects[object];

@@ -3,6 +3,8 @@ import tiles from 'img/tiles.png'
 import map from '@/assets/map.json'
 
 export default class GameMap {
+  safetile = -1;
+  gridsize = 40;
   constructor(phaser) {
     this.phaser = phaser;
     this.phaser.load.tilemap('map', null, map, Phaser.Tilemap.TILED_JSON);
@@ -19,7 +21,7 @@ export default class GameMap {
     var safeTiles = []
     var tiles = this.tileLayer.getTiles(0,0, this.tileLayer.width, this.tileLayer.height)
     tiles.forEach(tile => {
-      if(tile.index === this.phaser.safetile) {
+      if(tile.index === this.safetile) {
         safeTiles.push(tile)
       }
     })
@@ -58,5 +60,8 @@ export default class GameMap {
   }
   update() {
     return;
+  }
+  getLayerData() {
+    return this.map.layers[0].data;
   }
 }
