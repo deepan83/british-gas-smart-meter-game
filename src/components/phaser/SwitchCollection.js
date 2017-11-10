@@ -31,6 +31,7 @@ export default class {
       object.create(spawns[index].worldX + (this.GameMap.gridsize / 2), spawns[index].worldY + (this.GameMap.gridsize / 2));
       this.group.add(object.sprite);
       object.onOff = () => {
+        this.onScore(1000);
         this.switchesOff++;
         if (this.switchesOff == 2) {
           if (typeof this.onAllOff == 'function') {
@@ -39,6 +40,7 @@ export default class {
         }
       }
       object.onOn = () => {
+        this.onScore(-1000);
         this.switchesOff--;
       }
     });

@@ -14,4 +14,7 @@ export default function create(phaser, vGame) {
   vGame.switchCollection.onAllOff = () => {
     vGame.finished();
   };
+  vGame.switchCollection.onScore = (score) => {
+    vGame.score += score;
+  };
 }
