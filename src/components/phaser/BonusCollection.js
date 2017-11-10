@@ -4,32 +4,43 @@ import Bonus from './Bonus'
 export default class {
   lastObjectIndex = 0;
   objects = {};
-  constructor(phaser, {map, character, levelConfig}) {
+  constructor(phaser, vGame) {
     this.phaser = phaser;
-    this.GameMap = map;
-    this.Character = character;
-    this.levelConfig = levelConfig;
+    this.vGame = vGame;
+    this.GameMap = vGame.map;
+    this.Character = vGame.character;
+    this.levelConfig = vGame.levelConfig;
     this.phaser.load.atlasJSONHash('objects', '/static/objects.png', '/static/objects.json');
-    this.addObjects();
-  }
-  addObjects() {
-    for (var i = 0; i < this.levelConfig.bonuses; i++) {
-      this.add();
-    }
   }
   add() {
-    this.objects[this.lastObjectIndex] = new Bonus(this.phaser, this.Character);
+    let spawn = this.GameMap.getRandomSpawnByType('bonus');
+    let index = this.lastObjectIndex;
+    let position = {
+      x: spawn.worldX + (this.GameMap.gridsize / 2),
+      y: spawn.worldY + (this.GameMap.gridsize / 2)
+    };
+    this.objects[index] = new Bonus(this.phaser, this.Character, position, this.levelConfig.bonusTypes[Math.floor(Math.random() * this.levelConfig.bonusTypes.length)]);
+    let removeTimer = this.phaser.game.time.create(false);
+    this.objects[index].onHit = (score) => {
+      this.vGame.score += score;
+      this.remove(index)
+      removeTimer.stop();
+    };
+    removeTimer.create(5000, false, 0, () => {
+      this.objects[index].remove();
+      this.remove(index)
+    }, this);
+    removeTimer.start();
+
     this.lastObjectIndex++;
   }
+  remove(index) {
+    delete this.objects[index];
+  }
   create() {
-    var spawns = this.GameMap.getRandomSpawnsByType('bonus', this.levelConfig.bonuses);
-    this.foreach((object, index) => {
-      this.objects[object].create(spawns[index].worldX + (this.GameMap.gridsize / 2), spawns[index].worldY + (this.GameMap.gridsize / 2), index % 2 == 0 ? 'microwave': 'washing-machine');
-      this.objects[object].onHit = () => {
-        delete this.objects[object];
-        this.onScore(30);
-      }
-    });
+    this.timer = this.phaser.game.time.create(false);
+    this.timer.loop(10000, this.add, this);
+    this.timer.start();
   }
   update() {
     this.foreach(object => {

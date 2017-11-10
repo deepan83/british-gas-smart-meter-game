@@ -6,7 +6,17 @@
       "id": "1",
       "bonuses": 1,
       "bulbs": 1,
-      "enemies": 1
+      "enemies": 1,
+      "bonusTypes": [
+        {
+          "score": 250,
+          "name": "microwave"
+        },
+        {
+          "score": 500,
+          "name": "washing-machine"
+        }
+      ]
     },
     "2": {
       "name": "The Lounge",

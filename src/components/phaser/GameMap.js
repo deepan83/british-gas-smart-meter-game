@@ -60,6 +60,10 @@ export default class GameMap {
 
     return spawns.slice(0, quantity);
   }
+  getRandomSpawnByType(type) {
+    var spawn = this.getRandomSpawnsByType(type, 1);
+    return spawn[0];
+  }
   getFriendlySpawn() {
     return this.spawns.friendly[0];
   }
