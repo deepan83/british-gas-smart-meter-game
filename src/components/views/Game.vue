@@ -44,7 +44,7 @@
             let timer = this.game.time.create(false);
 
             //  Set a TimerEvent to occur after 2 seconds
-            timer.loop(100, () => {
+            timer.loop(1000, () => {
               self.time++;
               if (self.time == 60) {
                 timer.stop();
