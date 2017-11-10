@@ -1,5 +1,4 @@
 import Phaser from 'phaser'
-import background from 'img/background.png'
 import Character from './Character'
 import GameMap from './GameMap'
 import BonusCollection from './BonusCollection'
@@ -8,7 +7,7 @@ import EnemyCollection from './EnemyCollection'
 
 export default function preload(phaser, vGame) {
     phaser.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-    vGame.map = new GameMap(phaser);
+    vGame.map = new GameMap(phaser, vGame);
     vGame.character = new Character(phaser, vGame);
     vGame.bonusCollection = new BonusCollection(phaser, vGame);
     vGame.enemyCollection = new EnemyCollection(phaser, vGame);
@@ -20,5 +19,4 @@ export default function preload(phaser, vGame) {
       vGame.character,
       vGame.enemyCollection
     ];
-    phaser.load.image('background', background);
 }

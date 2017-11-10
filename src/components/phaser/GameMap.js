@@ -1,21 +1,23 @@
 import Phaser from 'phaser'
-import tiles from 'img/tiles.png'
-import map from '@/assets/map.json'
 
 export default class GameMap {
   safetile = -1;
   gridsize = 40;
-  constructor(phaser) {
+  constructor(phaser, {levelConfig}) {
     this.phaser = phaser;
-    this.phaser.load.tilemap('map', null, map, Phaser.Tilemap.TILED_JSON);
-    this.phaser.load.image('tiles', tiles);
+    this.phaser.load.tilemap('map', '/static/maps/levels/' + levelConfig.id + '-' + levelConfig.short + '/map.json', null, Phaser.Tilemap.TILED_JSON);
+    this.phaser.load.image('tiles', '/static/maps/levels/' + levelConfig.id + '-' + levelConfig.short + '/tiles.png');
+    this.phaser.load.image('spawns', '/static/maps/spawns.png');
+    this.phaser.load.image('background', '/static/backgrounds/' + levelConfig.short + '.png');
   }
   create() {
+    this.phaser.add.sprite(0, 0, 'background');
     this.map = this.phaser.add.tilemap('map');
     this.map.addTilesetImage('tiles', 'tiles');
+    this.map.addTilesetImage('spawns', 'spawns');
     this.tileLayer = this.map.createLayer('Tile Layer 1');
     this.setSpawns();
-    this.map.setCollisionBetween(1,27, true, this.tileLayer);
+    this.map.setCollision(5, true, this.tileLayer);
   }
   randomSafeTile() {
     var safeTiles = []
@@ -29,10 +31,13 @@ export default class GameMap {
   }
   setSpawns() {
     this.spawns = {};
-    var id = 1;
-    var tiles = this.tileLayer.getTiles(0,0, this.tileLayer.width, this.tileLayer.height)
+
+    let id = 1;
+    let tiles = this.tileLayer.getTiles(0,0, this.tileLayer.width, this.tileLayer.height)
+    let spawnTileIndexes = [];
     tiles.forEach(tile => {
       if (tile.properties.hasOwnProperty('spawn')) {
+        spawnTileIndexes.push(tile.index);
         tile.id = id;
         id++;
         if (typeof this.spawns[tile.properties.spawn] === 'undefined') {
@@ -41,9 +46,9 @@ export default class GameMap {
         this.spawns[tile.properties.spawn].push(tile);
       }
     })
-    for (var i = 29; i < 33; i++) {
-      this.map.replace(i, -1);
-    }
+    spawnTileIndexes.forEach((index) => {
+      this.map.replace(index, -1);
+    });
   }
   getSpawnsByType(type) {
     return this.spawns[type];

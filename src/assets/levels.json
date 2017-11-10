@@ -3,7 +3,42 @@
     "1": {
       "name": "The Garden",
       "short": "garden",
-      "id": "1"
+      "id": "1",
+      "bonuses": 1,
+      "bulbs": 1,
+      "enemies": 1
+    },
+    "2": {
+      "name": "The Lounge",
+      "short": "lounge",
+      "id": "2",
+      "bonuses": 1,
+      "bulbs": 1,
+      "enemies": 1
+    },
+    "3": {
+      "name": "The Bedroom",
+      "short": "bedroom",
+      "id": "3",
+      "bonuses": 1,
+      "bulbs": 1,
+      "enemies": 1
+    },
+    "4": {
+      "name": "The Bathroom",
+      "short": "bathroom",
+      "id": "4",
+      "bonuses": 1,
+      "bulbs": 1,
+      "enemies": 1
+    },
+    "5": {
+      "name": "The Kitchen",
+      "short": "kitchen",
+      "id": "5",
+      "bonuses": 1,
+      "bulbs": 1,
+      "enemies": 1
     }
   }
 }

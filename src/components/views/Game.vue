@@ -33,7 +33,6 @@
           create: function() {
             let startNowDifference = Math.floor(Date.now()) - self.initTime;
             let holdTime = 4000 - startNowDifference;
-            console.log(holdTime);
             self.holdCreate(() => {
               self.showGame = true;
               this.game.state.start('game')
