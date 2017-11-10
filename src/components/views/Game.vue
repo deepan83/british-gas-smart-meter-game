@@ -1,6 +1,6 @@
 <template>
   <div id="game">
-    <div v-if="showGame" class="top-bar">{{ score }} <router-link :to="{name: 'onboarding'}">Onboard</router-link></div>
+    <div v-if="showGame" class="top-bar">{{ score }} {{ time }}</div>
     <div v-if="!showGame" class="preload">
       <div class="level">Level {{ this.levelConfig.id }}</div>
       <div class="level-name">{{ this.levelConfig.name }}</div>
@@ -41,22 +41,36 @@
         })
         this.game.state.add('game', {
           create: function() {
+            let timer = this.game.time.create(false);
+
+            //  Set a TimerEvent to occur after 2 seconds
+            timer.loop(100, () => {
+              self.time++;
+              if (self.time == 60) {
+                timer.stop();
+                self.finished();
+              }
+            }, this);
+
+            //  Start the timer running - this is important!
+            //  It won't start automatically, allowing you to hook it to button events and the like.
+            timer.start();
             create(this, self);
           },
           update: function() {
             update(this, self)
-          }
+          },
         })
         this.game.state.start('preload');
       }
     },
     methods: {
       finished() {
-        console.log('Fin')
+        this.game.paused = true;
       },
       holdCreate(callback, time) {
         setTimeout(callback, time);
-      }
+      },
     },
     destroyed() {
       this.game.destroy()
@@ -65,7 +79,8 @@
       game: null,
       score: 0,
       levelConfig: false,
-      showGame: false
+      showGame: false,
+      time: 0
     })
   }
 </script>
