@@ -1,7 +1,10 @@
 <template>
   <div id="game">
     <div v-if="showGame" class="top-bar">{{ score }} <router-link :to="{name: 'onboarding'}">Onboard</router-link></div>
-    <div v-if="!showGame" class="preload"></div>
+    <div v-if="!showGame" class="preload">
+      <div class="level">Level {{ this.levelConfig.id }}</div>
+      <div class="level-name">{{ this.levelConfig.name }}</div>
+    </div>
   </div>
 </template>
 
@@ -18,6 +21,7 @@
     name: 'game',
     props: ['level'],
     mounted () {
+      this.initTime = Math.floor(Date.now());
       this.levelConfig = levelConfig.levels[this.level];
       let self = this
       if (this.game == null) {
@@ -27,10 +31,13 @@
             preload(this, self)
           },
           create: function() {
+            let startNowDifference = Math.floor(Date.now()) - self.initTime;
+            let holdTime = 4000 - startNowDifference;
+            console.log(holdTime);
             self.holdCreate(() => {
               self.showGame = true;
               this.game.state.start('game')
-            });
+            }, (holdTime > 0 ? holdTime : 0));
           },
         })
         this.game.state.add('game', {
@@ -48,8 +55,8 @@
       finished() {
         console.log('Fin')
       },
-      holdCreate(callback) {
-        setTimeout(callback, 5000);
+      holdCreate(callback, time) {
+        setTimeout(callback, time);
       }
     },
     destroyed() {
@@ -69,8 +76,24 @@
     height: 40px;
   }
   .preload {
+    top: 0;
+    left: 0;
+    position: absolute;
     width: 600px;
     height: 600px;
     background-image: url('~img/gradient.svg');
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font: 26px/1.4 Minecraft;
+  }
+  .level {
+    text-transform: uppercase;
+  }
+  .level-name {
+
   }
 </style>

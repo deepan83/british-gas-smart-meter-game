@@ -1,7 +1,9 @@
 {
   "levels": {
     "1": {
-      "id": "garden"
+      "name": "The Garden",
+      "short": "garden",
+      "id": "1"
     }
   }
 }
