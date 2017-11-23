@@ -3,12 +3,14 @@ import PathFinderPlugin from 'phaser_plugin_pathfinding/bin/phaser_pathfinding-0
 import enemy from 'img/enemy.png'
 
 export default class {
-  freeze = false;
-  constructor(phaser, GameMap) {
+  frozen = false;
+  constructor(phaser, GameMap, Character) {
     this.followingPath = false;
     this.pathToFollow = [];
+    this.hitting = [];
     this.phaser = phaser;
     this.GameMap = GameMap;
+    this.Character = Character;
     this.speed = 80;
     this.phaser.load.spritesheet('enemy', enemy, 40, 40);
   }
@@ -29,23 +31,35 @@ export default class {
         this.followingPath = false;
         this.followPath();
     });
-    let removeTimer = this.phaser.game.time.create(false);
-    removeTimer.create(5000, false, 0, () => {
-      this.freeze = true;
-      let removeTimer = this.phaser.game.time.create(false);
-      removeTimer.create(5000, false, 0, () => {
-        this.freeze = false;
-      });
-      removeTimer.start();
-    });
-    removeTimer.start();
   }
   update() {
+    this.checkHitting(this.Character.sprite, 'character', this.freeze);
     if (!this.followingPath) {
       let gotoTile = this.GameMap.randomSafeTile()
       this.findPathTo(gotoTile.x, gotoTile.y);
     }
     this.followPath();
+  }
+  checkHitting(object, type, callback) {
+    if (!this.hitting[type] && this.overlap(object)) {
+      this.hitting[type] = true;
+      callback.call(this);
+    } else if (this.hitting[type] && !this.overlap(object)) {
+      this.hitting[type] = false;
+    }
+  }
+  overlap(object) {
+    return this.phaser.physics.arcade.overlap(this.sprite, object);
+  }
+  freeze() {
+    if (!this.frozen) {
+      this.frozen = true;
+      let freezeTimer = this.phaser.game.time.create(false);
+      freezeTimer.create(5000, false, 0, () => {
+        this.frozen = false;
+      });
+      freezeTimer.start();
+    }
   }
   findPathTo(tilex, tiley) {
     this.pathfinder.setCallbackFunction((path) => {
@@ -58,7 +72,7 @@ export default class {
     this.pathfinder.calculatePath();
   }
   followPath() {
-    if (!this.pathToFollow.length || this.followingPath || this.freeze) {
+    if (!this.pathToFollow.length || this.followingPath || this.frozen) {
         return;
     }
     var next = this.pathToFollow.shift();

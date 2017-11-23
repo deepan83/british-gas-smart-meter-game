@@ -4,9 +4,10 @@ import Enemy from './Enemy'
 export default class {
   lastObjectIndex = 0;
   objects = {};
-  constructor(phaser, {map, levelConfig}) {
+  constructor(phaser, {map, levelConfig, character}) {
     this.phaser = phaser;
     this.GameMap = map;
+    this.Character = character;
     this.levelConfig = levelConfig;
     this.addObjects();
   }
@@ -16,7 +17,7 @@ export default class {
     }
   }
   add() {
-    this.objects[this.lastObjectIndex] = new Enemy(this.phaser, this.GameMap);
+    this.objects[this.lastObjectIndex] = new Enemy(this.phaser, this.GameMap, this.Character);
     this.lastObjectIndex++;
   }
   create() {
