@@ -33,7 +33,7 @@ export default class {
       object.onOff = () => {
         this.onScore(1000);
         this.switchesOff++;
-        if (this.switchesOff == 2) {
+        if (this.switchesOff == this.levelConfig.bulbs) {
           if (typeof this.onAllOff == 'function') {
             this.onAllOff();
           }

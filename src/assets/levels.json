@@ -4,8 +4,7 @@
       "name": "The Garden",
       "short": "garden",
       "id": "1",
-      "bonuses": 1,
-      "bulbs": 1,
+      "bulbs": 3,
       "enemies": 1,
       "bonusTypes": [
         {
@@ -22,33 +21,29 @@
       "name": "The Lounge",
       "short": "lounge",
       "id": "2",
-      "bonuses": 1,
-      "bulbs": 1,
-      "enemies": 1
+      "bulbs": 3,
+      "enemies": 2
     },
     "3": {
       "name": "The Bedroom",
       "short": "bedroom",
       "id": "3",
-      "bonuses": 1,
-      "bulbs": 1,
-      "enemies": 1
+      "bulbs": 4,
+      "enemies": 3
     },
     "4": {
       "name": "The Bathroom",
       "short": "bathroom",
       "id": "4",
-      "bonuses": 1,
-      "bulbs": 1,
-      "enemies": 1
+      "bulbs": 5,
+      "enemies": 4
     },
     "5": {
       "name": "The Kitchen",
       "short": "kitchen",
       "id": "5",
-      "bonuses": 1,
-      "bulbs": 1,
-      "enemies": 1
+      "bulbs": 7,
+      "enemies": 5
     }
   }
 }
