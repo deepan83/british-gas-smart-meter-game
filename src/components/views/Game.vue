@@ -67,6 +67,7 @@
     methods: {
       finished() {
         this.game.paused = true;
+        this.$router.push({ name: 'video', params: { level: this.level }})
       },
       holdCreate(callback, time) {
         setTimeout(callback, time);
