@@ -3,6 +3,7 @@
     <div class="videoWrapper">
       <iframe width="560" height="315" :src="levelVideo" frameborder="0" allowfullscreen></iframe>
     </div>
+    Calculating Score
     <router-link v-if="showSkip" :to="{name: 'score', params: {level: level}}" class="skip">Skip</router-link>
   </div>
 </template>

@@ -67,6 +67,7 @@
     methods: {
       finished() {
         this.game.paused = true;
+        this.$store.commit('updateScore', this.score);
         this.$router.push({ name: 'video', params: { level: this.level }})
       },
       holdCreate(callback, time) {
