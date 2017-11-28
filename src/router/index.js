@@ -5,6 +5,7 @@ import Onboarding from '@/components/views/Onboarding'
 import Game from '@/components/views/Game'
 import Video from '@/components/views/Video'
 import Score from '@/components/views/Score'
+import Finish from '@/components/views/Finish'
 
 Vue.use(Router)
 
@@ -39,6 +40,11 @@ const router = new Router({
       name: 'score',
       component: Score,
       props: true,
+    },
+    {
+      path: '/finish',
+      name: 'finish',
+      component: Finish,
     },
   ]
 })

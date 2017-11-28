@@ -68,7 +68,11 @@
       finished() {
         this.game.paused = true;
         this.$store.commit('updateScore', this.score);
-        this.$router.push({ name: 'video', params: { level: this.level }})
+        if (this.level === Object.keys(levelConfig.levels).length) {
+          this.$router.push({ name: 'finish'});
+        } else {
+          this.$router.push({ name: 'video', params: { level: this.level }});
+        }
       },
       holdCreate(callback, time) {
         setTimeout(callback, time);
