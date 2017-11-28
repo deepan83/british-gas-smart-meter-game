@@ -17,7 +17,8 @@ export default class {
     }
   }
   add() {
-    this.objects[this.lastObjectIndex] = new Enemy(this.phaser, this.GameMap, this.Character);
+    var enemy = ['girl', 'boy'][Math.floor(Math.random()*2)];
+    this.objects[this.lastObjectIndex] = new Enemy(this.phaser, this.GameMap, this.Character, enemy);
     this.lastObjectIndex++;
   }
   create() {

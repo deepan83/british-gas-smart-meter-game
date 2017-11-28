@@ -1,10 +1,10 @@
 import Phaser from 'phaser'
 import PathFinderPlugin from 'phaser_plugin_pathfinding/bin/phaser_pathfinding-0.2.0.js';
-import enemy from 'img/enemy.png'
+import getFrameKeys from './util/getFrameKeys'
 
 export default class {
   frozen = false;
-  constructor(phaser, GameMap, Character) {
+  constructor(phaser, GameMap, Character, enemy) {
     this.followingPath = false;
     this.pathToFollow = [];
     this.hitting = [];
@@ -12,15 +12,15 @@ export default class {
     this.GameMap = GameMap;
     this.Character = Character;
     this.speed = 80;
-    this.phaser.load.spritesheet('enemy', enemy, 40, 40);
+    this.enemy = enemy;
   }
   create(x, y) {
-    this.sprite = this.phaser.add.sprite(x, y, 'enemy');
+    this.sprite = this.phaser.add.sprite(x, y, 'objects', this.enemy + '/down/1');
     // this.sprite.anchor.set(0.5);
-    this.sprite.animations.add('walk' + Phaser.LEFT, [0,1,2]);
-    this.sprite.animations.add('walk' + Phaser.RIGHT, [3,4,5]);
-    this.sprite.animations.add('walk' + Phaser.UP, [0,1,4,5]);
-    this.sprite.animations.add('walk' + Phaser.DOWN, [0,1,4,5]);
+    this.sprite.animations.add('walk' + Phaser.LEFT, getFrameKeys(this.enemy + '/left', this.phaser.cache.getFrameData('objects')));
+    this.sprite.animations.add('walk' + Phaser.RIGHT, getFrameKeys(this.enemy + '/right', this.phaser.cache.getFrameData('objects')));
+    this.sprite.animations.add('walk' + Phaser.UP, getFrameKeys(this.enemy + '/up', this.phaser.cache.getFrameData('objects')));
+    this.sprite.animations.add('walk' + Phaser.DOWN, getFrameKeys(this.enemy + '/down', this.phaser.cache.getFrameData('objects')));
 
     this.pathfinder = this.phaser.game.plugins.add(Phaser.Plugin.PathFinderPlugin);
     this.pathfinder.setGrid(this.GameMap.getLayerData(), [this.GameMap.safetile]);
@@ -53,6 +53,7 @@ export default class {
   }
   freeze() {
     if (!this.frozen) {
+      this.sprite.animations.stop();
       this.frozen = true;
       let freezeTimer = this.phaser.game.time.create(false);
       freezeTimer.create(5000, false, 0, () => {
@@ -75,10 +76,29 @@ export default class {
     if (!this.pathToFollow.length || this.followingPath || this.frozen) {
         return;
     }
+
+    var current = {
+      x: this.sprite.x / this.GameMap.gridsize,
+      y: this.sprite.y /this.GameMap.gridsize
+    };
     var next = this.pathToFollow.shift();
+
     if (!next) {
         return;
     }
+
+    var direction = '';
+    if (next.x > current.x) {
+      direction = Phaser.RIGHT;
+    } else if (next.x < current.x) {
+      direction = Phaser.LEFT;
+    } else if (next.y < current.y) {
+      direction = Phaser.UP;
+    } else if (next.y > current.y) {
+      direction = Phaser.DOWN;
+    }
+
+    this.sprite.animations.play('walk'+direction, 10, true);
 
     var x = (next.x * this.GameMap.gridsize);
     var y = (next.y * this.GameMap.gridsize);
