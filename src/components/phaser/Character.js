@@ -10,8 +10,9 @@ export default class {
   directions = [ null, null, null, null, null ];
   opposites = [ Phaser.NONE, Phaser.RIGHT, Phaser.LEFT, Phaser.DOWN, Phaser.UP ];
   turning = Phaser.NONE;
-  constructor(phaser, {map}) {
+  constructor(phaser, {map, selectedCharacter}) {
     this.phaser = phaser;
+    this.character = selectedCharacter;
     this.GameMap = map;
     this.phaser.load.spritesheet('character', character, 40, 40);
     this.cursors = phaser.input.keyboard.createCursorKeys();

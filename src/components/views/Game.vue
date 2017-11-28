@@ -16,6 +16,7 @@
   import preload from 'components/phaser/preload'
   import update from 'components/phaser/update'
   import levelConfig from '@/assets/levels.json'
+  import { mapGetters } from 'vuex'
 
   export default {
     name: 'game',
@@ -80,6 +81,11 @@
     },
     destroyed() {
       this.game.destroy()
+    },
+    computed: {
+      ...mapGetters({
+        selectedCharacter: 'character'
+      })
     },
     data: () => ({
       game: null,

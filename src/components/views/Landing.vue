@@ -5,8 +5,8 @@
       <p class="description">Lorem ipsum dolor sit amet.<br>Sed in rebus apertissimis.</p>
       <label class="chose-player-label">Choose Player</label>
       <div class="player-select">
-        <button class="player-select-button player-select-button--female" :class="{'player-select-button--selected': selected == 'female'}" @click.prevent="select('female')"></button>
-        <button class="player-select-button player-select-button--male" :class="{'player-select-button--selected': selected == 'male'}" @click.prevent="select('male')"></button>
+        <button v-for="character in ['mum', 'dad']" class="player-select-button" :class="playerSelectClasses(character)" @click.prevent="changeCharacter(character)"></button>
+        <!-- <button class="player-select-button player-select-button--male" :class="{'player-select-button--selected': selected == 'male'}" @click.prevent="changeCharacter('male')"></button> -->
       </div>
       <button class="start" @click.prevent="start"></button>
     </div>
@@ -15,23 +15,31 @@
 
 <script>
 import Cookies from 'js-cookie';
+import {mapGetters, mapMutations} from 'vuex';
+
 export default {
   props: ['onboarding_always'],
-  data() {
-    return {
-      selected: 'female'
-    }
+  computed: {
+    ...mapGetters([
+      'character'
+    ])
   },
   methods: {
-    select(selection) {
-      this.selected = selection;
-    },
     start() {
       if (!Cookies.get('onboarding') || this.onboarding_always) {
         Cookies.set('onboarding', true, { expires: 365 });
         this.$router.push({ name: 'onboarding'})
       } else {
         this.$router.push({ name: 'game', params: { level: 1 }})
+      }
+    },
+    ...mapMutations([
+      'changeCharacter'
+    ]),
+    playerSelectClasses(character) {
+      return {
+        'player-select-button--selected': this.character == character,
+        ['player-select-button--' + character]: true
       }
     }
   }
@@ -96,11 +104,11 @@ export default {
       background-repeat: no-repeat;
       background-color: transparent;
     }
-    &--male::before {
-      background-image: url('~img/male-character.png');
+    &--dad::before {
+      background-image: url('~img/dad-character.png');
     }
-    &--female::before {
-      background-image: url('~img/female-character.png');
+    &--mum::before {
+      background-image: url('~img/mum-character.png');
     }
   }
   .start {

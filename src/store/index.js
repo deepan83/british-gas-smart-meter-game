@@ -12,6 +12,7 @@ export default new Vuex.Store({
     getters,
     strict: debug,
     state: {
-      score: 0
+      score: 0,
+      character: 'mum'
     }
 })
