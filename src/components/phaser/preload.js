@@ -7,6 +7,7 @@ import EnemyCollection from './EnemyCollection'
 
 export default function preload(phaser, vGame) {
     phaser.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    phaser.load.atlasJSONHash('objects', '/static/objects.png', '/static/objects.json');
     vGame.map = new GameMap(phaser, vGame);
     vGame.character = new Character(phaser, vGame);
     vGame.bonusCollection = new BonusCollection(phaser, vGame);

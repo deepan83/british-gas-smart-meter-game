@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import character from 'img/character.png'
+import getFrameKeys from './util/getFrameKeys'
 
 export default class {
   threshold = 3;
@@ -14,7 +14,6 @@ export default class {
     this.phaser = phaser;
     this.character = selectedCharacter;
     this.GameMap = map;
-    this.phaser.load.spritesheet('character', character, 40, 40);
     this.cursors = phaser.input.keyboard.createCursorKeys();
   }
   create() {
@@ -22,12 +21,12 @@ export default class {
       x: this.GameMap.getFriendlySpawn().worldX + (this.GameMap.gridsize / 2),
       y: this.GameMap.getFriendlySpawn().worldY + (this.GameMap.gridsize / 2),
     }
-    this.sprite = this.phaser.add.sprite(spritePosition.x, spritePosition.y, 'character');
+    this.sprite = this.phaser.add.sprite(spritePosition.x, spritePosition.y, 'objects', this.character + '/down/1');
     this.sprite.anchor.set(0.5);
-    this.sprite.animations.add('walk' + Phaser.LEFT, [0,1,2]);
-    this.sprite.animations.add('walk' + Phaser.RIGHT, [3,4,5]);
-    this.sprite.animations.add('walk' + Phaser.UP, [0,1,4,5]);
-    this.sprite.animations.add('walk' + Phaser.DOWN, [0,1,4,5]);
+    this.sprite.animations.add('walk' + Phaser.LEFT, getFrameKeys(this.character + '/left', this.phaser.cache.getFrameData('objects')));
+    this.sprite.animations.add('walk' + Phaser.RIGHT, getFrameKeys(this.character + '/right', this.phaser.cache.getFrameData('objects')));
+    this.sprite.animations.add('walk' + Phaser.UP, getFrameKeys(this.character + '/up', this.phaser.cache.getFrameData('objects')));
+    this.sprite.animations.add('walk' + Phaser.DOWN, getFrameKeys(this.character + '/down', this.phaser.cache.getFrameData('objects')));
     this.phaser.physics.arcade.enable(this.sprite);
     this.move(Phaser.DOWN)
   }
@@ -99,7 +98,7 @@ export default class {
         this.sprite.body.velocity.y = speed;
     }
 
-    this.sprite.animations.play('walk'+direction, 30, true);
+    this.sprite.animations.play('walk'+direction, 10, true);
 
     this.currentDirection = direction;
   }

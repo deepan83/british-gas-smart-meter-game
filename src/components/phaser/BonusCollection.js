@@ -10,7 +10,6 @@ export default class {
     this.GameMap = vGame.map;
     this.Character = vGame.character;
     this.levelConfig = vGame.levelConfig;
-    this.phaser.load.atlasJSONHash('objects', '/static/objects.png', '/static/objects.json');
   }
   add() {
     let spawn = this.GameMap.getRandomSpawnByType('bonus');

@@ -17,6 +17,6 @@ export default new Vuex.Store({
   strict: debug,
   state: {
     score: 0,
-    character: 'mum'
+    character: 'dad'
   }
 })
