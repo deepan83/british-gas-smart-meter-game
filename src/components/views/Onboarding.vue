@@ -7,12 +7,14 @@
           <p class="slide__instruction" v-html="instruction.text"></p>
         </div>
       </div>
-      <router-link :to="{name: 'game', params: {level: 1}}" class="skip">Skip</router-link>
+      <button class="skip" @click.prevent="skip">Skip</button>
+      <!-- <router-link :to="{name: 'game', params: {level: 1}}" class="skip">Skip</router-link> -->
     </div>
   </div>
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
 import 'owl.carousel'
 import image1 from 'img/instructions/1.png'
 import image2 from 'img/instructions/2.png'
@@ -47,6 +49,14 @@ export default {
       items: 1,
       navText: ['','']
     })
+  },
+  methods: {
+    ...mapMutations({
+      changeRoute: 'router/change'
+    }),
+    skip() {
+      this.changeRoute({name: 'game', params: {level: 1}});
+    }
   }
 }
 </script>
@@ -97,5 +107,7 @@ export default {
     position: absolute;
     font: 14px/1.15 Gillsans;
     text-transform: uppercase;
+    background-color: transparent;
+    border: 0;
   }
 </style>

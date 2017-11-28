@@ -1,12 +1,17 @@
 <template>
   <div class="app">
-    <router-view></router-view>
+    <component v-bind:is="view"></component>
   </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
-
+  computed: {
+    ...mapGetters({
+      view: 'router/view'
+    }),
+  },
 }
 </script>
 

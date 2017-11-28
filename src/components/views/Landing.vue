@@ -6,7 +6,6 @@
       <label class="chose-player-label">Choose Player</label>
       <div class="player-select">
         <button v-for="character in ['mum', 'dad']" class="player-select-button" :class="playerSelectClasses(character)" @click.prevent="changeCharacter(character)"></button>
-        <!-- <button class="player-select-button player-select-button--male" :class="{'player-select-button--selected': selected == 'male'}" @click.prevent="changeCharacter('male')"></button> -->
       </div>
       <button class="start" @click.prevent="start"></button>
     </div>
@@ -16,21 +15,24 @@
 <script>
 import Cookies from 'js-cookie';
 import {mapGetters, mapMutations} from 'vuex';
+import {getQueryVariable} from '@/util';
 
 export default {
-  props: ['onboarding_always'],
   computed: {
     ...mapGetters([
       'character'
     ])
   },
   methods: {
+    ...mapMutations({
+      changeRoute: 'router/change'
+    }),
     start() {
-      if (!Cookies.get('onboarding') || this.onboarding_always) {
+      if (!Cookies.get('onboarding') || getQueryVariable('onboarding_always')) {
         Cookies.set('onboarding', true, { expires: 365 });
-        this.$router.push({ name: 'onboarding'})
+        this.changeRoute({name: 'onboarding'});
       } else {
-        this.$router.push({ name: 'game', params: { level: 1 }})
+        this.changeRoute({name: 'game', params: {level: 1}});
       }
     },
     ...mapMutations([

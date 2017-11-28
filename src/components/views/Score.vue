@@ -1,12 +1,28 @@
 <template>
   <div>
-    <router-link :to="{name: 'game', params: {level: (parseInt(level) + 1)}}" class="next">Next</router-link>
+    <button @click.prevent="next" class="next">Next</button>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
 export default {
-  props: ['level'],
+  methods: {
+    ...mapMutations({
+      changeRoute: 'router/change'
+    }),
+    next() {
+      this.changeRoute({name: 'game', params: {level: this.level + 1}});
+    }
+  },
+  computed: {
+    ...mapGetters({
+      routerParams: 'router/params'
+    }),
+    level() {
+      return this.routerParams.level;
+    },
+  }
 }
 </script>
 

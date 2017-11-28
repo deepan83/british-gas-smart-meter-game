@@ -16,11 +16,10 @@
   import preload from 'components/phaser/preload'
   import update from 'components/phaser/update'
   import levelConfig from '@/assets/levels.json'
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapMutations } from 'vuex'
 
   export default {
     name: 'game',
-    props: ['level'],
     mounted () {
       this.initTime = Math.floor(Date.now());
       this.levelConfig = levelConfig.levels[this.level];
@@ -65,14 +64,18 @@
         this.game.state.start('preload');
       }
     },
+
     methods: {
+      ...mapMutations({
+        changeRoute: 'router/change'
+      }),
       finished() {
         this.game.paused = true;
         this.$store.commit('updateScore', this.score);
         if (this.level === Object.keys(levelConfig.levels).length) {
-          this.$router.push({ name: 'finish'});
+          this.changeRoute({name: 'finish'});
         } else {
-          this.$router.push({ name: 'video', params: { level: this.level }});
+          this.changeRoute({name: 'video', params: {level: this.level}});
         }
       },
       holdCreate(callback, time) {
@@ -84,8 +87,12 @@
     },
     computed: {
       ...mapGetters({
-        selectedCharacter: 'character'
-      })
+        selectedCharacter: 'character',
+        routerParams: 'router/params'
+      }),
+      level() {
+        return this.routerParams.level;
+      }
     },
     data: () => ({
       game: null,
