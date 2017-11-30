@@ -26,8 +26,9 @@ export default class {
       removeTimer.stop();
     };
     removeTimer.create(5000, false, 0, () => {
-      this.objects[index].remove();
-      this.remove(index)
+      this.objects[index].remove(() => {
+        this.remove(index)
+      });
     }, this);
     removeTimer.start();
 

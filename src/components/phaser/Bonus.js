@@ -13,8 +13,10 @@ export default class {
   }
   createSprite() {
     this.sprite = this.phaser.add.sprite(this.position.x, this.position.y, 'objects', this.type.name + '/1');
-    this.animations.puls = this.sprite.animations.add('puls', getFrameKeys(this.type.name, this.phaser.cache.getFrameData('objects')));
     this.sprite.anchor.set(0.5);
+    this.animations.puls = this.phaser.add.tween(this.sprite);
+    // properties, duration, ease, autoStart, delay, repeat, yoyo
+    this.animations.puls.to({alpha: 0}, 200, "Linear", false, 0, 5).yoyo(true, 0);
     this.phaser.physics.enable(this.sprite, Phaser.Physics.ARCADE);
   }
   createScoreSprite() {
@@ -24,14 +26,11 @@ export default class {
   }
   hit() {
     this.hitting = true;
-    this.animations.puls.onComplete.add(() => {
-      this.animations.flash.onComplete.add(() => {
-        this.kill();
-        this.call('onHit', [this.type.score]);
-      });
-      this.animations.flash.play(30)
+    this.animations.flash.onComplete.add(() => {
+      this.kill();
+      this.call('onHit', [this.type.score]);
     });
-    this.animations.puls.play(30);
+    this.animations.flash.play(30)
   }
   update() {
     if (!this.hitting) {
@@ -42,11 +41,12 @@ export default class {
     this.sprite.kill();
     this.scoreSprite.kill();
   }
-  remove() {
+  remove(callback) {
     this.animations.puls.onComplete.add(() => {
       this.kill();
+      callback();
     });
-    this.animations.puls.play();
+    this.animations.puls.start();
   }
   call(functionName, params) {
     if (typeof this[functionName] === 'function') {
