@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import Bonus from './Bonus'
+import getFrameKeys from './util/getFrameKeys'
 
 export default class {
   lastObjectIndex = 0;

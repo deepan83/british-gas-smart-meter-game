@@ -10,6 +10,7 @@ export default class {
     this.position = position
     this.createSprite();
     this.createScoreSprite();
+    this.createPoofSprite();
   }
   createSprite() {
     this.sprite = this.phaser.add.sprite(this.position.x, this.position.y, 'objects', this.type.name + '/1');
@@ -21,16 +22,33 @@ export default class {
   }
   createScoreSprite() {
     this.scoreSprite = this.phaser.add.sprite(this.position.x, this.position.y, 'objects', 'score/' + this.type.score + '/1');
-    this.animations.flash = this.scoreSprite.animations.add('flash', getFrameKeys('score/' + this.type.score, this.phaser.cache.getFrameData('objects')));
-    this.scoreSprite.anchor.set(0.5);
+    this.scoreSprite.scale.setTo(0,0);
+    this.scoreSprite.anchor.set(0.5,1);
+    this.animations.score = this.scoreSprite.animations.add('score', getFrameKeys('score/250', this.phaser.cache.getFrameData('objects')));
+  }
+  createPoofSprite() {
+    this.poofSprite = this.phaser.add.sprite(this.position.x, this.position.y, 'objects', 'poof/1');
+    this.poofSprite.scale.setTo(0,0);
+    this.animations.poof = this.poofSprite.animations.add('poof', getFrameKeys('poof', this.phaser.cache.getFrameData('objects')));
+    this.poofSprite.anchor.set(0.5);
   }
   hit() {
     this.hitting = true;
-    this.animations.flash.onComplete.add(() => {
-      this.kill();
-      this.call('onHit', [this.type.score]);
+    this.animations.puls.stop();
+    this.sprite.kill();
+    this.animations.poof.onComplete.add(() => {
+      this.poofSprite.kill();
+      this.animations.score.onComplete.add(() => {
+        setTimeout(() => {
+          this.scoreSprite.kill();
+          this.call('onHit', [this.type.score]);
+        }, 250);
+      });
+      this.scoreSprite.scale.setTo(1,1);
+      this.animations.score.play(15)
     });
-    this.animations.flash.play(30)
+    this.poofSprite.scale.setTo(1,1);
+    this.animations.poof.play(10)
   }
   update() {
     if (!this.hitting) {
@@ -40,6 +58,7 @@ export default class {
   kill() {
     this.sprite.kill();
     this.scoreSprite.kill();
+    this.poofSprite.kill();
   }
   remove(callback) {
     this.animations.puls.onComplete.add(() => {
