@@ -28,9 +28,29 @@ export default class {
     this.sprite.animations.add('walk' + Phaser.UP, getFrameKeys(this.character + '/up', this.phaser.cache.getFrameData('objects')));
     this.sprite.animations.add('walk' + Phaser.DOWN, getFrameKeys(this.character + '/down', this.phaser.cache.getFrameData('objects')));
     this.phaser.physics.arcade.enable(this.sprite);
+    this.createDPad();
+    console.log(this);
     this.move(Phaser.DOWN)
   }
+
+  createDPad() {
+    var dPadPosition = {
+      y: this.phaser.game.world.height - 140,
+      x: this.phaser.game.world.width - 140,
+    }
+    this.dPad = {
+      left: this.phaser.add.button(dPadPosition.y + 40, dPadPosition.x + 40, 'objects', function() {console.log('something')}, null, 'd-pad/left', 'd-pad/left')
+    }
+    console.log(this.dPad)
+
+    this.dPad.left.onInputUp.add(() => {
+      console.log('lala');
+    },this)
+  }
   update() {
+    if (this.dPad.left.game.input.activePointer.isDown) {
+      console.log(this.dPad.left.game.input.activePointer)
+    }
     if (this.activateCollision()) {
       this.sprite.animations.stop();
     }

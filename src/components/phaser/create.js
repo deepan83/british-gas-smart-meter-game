@@ -1,20 +1,20 @@
 import Phaser from 'phaser'
 
-export default function create(phaser, vGame) {
+export default function create(phaser, vGame, gameObject) {
   phaser.physics.startSystem(Phaser.Physics.ARCADE);
 
-  for (var i = 0; i <= vGame.lifeCycleListeners.length - 1; i++) {
-    vGame.lifeCycleListeners[i].create();
+  for (var i = 0; i <= gameObject.lifeCycleListeners.length - 1; i++) {
+    gameObject.lifeCycleListeners[i].create();
   }
 
-  vGame.bonusCollection.onScore = (score) => {
+  gameObject.bonusCollection.onScore = (score) => {
     vGame.score += score;
   };
 
-  vGame.switchCollection.onAllOff = () => {
+  gameObject.switchCollection.onAllOff = () => {
     vGame.finished();
   };
-  vGame.switchCollection.onScore = (score) => {
+  gameObject.switchCollection.onScore = (score) => {
     vGame.score += score;
   };
 }

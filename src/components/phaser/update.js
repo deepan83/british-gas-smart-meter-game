@@ -1,7 +1,7 @@
 import Phaser from 'phaser'
 
-export default function update(phaser, vGame) {
-  for (var i = 0; i <= vGame.lifeCycleListeners.length - 1; i++) {
-    vGame.lifeCycleListeners[i].update();
+export default function update(phaser, vGame, gameObject) {
+  for (var i = 0; i <= gameObject.lifeCycleListeners.length - 1; i++) {
+    gameObject.lifeCycleListeners[i].update();
   }
 }
