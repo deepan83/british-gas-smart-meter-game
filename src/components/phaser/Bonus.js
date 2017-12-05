@@ -2,12 +2,14 @@ import Phaser from 'phaser'
 import getFrameKeys from './util/getFrameKeys'
 
 export default class {
-  constructor(phaser, Character, position, type) {
+  hitting = false;
+  animations = {};
+  constructor(phaser, Character, position, type, callbacks) {
     this.phaser = phaser;
     this.Character = Character;
-    this.animations = {};
-    this.type = type
-    this.position = position
+    this.position = position;
+    this.type = type;
+    this.callbacks = callbacks;
     this.createSprite();
     this.createScoreSprite();
     this.createPoofSprite();
@@ -41,7 +43,7 @@ export default class {
       this.animations.score.onComplete.add(() => {
         setTimeout(() => {
           this.scoreSprite.kill();
-          this.call('onHit', [this.type.score]);
+          this.callbacks.onHit(this.type.score);
         }, 250);
       });
       this.scoreSprite.scale.setTo(1,1);
@@ -66,10 +68,5 @@ export default class {
       callback();
     });
     this.animations.puls.start();
-  }
-  call(functionName, params) {
-    if (typeof this[functionName] === 'function') {
-      this[functionName](...params);
-    }
   }
 }

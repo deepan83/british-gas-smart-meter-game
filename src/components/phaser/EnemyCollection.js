@@ -2,12 +2,12 @@ import Phaser from 'phaser'
 import Enemy from './Enemy'
 
 export default class {
-  lastObjectIndex = 0;
-  objects = {};
-  constructor(phaser, {map, levelConfig, character}) {
+  lastEnemyIndex = 0;
+  enemies = {};
+  constructor(phaser, GameMap, Character, levelConfig) {
     this.phaser = phaser;
-    this.GameMap = map;
-    this.Character = character;
+    this.GameMap = GameMap;
+    this.Character = Character;
     this.levelConfig = levelConfig;
     this.addObjects();
   }
@@ -18,28 +18,26 @@ export default class {
   }
   add() {
     var enemy = ['girl', 'boy'][Math.floor(Math.random()*2)];
-    this.objects[this.lastObjectIndex] = new Enemy(this.phaser, this.GameMap, this.Character, enemy);
-    this.lastObjectIndex++;
+    this.enemies[this.lastEnemyIndex] = new Enemy(this.phaser, this.GameMap, this.Character, enemy);
+    this.lastEnemyIndex++;
   }
   create() {
     var spawns = this.GameMap.getRandomSpawnsByType('enemy', this.levelConfig.enemies);
     this.group = this.phaser.add.physicsGroup();
-    this.foreach((object, index) => {
-      object = this.objects[object];
-      object.create(spawns[index].worldX, spawns[index].worldY);
-      this.group.add(object.sprite);
-      // object.onHit = () => {
-      //   delete this.objects[object];
-      //   this.onScore(30);
-      // }
+    this.foreach((enemy, enemyIndex) => {
+      enemy.create(spawns[enemyIndex].worldX, spawns[enemyIndex].worldY);
+      this.group.add(enemy.sprite);
     });
   }
   update() {
-    this.foreach(object => {
-      this.objects[object].update();
+    this.foreach(enemy => {
+      enemy.update();
     });
   }
   foreach(callback) {
-    Object.keys(this.objects).forEach(callback);
+    Object.keys(this.enemies).forEach((enemyIndex) => {
+      var enemy = this.enemies[enemyIndex];
+      callback(enemy, enemyIndex);
+    });
   }
 }

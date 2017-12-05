@@ -22,7 +22,7 @@ export default class {
     this.sprite.animations.add('walk' + Phaser.UP, getFrameKeys(this.enemy + '/up', this.phaser.cache.getFrameData('objects')));
     this.sprite.animations.add('walk' + Phaser.DOWN, getFrameKeys(this.enemy + '/down', this.phaser.cache.getFrameData('objects')));
 
-    this.pathfinder = this.phaser.game.plugins.add(Phaser.Plugin.PathFinderPlugin);
+    this.pathfinder = this.phaser.plugins.add(Phaser.Plugin.PathFinderPlugin);
     this.pathfinder.setGrid(this.GameMap.getLayerData(), [this.GameMap.safetile]);
     this.phaser.physics.arcade.enable(this.sprite);
 
@@ -55,7 +55,7 @@ export default class {
     if (!this.frozen) {
       this.sprite.animations.stop();
       this.frozen = true;
-      let freezeTimer = this.phaser.game.time.create(false);
+      let freezeTimer = this.phaser.time.create(false);
       freezeTimer.create(5000, false, 0, () => {
         this.frozen = false;
       });
@@ -78,8 +78,8 @@ export default class {
     }
 
     var current = {
-      x: this.sprite.x / this.GameMap.gridsize,
-      y: this.sprite.y /this.GameMap.gridsize
+      x: this.sprite.x / this.GameMap.tileSize,
+      y: this.sprite.y /this.GameMap.tileSize
     };
     var next = this.pathToFollow.shift();
 
@@ -100,8 +100,8 @@ export default class {
 
     this.sprite.animations.play('walk'+direction, 10, true);
 
-    var x = (next.x * this.GameMap.gridsize);
-    var y = (next.y * this.GameMap.gridsize);
+    var x = (next.x * this.GameMap.tileSize);
+    var y = (next.y * this.GameMap.tileSize);
     // console.log("moving to", x, y, next);
     this.followingPath = true;
     this.movingTween.target = this.sprite;

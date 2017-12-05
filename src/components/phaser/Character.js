@@ -10,16 +10,16 @@ export default class {
   directions = [ null, null, null, null, null ];
   opposites = [ Phaser.NONE, Phaser.RIGHT, Phaser.LEFT, Phaser.DOWN, Phaser.UP ];
   turning = Phaser.NONE;
-  constructor(phaser, {map, selectedCharacter}) {
+  constructor(phaser, GameMap, selectedCharacter) {
     this.phaser = phaser;
     this.character = selectedCharacter;
-    this.GameMap = map;
+    this.GameMap = GameMap;
     this.cursors = phaser.input.keyboard.createCursorKeys();
   }
   create() {
     var spritePosition = {
-      x: this.GameMap.getFriendlySpawn().worldX + (this.GameMap.gridsize / 2),
-      y: this.GameMap.getFriendlySpawn().worldY + (this.GameMap.gridsize / 2),
+      x: this.GameMap.getFriendlySpawn().worldX + this.GameMap.halfTile,
+      y: this.GameMap.getFriendlySpawn().worldY + this.GameMap.halfTile,
     }
     this.sprite = this.phaser.add.sprite(spritePosition.x, spritePosition.y, 'objects', this.character + '/down/1');
     this.sprite.anchor.set(0.5);
@@ -29,19 +29,17 @@ export default class {
     this.sprite.animations.add('walk' + Phaser.DOWN, getFrameKeys(this.character + '/down', this.phaser.cache.getFrameData('objects')));
     this.phaser.physics.arcade.enable(this.sprite);
     this.createDPad();
-    console.log(this);
     this.move(Phaser.DOWN)
   }
 
   createDPad() {
     var dPadPosition = {
-      y: this.phaser.game.world.height - 140,
-      x: this.phaser.game.world.width - 140,
+      y: this.phaser.world.height - 140,
+      x: this.phaser.world.width - 140,
     }
     this.dPad = {
       left: this.phaser.add.button(dPadPosition.y + 40, dPadPosition.x + 40, 'objects', function() {console.log('something')}, null, 'd-pad/left', 'd-pad/left')
     }
-    console.log(this.dPad)
 
     this.dPad.left.onInputUp.add(() => {
       console.log('lala');
@@ -49,14 +47,14 @@ export default class {
   }
   update() {
     if (this.dPad.left.game.input.activePointer.isDown) {
-      console.log(this.dPad.left.game.input.activePointer)
+      // console.log(this.dPad.left.game.input.activePointer)
     }
     if (this.activateCollision()) {
       this.sprite.animations.stop();
     }
 
-    this.marker.x = this.phaser.math.snapToFloor(Math.floor(this.sprite.x), this.GameMap.gridsize) / this.GameMap.gridsize;
-    this.marker.y = this.phaser.math.snapToFloor(Math.floor(this.sprite.y), this.GameMap.gridsize) / this.GameMap.gridsize;
+    this.marker.x = this.phaser.math.snapToFloor(Math.floor(this.sprite.x), this.GameMap.tileSize) / this.GameMap.tileSize;
+    this.marker.y = this.phaser.math.snapToFloor(Math.floor(this.sprite.y), this.GameMap.tileSize) / this.GameMap.tileSize;
 
     //  Update our grid sensors
     this.directions[1] = this.GameMap.map.getTileLeft(this.GameMap.tileLayer.index, this.marker.x, this.marker.y);
@@ -101,8 +99,8 @@ export default class {
     } else {
       this.turning = turnTo;
 
-      this.turnPoint.x = (this.marker.x * this.GameMap.gridsize) + (this.GameMap.gridsize / 2);
-      this.turnPoint.y = (this.marker.y * this.GameMap.gridsize) + (this.GameMap.gridsize / 2);
+      this.turnPoint.x = (this.marker.x * this.GameMap.tileSize) + this.GameMap.halfTile;
+      this.turnPoint.y = (this.marker.y * this.GameMap.tileSize) + this.GameMap.halfTile;
     }
   }
   move(direction) {

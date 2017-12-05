@@ -2,8 +2,8 @@
   <div id="game">
     <div v-if="showGame" class="top-bar">{{ score }} {{ time }}</div>
     <div v-if="!showGame" class="preload">
-      <div class="level">Level {{ this.levelConfig.id }}</div>
-      <div class="level-name">{{ this.levelConfig.name }}</div>
+      <div class="level">Level {{ levelConfig.id }}</div>
+      <div class="level-name">{{ levelConfig.name }}</div>
     </div>
   </div>
 </template>
@@ -11,20 +11,32 @@
 <script>
 import 'pixi'
 import 'p2'
-import phaser from 'compponents/phaser'
+import GBGame from 'components/phaser/BGGame'
 import levelConfig from '@/assets/levels.json'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   mounted () {
-    this.game = phaser.init();
+    this.game = new GBGame(this.levelConfig, this.selectedCharacter, this.$el, {
+      onStart: () => {
+        this.showGame = true;
+      },
+      onTime: () => {
+        this.time++;
+      },
+      onFinish: () => {
+        this.finished();
+      },
+      onScore: (score) => {
+        this.score += score;
+      }
+    });
   },
   methods: {
     ...mapMutations({
       changeRoute: 'router/change'
     }),
     finished() {
-      this.game.paused = true;
       this.$store.commit('updateScore', this.score);
       if (this.level === Object.keys(levelConfig.levels).length) {
         this.changeRoute({name: 'finish'});
@@ -32,12 +44,9 @@ export default {
         this.changeRoute({name: 'video', params: {level: this.level}});
       }
     },
-    holdCreate(callback, time) {
-      setTimeout(callback, time);
-    },
   },
   destroyed() {
-    this.game.destroy()
+    this.game.destroy();
   },
   computed: {
     ...mapGetters({
@@ -46,12 +55,13 @@ export default {
     }),
     level() {
       return this.routerParams.level;
+    },
+    levelConfig() {
+      return levelConfig.levels[this.level];
     }
   },
   data: () => ({
-    game: null,
     score: 0,
-    levelConfig: false,
     showGame: false,
     time: 0
   })

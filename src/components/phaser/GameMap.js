@@ -2,8 +2,9 @@ import Phaser from 'phaser'
 
 export default class GameMap {
   safetile = -1;
-  gridsize = 40;
-  constructor(phaser, {levelConfig}) {
+  tileSize = 40;
+  halfTile = this.tileSize / 2;
+  constructor(phaser, levelConfig) {
     this.phaser = phaser;
     this.phaser.load.tilemap('map', '/static/maps/levels/' + levelConfig.id + '-' + levelConfig.short + '/map.json', null, Phaser.Tilemap.TILED_JSON);
     this.phaser.load.image('tiles', '/static/maps/levels/' + levelConfig.id + '-' + levelConfig.short + '/tiles.png');

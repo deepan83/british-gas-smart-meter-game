@@ -2,10 +2,11 @@ import Phaser from 'phaser'
 import bulb from 'img/bulb.png'
 
 export default class {
-  constructor(phaser, Character, EnemyCollection) {
+  constructor(phaser, Character, EnemyCollection, callbacks) {
     this.phaser = phaser;
     this.Character = Character;
     this.EnemyCollection = EnemyCollection;
+    this.callbacks = callbacks;
     this.hitting = {
       character: false,
       enemy: false,
@@ -23,18 +24,14 @@ export default class {
     if (this.isOn) {
       this.sprite.frame = 1;
       this.isOn = false;
-      if (typeof this.onOff == 'function') {
-        this.onOff();
-      }
+      this.callbacks.onOff();
     }
   }
   on() {
     if (!this.isOn) {
       this.sprite.frame = 0;
       this.isOn = true;
-      if (typeof this.onOn == 'function') {
-        this.onOn();
-      }
+      this.callbacks.onOn();
     }
   }
   update() {
