@@ -27,9 +27,18 @@ class Game extends Phaser.State {
     let gameMap = new GameMap(this.game, 'map');
     let character = new Character(this.game, gameMap, this.game.selectedCharacter);
     let bonusCollection = new BonusCollection(this.game, gameMap, character, this.game.levelConfig);
+    this.game.world.add(bonusCollection);
+
     let enemyCollection = new EnemyCollection(this.game, gameMap, character, this.game.levelConfig);
+    this.game.world.add(enemyCollection);
 
     let bulbCollection = new BulbCollection(this.game, gameMap, character, enemyCollection, this.game.levelConfig);
+    this.game.world.add(bulbCollection);
+    this.game.world.bringToTop(gameMap.tileLayer);
+    this.game.world.bringToTop(bonusCollection);
+    this.game.world.bringToTop(bulbCollection);
+    this.game.world.bringToTop(enemyCollection);
+    this.game.world.bringToTop(character);
   }
 
 }
