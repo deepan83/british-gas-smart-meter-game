@@ -87,6 +87,7 @@ export default {
   .page {
     height: 100%;
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
     background-image: url('~img/background.png');
