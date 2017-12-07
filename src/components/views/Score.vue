@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page">
     <button @click.prevent="next" class="next">Next</button>
   </div>
 </template>
@@ -27,4 +27,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .page {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('~img/background.png');
+  }
 </style>

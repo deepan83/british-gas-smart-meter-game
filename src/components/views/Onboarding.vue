@@ -66,7 +66,7 @@ export default {
     width: 100%;
     height: 100%;
     position: relative;
-    background-image: url('~img/gradient.svg');
+    background-image: url('~img/background.png');
   }
   .my-slider {
     top: 50%;

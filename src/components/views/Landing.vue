@@ -55,7 +55,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('~img/landing-background.jpg');
+    background-image: url('~img/background.png');
   }
   .page-content {
     text-align: center;

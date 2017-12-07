@@ -75,7 +75,7 @@ export default {
     position: absolute;
     width: 600px;
     height: 600px;
-    background-image: url('~img/gradient.svg');
+    background-image: url('~img/background.png');
 
     display: flex;
     flex-direction: column;

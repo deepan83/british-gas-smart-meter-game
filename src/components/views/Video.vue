@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page">
     <div class="videoWrapper">
       <iframe width="560" height="315" :src="levelVideo" frameborder="0" allowfullscreen></iframe>
     </div>
@@ -46,6 +46,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.page {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('~img/background.png');
+}
 .videoWrapper {
   position: relative;
   padding-bottom: 56.25%;
