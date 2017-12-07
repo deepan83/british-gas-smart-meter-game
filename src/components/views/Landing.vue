@@ -1,13 +1,24 @@
 <template>
   <div class="page">
     <div class="page-content">
-      <h1 class="title">Name Of Game</h1>
-      <p class="description">Lorem ipsum dolor sit amet.<br>Sed in rebus apertissimis.</p>
-      <label class="chose-player-label">Choose Player</label>
-      <div class="player-select">
-        <button v-for="character in ['mum', 'dad']" class="player-select-button" :class="playerSelectClasses(character)" @click.prevent="changeCharacter(character)"></button>
+      <h1 class="title" :class="{ 'title--typewriting': typewriting, 'title--transition': transition }">{{ typewritingTitle }}</h1>
+      <div class="objects" :class="{ 'objects--transition': transition }">
+        <img src="~img/dad-character.gif" alt="">
+        <img src="~img/radio.png" alt="">
+        <img src="~img/mum-character.gif" alt="">
+        <img src="~img/bulb-1.png" alt="">
+        <img src="~img/boy-character.gif" alt="">
+        <img src="~img/washer.png" alt="">
+        <img src="~img/girl-character.gif" alt="">
       </div>
-      <button class="start" @click.prevent="start"></button>
+      <div class="page-transition-content" :class="{ 'page-transition-content--transition': transition }">
+        <p class="description" v-html="description"></p>
+        <label class="chose-player-label">Choose Player</label>
+        <div class="player-select">
+          <button v-for="character in ['mum', 'dad']" class="player-select-button" :class="playerSelectClasses(character)" @click.prevent="changeCharacter(character)"></button>
+        </div>
+        <button class="start" @click.prevent="start"></button>
+      </div>
     </div>
   </div>
 </template>
@@ -18,6 +29,27 @@ import {mapGetters, mapMutations} from 'vuex';
 import {getQueryVariable} from '@/util';
 
 export default {
+  data() {
+    return {
+      title: 'Smart Meter Maze',
+      typewritingTitle: '',
+      typewriting: true,
+      transition: false,
+      description: 'It\'s a race against time and we need your help.<br>Locate and switch off as many energy draining appliances as you can spot in our Smart Meter Maze.<br>Faster than the teenagers switching them back on.<br><br>Good luck!'
+    }
+  },
+  mounted() {
+    this.interval = setInterval(() => {
+      this.typewritingTitle = this.title.slice(0, this.typewritingTitle.length + 1);
+      if (this.typewritingTitle.length == this.title.length) {
+        this.typewriting = false;
+        window.clearInterval(this.interval)
+        setTimeout(() => {
+          this.transition = true;
+        }, 2000);
+      }
+    }, 100);
+  },
   computed: {
     ...mapGetters([
       'character'
@@ -65,10 +97,76 @@ export default {
     letter-spacing: .32px;
   }
   .title {
-    text-transform: uppercase;
-    font: 38px/1 Minecraft;
+    font: 58px/1 Minecraft;
     margin-bottom: 10px;
     letter-spacing: 1.51px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 0 2px 2px #000;
+    transition: font-size 1s .5s;
+    &--typewriting {
+      &::after {
+        content: '';
+        height: 62px;
+        width: 20px;
+        margin-top: -12px;
+        display: inline-block;
+        background-color: #fff;
+        animation: blink .5s infinite;
+        @keyframes blink {
+          0%   {opacity: 1}
+          50% {opacity: 0}
+          100% {opacity: 1}
+        }
+      }
+    }
+    &--transition {
+      font-size: 38px;
+      transform: translateY(275%);
+      animation: title-transition 1s .5s forwards;
+      @keyframes title-transition {
+        0%   {transform: translateY(275%)}
+        100% {transform: translateY(0)}
+      }
+    }
+  }
+  .objects {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    &--transition {
+      position: absolute;
+      top: 52%;
+      animation: objects-transition 1.5s forwards;
+      @keyframes objects-transition {
+        0%   {
+          transform: translateX(0);
+        }
+        10%   {
+          transform: translateX(10%);
+        }
+        100% {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+      }
+    }
+  }
+  .page-transition-content {
+    display: none;
+    &--transition {
+      display: block;
+      opacity: 0;
+      transform: translate(10%, 50%) scale(.5);
+      animation: page-content-transition 1s 1s forwards;
+      @keyframes page-content-transition {
+        100% {
+          transform: translate(0, 0) scale(1);
+          opacity: 1;
+        }
+      }
+    }
   }
   .description {
     margin-bottom: 60px;
