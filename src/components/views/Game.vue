@@ -9,27 +9,24 @@
 </template>
 
 <script>
-import 'pixi'
-import 'p2'
-import GBGame from 'components/phaser/BGGame'
+import Main from 'components/phaser/Main'
 import levelConfig from '@/assets/levels.json'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   mounted () {
-    this.game = new GBGame(this.levelConfig, this.selectedCharacter, this.$el, {
-      onStart: () => {
-        this.showGame = true;
-      },
-      onTime: () => {
-        this.time++;
-      },
-      onFinish: () => {
-        this.finished();
-      },
-      onScore: (score) => {
-        this.score += score;
-      }
+    this.game = new Main(this.levelConfig, this.selectedCharacter, this.$el);
+    this.game.onStart.add(() => {
+      this.showGame = true;
+    });
+    this.game.onTime.add(() => {
+      this.time++;
+    });
+    this.game.onFinish.add(() => {
+      this.finished();
+    });
+    this.game.onScore.add(score => {
+      this.score += score;
     });
   },
   methods: {

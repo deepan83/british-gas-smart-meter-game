@@ -1,24 +1,17 @@
 import Phaser from 'phaser'
 
-export default class GameMap {
+class GameMap extends Phaser.Tilemap {
   safetile = -1;
   tileSize = 40;
   halfTile = this.tileSize / 2;
-  constructor(phaser, levelConfig) {
-    this.phaser = phaser;
-    this.phaser.load.tilemap('map', '/static/maps/levels/' + levelConfig.id + '-' + levelConfig.short + '/map.json', null, Phaser.Tilemap.TILED_JSON);
-    this.phaser.load.image('tiles', '/static/maps/levels/' + levelConfig.id + '-' + levelConfig.short + '/tiles.png');
-    this.phaser.load.image('spawns', '/static/maps/spawns.png');
-    this.phaser.load.image('background', '/static/backgrounds/' + levelConfig.short + '.png');
-  }
-  create() {
-    this.phaser.add.sprite(0, 0, 'background');
-    this.map = this.phaser.add.tilemap('map');
-    this.map.addTilesetImage('tiles', 'tiles');
-    this.map.addTilesetImage('spawns', 'spawns');
-    this.tileLayer = this.map.createLayer('Tile Layer 1');
+  constructor(game, key) {
+    super(game, key);
+    this.game.add.sprite(0, 0, 'background');
+    this.addTilesetImage('tiles', 'tiles');
+    this.addTilesetImage('spawns', 'spawns');
+    this.tileLayer = this.createLayer('Tile Layer 1');
     this.setSpawns();
-    this.map.setCollision(5, true, this.tileLayer);
+    this.setCollision(5, true, this.tileLayer);
   }
   randomSafeTile() {
     var safeTiles = []
@@ -48,7 +41,7 @@ export default class GameMap {
       }
     })
     spawnTileIndexes.forEach((index) => {
-      this.map.replace(index, -1);
+      this.replace(index, -1);
     });
   }
   getSpawnsByType(type) {
@@ -68,10 +61,8 @@ export default class GameMap {
   getFriendlySpawn() {
     return this.spawns.friendly[0];
   }
-  update() {
-    return;
-  }
   getLayerData() {
-    return this.map.layers[0].data;
+    return this.layers[0].data;
   }
 }
+export default GameMap
