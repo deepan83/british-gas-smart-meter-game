@@ -39,16 +39,18 @@ export default {
     }
   },
   mounted() {
-    this.interval = setInterval(() => {
-      this.typewritingTitle = this.title.slice(0, this.typewritingTitle.length + 1);
-      if (this.typewritingTitle.length == this.title.length) {
-        this.typewriting = false;
-        window.clearInterval(this.interval)
-        setTimeout(() => {
-          this.transition = true;
-        }, 2000);
-      }
-    }, 100);
+    setTimeout(() => {
+      this.interval = setInterval(() => {
+        this.typewritingTitle = this.title.slice(0, this.typewritingTitle.length + 1);
+        if (this.typewritingTitle.length == this.title.length) {
+          this.typewriting = false;
+          window.clearInterval(this.interval)
+          setTimeout(() => {
+            this.transition = true;
+          }, 2000);
+        }
+      }, 100);
+    }, 3000);
   },
   computed: {
     ...mapGetters([
