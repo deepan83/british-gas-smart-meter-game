@@ -14,6 +14,7 @@ class Bonus extends Phaser.Sprite {
     this.game.physics.enable(this, Phaser.Physics.ARCADE);
     this.character = character;
     this.type = type;
+    this.bonusAudio = this.game.add.audio('bonus');
     this.createScoreSprite();
     this.createPoofSprite();
     this.initRemove();
@@ -46,6 +47,7 @@ class Bonus extends Phaser.Sprite {
     this.removeTimer.stop();
     this.tweens.puls.stop();
     this.kill();
+    this.bonusAudio.play();
     this.poofAnimation.onComplete.add(() => {
       this.poofSprite.kill();
       this.scoreAnimation.onComplete.add(() => {

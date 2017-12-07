@@ -22,6 +22,7 @@ class Character extends Phaser.Sprite {
     this.animations.add('walk' + Phaser.UP, getFrameKeys(selectedCharacter + '/up', this.game.cache.getFrameData('objects')));
     this.animations.add('walk' + Phaser.DOWN, getFrameKeys(selectedCharacter + '/down', this.game.cache.getFrameData('objects')));
     this.game.add.existing(this);
+    this.stepsAudio = this.game.add.audio('steps');
     this.game.physics.arcade.enable(this);
     // this.createDPad();
     this.move(Phaser.DOWN)
@@ -43,6 +44,7 @@ class Character extends Phaser.Sprite {
   update() {
     if (this.activateCollision()) {
       this.animations.stop();
+      this.stepsAudio.stop();
     }
 
     this.marker.x = this.game.math.snapToFloor(Math.floor(this.x), this.gameMap.tileSize) / this.gameMap.tileSize;
@@ -109,6 +111,7 @@ class Character extends Phaser.Sprite {
     }
 
     this.animations.play('walk'+direction, 10, true);
+    this.stepsAudio.play();
 
     this.currentDirection = direction;
   }

@@ -21,6 +21,8 @@ class Enemy extends Phaser.Sprite {
     this.animations.add('walk' + Phaser.UP, getFrameKeys(enemy + '/up', game.cache.getFrameData('objects')));
     this.animations.add('walk' + Phaser.DOWN, getFrameKeys(enemy + '/down', game.cache.getFrameData('objects')));
 
+    this.freezeAudio = this.game.add.audio('freeze');
+
     this.pathfinder = game.plugins.add(Phaser.Plugin.PathFinderPlugin);
     this.pathfinder.setGrid(gameMap.getLayerData(), [gameMap.safetile]);
     game.physics.arcade.enable(this);
@@ -52,6 +54,7 @@ class Enemy extends Phaser.Sprite {
   }
   freeze() {
     if (!this.frozen) {
+      this.freezeAudio.play();
       this.animations.stop();
       this.frozen = true;
       let freezeTimer = this.game.time.create(false);

@@ -16,9 +16,12 @@ class Bulb extends Phaser.Sprite {
     this.character = character;
     this.enemyCollection = enemyCollection;
     this.game.physics.enable(this, Phaser.Physics.ARCADE);
+    this.lightOnAudio = this.game.add.audio('light-on');
+    this.lightOffAudio = this.game.add.audio('light-off');
   }
   off() {
     if (this.isOn) {
+      this.lightOffAudio.play();
       this.frameName = 'bulb/off';
       this.isOn = false;
       this.onOff.dispatch();
@@ -26,6 +29,7 @@ class Bulb extends Phaser.Sprite {
   }
   on() {
     if (!this.isOn) {
+      this.lightOnAudio.play();
       this.frameName = 'bulb/on';
       this.isOn = true;
       this.onOn.dispatch();
