@@ -39,18 +39,22 @@ export default {
     }
   },
   mounted() {
-    setTimeout(() => {
-      this.interval = setInterval(() => {
-        this.typewritingTitle = this.title.slice(0, this.typewritingTitle.length + 1);
-        if (this.typewritingTitle.length == this.title.length) {
-          this.typewriting = false;
-          window.clearInterval(this.interval)
-          setTimeout(() => {
-            this.transition = true;
-          }, 2000);
-        }
-      }, 100);
-    }, 3000);
+    if (getQueryVariable('no_transition')) {
+      this.transition = true;
+    } else {
+      setTimeout(() => {
+        this.interval = setInterval(() => {
+          this.typewritingTitle = this.title.slice(0, this.typewritingTitle.length + 1);
+          if (this.typewritingTitle.length == this.title.length) {
+            window.clearInterval(this.interval)
+            setTimeout(() => {
+              this.typewriting = false;
+              this.transition = true;
+            }, 2000);
+          }
+        }, 100);
+      }, 3000);
+    }
   },
   computed: {
     ...mapGetters([
