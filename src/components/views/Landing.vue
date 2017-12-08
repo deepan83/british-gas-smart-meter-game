@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="page-content">
-      <h1 class="title" :class="{ 'title--typewriting': typewriting, 'title--transition': transition }">{{ typewritingTitle }}</h1>
+      <h1 class="title" :class="{ 'title--typewriting': typewriting, 'title--transition': transition }" v-html="pageTitle"></h1>
       <div class="objects" :class="{ 'objects--transition': transition }">
         <img src="~img/dad-character.gif" alt="">
         <img src="~img/radio.png" alt="">
@@ -33,9 +33,11 @@ export default {
     return {
       title: 'Smart Meter Maze',
       typewritingTitle: '',
+      initialTitle: '&nbsp;',
       typewriting: true,
       transition: false,
-      description: 'It\'s a race against time and we need your help.<br>Locate and switch off as many energy draining appliances as you can spot in our Smart Meter Maze.<br>Faster than the teenagers switching them back on.<br><br>Good luck!'
+      description: 'A RACE TO SAVE ENERGY<br><br><br>It\'s a race against time and we need your help.<br>Locate and switch off as many energy draining appliances as you can spot in our Smart Meter Maze.<br>Faster than the teenagers switching them back on.<br><br>Good luck!<br><br>',
+      canType: true
     }
   },
   mounted() {
@@ -43,23 +45,26 @@ export default {
       this.transition = true;
     } else {
       setTimeout(() => {
-        this.interval = setInterval(() => {
-          this.typewritingTitle = this.title.slice(0, this.typewritingTitle.length + 1);
-          if (this.typewritingTitle.length == this.title.length) {
-            window.clearInterval(this.interval)
-            setTimeout(() => {
-              this.typewriting = false;
-              this.transition = true;
-            }, 2000);
-          }
-        }, 100);
-      }, 3000);
+      this.interval = setInterval(() => {
+        this.typewritingTitle = this.title.slice(0, this.typewritingTitle.length + 1);
+        if (this.typewritingTitle.length == this.title.length) {
+          window.clearInterval(this.interval)
+          setTimeout(() => {
+            this.typewriting = false;
+            this.transition = true;
+          }, 2000);
+        }
+      }, 100);
+      }, 2000);
     }
   },
   computed: {
     ...mapGetters([
       'character'
-    ])
+    ]),
+    pageTitle() {
+      return this.typewritingTitle.length < 1 ? this.initialTitle : this.typewritingTitle;
+    }
   },
   methods: {
     ...mapMutations({
@@ -90,10 +95,8 @@ export default {
 <style scoped lang="scss">
   .page {
     height: 100%;
-    display: flex;
     position: relative;
-    justify-content: center;
-    align-items: center;
+    -webkit-backface-visibility: hidden;
     background-image: url('~img/background.png');
   }
   .page-content {
@@ -102,8 +105,13 @@ export default {
     width: 100%;
     font: 16px/1 Minecraft;
     letter-spacing: .32px;
+    text-shadow: 0 2px 4px rgba(#000, .5);
   }
   .title {
+    position: absolute;
+    white-space: nowrap;
+    top: 73px;
+    left: 50%;
     font: 58px/1 Minecraft;
     margin-bottom: 10px;
     letter-spacing: 1.51px;
@@ -111,14 +119,17 @@ export default {
     justify-content: center;
     align-items: center;
     text-shadow: 0 2px 2px #000;
-    transition: font-size 1s .5s;
+    transition: all 1s 1s;
+    transform: translate(-50%, 275%);
     &--typewriting {
       &::after {
+        left: 100%;
+        top: -5px;
+        position: absolute;
         content: '';
         height: 62px;
         width: 20px;
-        margin-top: -12px;
-        display: inline-block;
+        display: block;
         background-color: #fff;
         animation: blink .5s infinite;
         @keyframes blink {
@@ -130,43 +141,38 @@ export default {
     }
     &--transition {
       font-size: 38px;
-      transform: translateY(275%);
-      animation: title-transition 1s .5s forwards;
-      @keyframes title-transition {
-        0%   {transform: translateY(275%)}
-        100% {transform: translateY(0)}
-      }
+      transform: translate(-50%, 0);
     }
   }
   .objects {
     display: flex;
+    top: 288px;
+    position: absolute;
     width: 100%;
     justify-content: center;
     &--transition {
-      position: absolute;
-      top: 52%;
       animation: objects-transition 1.5s forwards;
       @keyframes objects-transition {
         0%   {
-          transform: translateX(0);
+          transform: translate(0, 0);
         }
-        10%   {
-          transform: translateX(10%);
+        30%   {
+          transform: translate(10%, 0);
         }
         100% {
-          transform: translateX(-100%);
+          transform: translate(-100%, 30%);
           opacity: 0;
         }
       }
     }
   }
   .page-transition-content {
-    display: none;
+    position: absolute;
+    top: 125px;
+    opacity: 0;
     &--transition {
-      display: block;
-      opacity: 0;
       transform: translate(10%, 50%) scale(.5);
-      animation: page-content-transition 1s 1s forwards;
+      animation: page-content-transition 1s 2s forwards;
       @keyframes page-content-transition {
         100% {
           transform: translate(0, 0) scale(1);
@@ -176,7 +182,7 @@ export default {
     }
   }
   .description {
-    margin-bottom: 60px;
+
   }
   .chose-player-label {
     display: block;
