@@ -9,11 +9,15 @@
       "bonusTypes": [
         {
           "score": 250,
-          "name": "microwave"
+          "name": "leaf-blower"
         },
         {
           "score": 500,
-          "name": "washing-machine"
+          "name": "hedge-trimmer"
+        },
+        {
+          "score": 750,
+          "name": "lawn-mower"
         }
       ],
       "video": "https://www.youtube.com/embed/9ymjcSvEyhk"
@@ -23,28 +27,92 @@
       "short": "lounge",
       "id": "2",
       "bulbs": 3,
-      "enemies": 2
+      "enemies": 2,
+      "bonusTypes": [
+        {
+          "score": 250,
+          "name": "tv"
+        },
+        {
+          "score": 500,
+          "name": "light"
+        },
+        {
+          "score": 750,
+          "name": "console"
+        }
+      ],
+      "video": "https://www.youtube.com/embed/9ymjcSvEyhk"
     },
     "3": {
       "name": "The Bedroom",
       "short": "bedroom",
       "id": "3",
       "bulbs": 4,
-      "enemies": 3
+      "enemies": 3,
+      "bonusTypes": [
+        {
+          "score": 250,
+          "name": "laptop"
+        },
+        {
+          "score": 500,
+          "name": "phone"
+        },
+        {
+          "score": 750,
+          "name": "sound-system"
+        }
+      ],
+      "video": "https://www.youtube.com/embed/9ymjcSvEyhk"
     },
     "4": {
       "name": "The Bathroom",
       "short": "bathroom",
       "id": "4",
       "bulbs": 5,
-      "enemies": 4
+      "enemies": 4,
+      "bonusTypes": [
+        {
+          "score": 250,
+          "name": "tooth-brush"
+        },
+        {
+          "score": 500,
+          "name": "radiator"
+        },
+        {
+          "score": 750,
+          "name": "shower"
+        }
+      ],
+      "video": "https://www.youtube.com/embed/9ymjcSvEyhk"
     },
     "5": {
       "name": "The Kitchen",
       "short": "kitchen",
       "id": "5",
       "bulbs": 7,
-      "enemies": 5
+      "enemies": 5,
+      "bonusTypes": [
+        {
+          "score": 250,
+          "name": "kettle"
+        },
+        {
+          "score": 500,
+          "name": "toaster"
+        },
+        {
+          "score": 750,
+          "name": "microwave"
+        },
+        {
+          "score": 1000,
+          "name": "washing-machine"
+        }
+      ],
+      "video": "https://www.youtube.com/embed/9ymjcSvEyhk"
     }
   }
 }

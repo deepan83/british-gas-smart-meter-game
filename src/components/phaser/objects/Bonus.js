@@ -6,7 +6,7 @@ class Bonus extends Phaser.Sprite {
   onRemove = new Phaser.Signal();
   onScore = new Phaser.Signal();
   constructor(game, character, position, type) {
-    super(game, position.x, position.y, 'objects', type.name + '/1')
+    super(game, position.x, position.y, 'objects', 'bonuses/' + type.name)
     this.anchor.set(0.5);
     this.tweens.puls = this.game.add.tween(this);
     // properties, duration, ease, autoStart, delay, repeat, yoyo

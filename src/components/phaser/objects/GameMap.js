@@ -11,7 +11,7 @@ class GameMap extends Phaser.Tilemap {
     this.addTilesetImage('spawns', 'spawns');
     this.tileLayer = this.createLayer('Tile Layer 1');
     this.setSpawns();
-    this.setCollision(5, true, this.tileLayer);
+    this.setCollision([5,6], true, this.tileLayer);
   }
   randomSafeTile() {
     var safeTiles = []

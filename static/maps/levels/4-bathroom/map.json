@@ -72,7 +72,7 @@
          "columns":1,
          "firstgid":5,
          "image":"tiles.png",
-         "imageheight":41,
+         "imageheight":40,
          "imagewidth":40,
          "margin":0,
          "name":"tiles",
