@@ -9,37 +9,27 @@ class Character extends Phaser.Sprite {
   directions = [ null, null, null, null, null ];
   opposites = [ Phaser.NONE, Phaser.RIGHT, Phaser.LEFT, Phaser.DOWN, Phaser.UP ];
   turning = Phaser.NONE;
-  constructor(game, gameMap, selectedCharacter) {
+  constructor(game, gameMap, controls, selectedCharacter) {
     let characterPosition = {
       x: gameMap.getFriendlySpawn().worldX + gameMap.halfTile,
       y: gameMap.getFriendlySpawn().worldY + gameMap.halfTile,
     }
     super(game, characterPosition.x, characterPosition.y, 'objects', selectedCharacter + '/down/1')
     this.gameMap = gameMap;
+    this.controls = controls;
+    this.selectedCharacter = selectedCharacter;
+    this.initAnimations();
     this.anchor.set(0.5);
-    this.animations.add('walk' + Phaser.LEFT, getFrameKeys(selectedCharacter + '/left', this.game.cache.getFrameData('objects')));
-    this.animations.add('walk' + Phaser.RIGHT, getFrameKeys(selectedCharacter + '/right', this.game.cache.getFrameData('objects')));
-    this.animations.add('walk' + Phaser.UP, getFrameKeys(selectedCharacter + '/up', this.game.cache.getFrameData('objects')));
-    this.animations.add('walk' + Phaser.DOWN, getFrameKeys(selectedCharacter + '/down', this.game.cache.getFrameData('objects')));
     this.game.add.existing(this);
     this.stepsAudio = this.game.add.audio('steps');
     this.game.physics.arcade.enable(this);
-    // this.createDPad();
     this.move(Phaser.DOWN)
-    this.cursors = game.input.keyboard.createCursorKeys();
   }
-  createDPad() {
-    var dPadPosition = {
-      y: this.game.world.height - 140,
-      x: this.game.world.width - 140,
-    }
-    this.dPad = {
-      left: this.game.add.button(dPadPosition.y + 40, dPadPosition.x + 40, 'objects', function() {console.log('something')}, null, 'd-pad/left', 'd-pad/left')
-    }
-
-    this.dPad.left.onInputUp.add(() => {
-      console.log('lala');
-    },this)
+  initAnimations() {
+    this.animations.add('walk' + Phaser.LEFT, getFrameKeys(this.selectedCharacter + '/left', this.game.cache.getFrameData('objects')));
+    this.animations.add('walk' + Phaser.RIGHT, getFrameKeys(this.selectedCharacter + '/right', this.game.cache.getFrameData('objects')));
+    this.animations.add('walk' + Phaser.UP, getFrameKeys(this.selectedCharacter + '/up', this.game.cache.getFrameData('objects')));
+    this.animations.add('walk' + Phaser.DOWN, getFrameKeys(this.selectedCharacter + '/down', this.game.cache.getFrameData('objects')));
   }
   update() {
     if (this.activateCollision()) {
@@ -66,17 +56,8 @@ class Character extends Phaser.Sprite {
     return this.game.physics.arcade.collide(this, this.gameMap.tileLayer);
   }
   checkKeys() {
-    if (this.cursors.left.isDown && this.currentDirection !== Phaser.LEFT) {
-      this.checkDirection(Phaser.LEFT);
-    } else if (this.cursors.right.isDown && this.currentDirection !== Phaser.RIGHT) {
-      this.checkDirection(Phaser.RIGHT);
-    } else if (this.cursors.up.isDown && this.currentDirection !== Phaser.UP) {
-      this.checkDirection(Phaser.UP);
-    } else if (this.cursors.down.isDown && this.currentDirection !== Phaser.DOWN) {
-      this.checkDirection(Phaser.DOWN);
-    } else {
-      //  This forces them to hold the key down to turn the corner
-      this.turning = Phaser.NONE;
+    if (this.controls.direction && this.currentDirection !== this.controls.direction){
+      this.checkDirection(this.controls.direction);
     }
   }
   checkDirection(turnTo) {

@@ -1,4 +1,5 @@
 import GameMap from '../objects/GameMap'
+import Controls from '../objects/Controls'
 import Character from '../objects/Character'
 import BonusCollection from '../objects/BonusCollection'
 import EnemyCollection from '../objects/EnemyCollection'
@@ -25,7 +26,9 @@ class Game extends Phaser.State {
 
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
     let gameMap = new GameMap(this.game, 'map');
-    let character = new Character(this.game, gameMap, this.game.selectedCharacter);
+    let controls = new Controls(this.game);
+
+    let character = new Character(this.game, gameMap, controls, this.game.selectedCharacter);
     let bonusCollection = new BonusCollection(this.game, gameMap, character, this.game.levelConfig);
     this.game.world.add(bonusCollection);
 
@@ -39,6 +42,7 @@ class Game extends Phaser.State {
     this.game.world.bringToTop(bulbCollection);
     this.game.world.bringToTop(enemyCollection);
     this.game.world.bringToTop(character);
+    controls.bringToTop();
   }
 
 }

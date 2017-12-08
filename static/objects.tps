@@ -335,6 +335,19 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">objects/d-pad/inactive.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>30,30,60,60</rect>
+                <key>scale9Paddings</key>
+                <rect>30,30,60,60</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">objects/d-pad/left.png</key>
             <key type="filename">objects/d-pad/right.png</key>
             <struct type="IndividualSpriteSettings">
