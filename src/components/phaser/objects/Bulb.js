@@ -8,6 +8,7 @@ class Bulb extends Phaser.Sprite {
     enemy: false,
   }
   isOn = true;
+  lock = false;
   onOff = new Phaser.Signal();
   onOn = new Phaser.Signal();
 
@@ -20,7 +21,7 @@ class Bulb extends Phaser.Sprite {
     this.lightOffAudio = this.game.add.audio('light-off');
   }
   off() {
-    if (this.isOn) {
+    if (this.isOn && !this.lock) {
       this.lightOffAudio.play();
       this.frameName = 'bulb/off';
       this.isOn = false;
@@ -28,7 +29,7 @@ class Bulb extends Phaser.Sprite {
     }
   }
   on() {
-    if (!this.isOn) {
+    if (!this.isOn && !this.lock) {
       this.lightOnAudio.play();
       this.frameName = 'bulb/on';
       this.isOn = true;

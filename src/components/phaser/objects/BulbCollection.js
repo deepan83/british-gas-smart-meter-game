@@ -27,7 +27,12 @@ class BulbCollection extends Phaser.Group {
       this.game.onScore.dispatch(1000);
       this.bulbsOff++;
       if (this.bulbsOff == this.levelConfig.bulbs) {
-        this.game.onFinish.dispatch();
+        bulb.lock = true;
+        let waitFinish = this.game.time.create(false);
+        waitFinish.create(250, false, 0, () => {
+          this.game.onFinish.dispatch();
+        });
+        waitFinish.start();
       }
     })
     bulb.onOn.add(() => {
