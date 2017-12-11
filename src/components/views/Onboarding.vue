@@ -2,8 +2,8 @@
   <div class="page">
     <div class="my-slider">
       <div class="owl-carousel">
-        <div v-for="instruction in instructions" class="slide">
-          <img class="slide__image" :src="instruction.img" alt="">
+        <div v-for="(instruction, index) in instructions" class="slide">
+          <img class="slide__image" :class="'slide__image--' + index" :src="instruction.img" alt="">
           <p class="slide__instruction" v-html="instruction.text"></p>
         </div>
       </div>
@@ -71,8 +71,8 @@ export default {
   .my-slider {
     top: 50%;
     left: 50%;
-    width: 509px;
-    height: 404px;
+    width: 84.83vw;
+    height: 67.3vw;
     position: absolute;
     background-color: rgba(#ffffff, .5);
     transform: translate(-50%, -50%);
@@ -82,30 +82,41 @@ export default {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 509px;
-    height: 404px;
+    width: 84.83vw;
+    height: 67.3vw;
     &__image {
       &#{&} {
-        margin-bottom: 20px;
+        margin-bottom: 3.3vw;
         display: inline-block;
-        width: auto;
         height: auto;
+        &--0 {
+          width: 27vw;
+        }
+        &--1 {
+          width: 9vw;
+        }
+        &--2 {
+          width: 11vw;
+        }
+        &--3 {
+          width: 30vw;
+        }
       }
     }
     &__instruction {
       color: #1d8e42;
-      font: 21px/1.2 Minecraft;
-      letter-spacing: 1.25px;
+      font: 3.5vw/1.2 Minecraft;
+      letter-spacing: 0.16vw;
       text-align: center;
     }
   }
   .skip {
     z-index: 2;
-    right: 14px;
+    right: 2.3vw;
     color: #fff;
-    bottom: 17px;
+    bottom: 2.83vw;
     position: absolute;
-    font: 14px/1.15 Gillsans;
+    font: 2.3vw/1.15 Gillsans;
     text-transform: uppercase;
     background-color: transparent;
     border: 0;

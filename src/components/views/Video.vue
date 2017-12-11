@@ -51,6 +51,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-size: cover;
   background-image: url('~img/background.png');
 }
 .videoWrapper {

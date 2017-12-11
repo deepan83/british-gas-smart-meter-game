@@ -9,7 +9,7 @@ class Game extends Phaser.State {
   create() {
     this.gameTimer = this.game.time.create(false);
     this.gameTime = 0;
-    this.gameLength = 20;
+    this.gameLength = 60;
     this.endGameTimerAudio = this.game.add.audio('end-game-timer');
     this.endGameAudio = this.game.add.audio('end-game');
     //  Set a TimerEvent to occur after 2 seconds

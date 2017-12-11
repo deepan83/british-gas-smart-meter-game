@@ -67,14 +67,15 @@ export default {
 
 <style lang="scss" scoped>
   .top-bar {
-    height: 40px;
+    height: 6.6vw;
   }
   .preload {
     top: 0;
     left: 0;
     position: absolute;
-    width: 600px;
-    height: 600px;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
     background-image: url('~img/background.png');
 
     display: flex;
@@ -82,7 +83,7 @@ export default {
     justify-content: center;
     align-items: center;
     color: #fff;
-    font: 26px/1.4 Minecraft;
+    font: 4.3vw/1.4 Minecraft;
   }
   .level {
     text-transform: uppercase;

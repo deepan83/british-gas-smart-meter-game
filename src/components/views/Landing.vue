@@ -97,24 +97,25 @@ export default {
     height: 100%;
     position: relative;
     -webkit-backface-visibility: hidden;
+    background-size: cover;
     background-image: url('~img/background.png');
   }
   .page-content {
     text-align: center;
     color: #fff;
     width: 100%;
-    font: 16px/1 Minecraft;
-    letter-spacing: .32px;
+    font: 2.7vw/1 Minecraft;
+    letter-spacing: 0.04vw;
     text-shadow: 0 2px 4px rgba(#000, .5);
   }
   .title {
     position: absolute;
     white-space: nowrap;
-    top: 73px;
+    top: 11%;
     left: 50%;
-    font: 58px/1 Minecraft;
-    margin-bottom: 10px;
-    letter-spacing: 1.51px;
+    font: 9.6vw/1 Minecraft;
+    margin-bottom: 1.6vw;
+    letter-spacing: 0.16vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -124,11 +125,11 @@ export default {
     &--typewriting {
       &::after {
         left: 100%;
-        top: -5px;
+        top: -0.83vw;
         position: absolute;
         content: '';
-        height: 62px;
-        width: 20px;
+        height: 10.3vw;
+        width: 3.3vw;
         display: block;
         background-color: #fff;
         animation: blink .5s infinite;
@@ -140,13 +141,13 @@ export default {
       }
     }
     &--transition {
-      font-size: 38px;
+      font-size: 6.3vw;
       transform: translate(-50%, 0);
     }
   }
   .objects {
     display: flex;
-    top: 288px;
+    top: 48vw;
     position: absolute;
     width: 100%;
     justify-content: center;
@@ -168,7 +169,7 @@ export default {
   }
   .page-transition-content {
     position: absolute;
-    top: 125px;
+    top: 20.83vw;
     opacity: 0;
     &--transition {
       transform: translate(10%, 50%) scale(.5);
@@ -186,21 +187,21 @@ export default {
   }
   .chose-player-label {
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 3.3vw;
   }
   .player-select {
     display: flex;
-    margin-bottom: 33px;
+    margin-bottom: 5.5vw;
     justify-content: center;
   }
   .player-select-button {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 88px;
+    width: 14.6vw;
     outline: 0;
-    margin: 0 8px;
-    height: 88px;
+    margin: 0 1.3vw;
+    height: 14.6vw;
     background-color: #fff;
     border: 1px solid #979797;
     border-radius: 50%;
@@ -211,8 +212,8 @@ export default {
     &::before {
       content: '';
       display: block;
-      width: 30px;
-      height: 62px;
+      width: 5vw;
+      height: 10.3vw;
       background-position: center;
       background-repeat: no-repeat;
       background-color: transparent;
@@ -225,11 +226,12 @@ export default {
     }
   }
   .start {
-    width: 176px;
-    height: 41px;
+    width: 29.3vw;
+    height: 6.83vw;
     background-color: transparent;
     border: 0;
     outline: 0;
+    background-size: cover;
     background-image: url('~img/start-button.png');
   }
 </style>

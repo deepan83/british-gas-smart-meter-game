@@ -19,11 +19,13 @@ export default {
   @import "~scss/_settings";
   @import "~scss/_global";
   body {
-    height: 600px;
-    width: 600px;
   }
   .app {
-    height: 100%;
+    width: 100vw;
+    height: 100vw;
+    top: 0;
+    left: 0;
+    position: absolute;
     background-color: #ddd;
   }
 </style>
