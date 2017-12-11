@@ -15,6 +15,7 @@ class Bonus extends Phaser.Sprite {
     this.character = character;
     this.type = type;
     this.bonusAudio = this.game.add.audio('bonus');
+    this.bonusTimerAudio = this.game.add.audio('bonus-timer');
     this.createScoreSprite();
     this.createPoofSprite();
     this.initRemove();
@@ -39,12 +40,14 @@ class Bonus extends Phaser.Sprite {
         this.onRemove.dispatch();
       });
       this.tweens.puls.start();
+      this.bonusTimerAudio.play();
     }, this);
     this.removeTimer.start();
   }
   hit() {
     this.hitting = true;
     this.removeTimer.stop();
+    this.bonusTimerAudio.stop();
     this.tweens.puls.stop();
     this.kill();
     this.bonusAudio.play();

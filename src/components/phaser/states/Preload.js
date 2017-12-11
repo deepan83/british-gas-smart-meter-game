@@ -9,6 +9,7 @@ class Preload extends Phaser.State {
     this.game.load.image('background', '/static/backgrounds/' + this.game.levelConfig.short + '.png');
     this.game.load.audio('steps', '/static/audio/steps.mp3');
     this.game.load.audio('bonus', '/static/audio/bonus.mp3');
+    this.game.load.audio('bonus-timer', '/static/audio/bonus-timer.mp3');
     this.game.load.audio('light-on', '/static/audio/light-on.mp3');
     this.game.load.audio('light-off', '/static/audio/light-off.mp3');
     this.game.load.audio('freeze', '/static/audio/freeze.mp3');
