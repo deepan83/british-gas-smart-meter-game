@@ -21,7 +21,7 @@ class Character extends Phaser.Sprite {
     this.initAnimations();
     this.anchor.set(0.5);
     this.game.add.existing(this);
-    this.stepsAudio = this.game.add.audio('steps', 1, true);
+    this.stepsAudio = this.game.add.audio('steps', .2, true);
 
     this.game.physics.arcade.enable(this);
     this.move(Phaser.DOWN)
