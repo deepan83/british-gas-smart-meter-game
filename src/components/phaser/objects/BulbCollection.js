@@ -4,6 +4,7 @@ class BulbCollection extends Phaser.Group {
   bulbs = [];
   bulbsOff = 0;
   hittingCharacter = false;
+  allBulbsCollected = new Phaser.Signal();
 
   constructor(game, gameMap, character, enemyCollection, levelConfig) {
     super(game, undefined, 'bulbCollection', true);
@@ -30,7 +31,7 @@ class BulbCollection extends Phaser.Group {
         bulb.lock = true;
         let waitFinish = this.game.time.create(false);
         waitFinish.create(250, false, 0, () => {
-          this.game.onFinish.dispatch();
+          this.allBulbsCollected.dispatch();
         });
         waitFinish.start();
       }

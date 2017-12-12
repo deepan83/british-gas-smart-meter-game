@@ -4,6 +4,7 @@ import getFrameKeys from '../util/getFrameKeys'
 
 class Enemy extends Phaser.Sprite {
   frozen = true;
+  forceFrozen = false;
   followingPath = false;
   pathToFollow = [];
   hitting = [];
@@ -37,6 +38,7 @@ class Enemy extends Phaser.Sprite {
     });
     this.game.onFinish.add(() => {
       this.frozen = true;
+      this.forceFrozen = true;
       this.animations.stop();
     });
   }
@@ -66,7 +68,9 @@ class Enemy extends Phaser.Sprite {
       this.frozen = true;
       let freezeTimer = this.game.time.create(false);
       freezeTimer.create(5000, false, 0, () => {
-        this.frozen = false;
+        if (!this.forceFrozen) {
+          this.frozen = false;
+        }
       });
       freezeTimer.start();
     }

@@ -62,6 +62,18 @@ class Game extends Phaser.State {
     this.game.world.add(enemyCollection);
 
     let bulbCollection = new BulbCollection(this.game, gameMap, character, enemyCollection, this.game.levelConfig);
+    bulbCollection.allBulbsCollected.add(() => {
+      this.endGameAudio.play();
+      this.game.objectsPaused = true;
+      this.game.onFinish.dispatch();
+      this.gameTimer.stop();
+      let finishTimer = this.game.time.create(false);
+      finishTimer.create(5000, false, 0, () => {
+        this.game.paused = true;
+        this.game.onComplete.dispatch();
+      });
+      finishTimer.start();
+    });
     this.game.world.add(bulbCollection);
     this.game.world.bringToTop(gameMap.tileLayer);
     this.game.world.bringToTop(bonusCollection);
