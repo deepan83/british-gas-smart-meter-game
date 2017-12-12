@@ -217,12 +217,13 @@ export default {
       background-position: center;
       background-repeat: no-repeat;
       background-color: transparent;
+      background-size: cover;
     }
     &--dad::before {
-      background-image: url('~img/dad-character.png');
+      background-image: url('~img/dad-character.gif');
     }
     &--mum::before {
-      background-image: url('~img/mum-character.png');
+      background-image: url('~img/mum-character.gif');
     }
   }
   .start {
