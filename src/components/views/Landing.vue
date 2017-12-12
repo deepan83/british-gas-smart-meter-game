@@ -17,7 +17,9 @@
         <div class="player-select" :class="{ 'player-select--transition': transition }">
           <button v-for="character in ['mum', 'dad']" class="player-select-button" :class="playerSelectClasses(character)" @click.prevent="changeCharacter(character)"></button>
         </div>
-        <button class="start" :class="{ 'start--transition': transition }" @click.prevent="start"></button>
+        <div class="start-holder" :class="{ 'start-holder--transition': transition }">
+          <button class="start" @click.prevent="start"></button>
+        </div>
       </div>
     </div>
   </div>
@@ -164,7 +166,7 @@ export default {
   .description {
     opacity: 0;
     transform: translateX(100%);
-    transition: all .8s 2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: all .8s 1.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     &--transition {
       opacity: 1;
       transform: translateX(0);
@@ -175,7 +177,7 @@ export default {
     margin-bottom: 3.3vw;
     opacity: 0;
     transform: translateY(100%);
-    transition: all .8s 2.1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: all .8s 1.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     &--transition {
       opacity: 1;
       transform: translateX(0);
@@ -187,7 +189,7 @@ export default {
     justify-content: center;
     opacity: 0;
     transform: translateX(100%);
-    transition: all .8s 2.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: all .8s 1.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     &--transition {
       opacity: 1;
       transform: translateX(0);
@@ -233,9 +235,12 @@ export default {
     outline: 0;
     background-size: cover;
     background-image: url('~img/start-button.png');
+  }
+  .start-holder {
+    width: 100%;
     opacity: 0;
     transform: translateX(100%);
-    transition: all .8s 2.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: all .8s 2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     &--transition {
       opacity: 1;
       transform: translateX(0);
