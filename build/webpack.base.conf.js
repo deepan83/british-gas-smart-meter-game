@@ -3,6 +3,7 @@ var utils = require('./utils')
 var webpack = require('webpack')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 var phaserModule = path.join(__dirname, '../node_modules/phaser-ce/')
 var phaser = path.join(phaserModule, 'build/custom/phaser-split.js')
@@ -77,6 +78,11 @@ module.exports = {
       $: "jquery",
       jQuery: "jquery",
       "window.jQuery": "jquery"
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'embed.html',
+      template: 'embed.html',
+      inject: false
     })
   ]
 }
