@@ -16,24 +16,23 @@ class Controls {
   constructor(game) {
     this.game = game;
     this.position = {
-      x: this.game.world.width - 140,
-      y: this.game.world.height - 140,
+      x: this.game.world.width - 190,
+      y: this.game.world.height - 190,
     }
     this.controls = this.game.add.sprite(this.position.x, this.position.y, 'objects', this.frames[Phaser.NONE]);
-    this.origin = new Phaser.Point(this.position.x + 60, this.position.y + 60);
+    this.origin = new Phaser.Point(this.position.x + 90, this.position.y + 90);
     this.initialPoints = [
-      new Phaser.Point(this.position.x, this.position.y + 41),
-      new Phaser.Point(this.position.x + 37, this.position.y + 41),
-      new Phaser.Point(this.position.x + 56, this.position.y + 60),
-      new Phaser.Point(this.position.x + 37, this.position.y + 79),
-      new Phaser.Point(this.position.x, this.position.y + 79),
+      new Phaser.Point(this.position.x, this.position.y + 62),
+      new Phaser.Point(this.position.x + 56, this.position.y + 62),
+      new Phaser.Point(this.position.x + 84, this.position.y + 90),
+      new Phaser.Point(this.position.x + 56, this.position.y + 118),
+      new Phaser.Point(this.position.x, this.position.y + 118),
     ]
     this.setButtons();
     this.game.input.onDown.add(this.pointerDown, this);
     this.game.input.onUp.add(this.pointerUp, this);
     this.keyboard = this.game.input.keyboard;
     this.keyboard.addCallbacks(this, this.keyPressesDown, this.keyReleased);
-
   }
   setButtons() {
     this.buttons = [];
@@ -41,6 +40,7 @@ class Controls {
     Object.keys(this.keyCodes).forEach((key, index) => {
       this.setButton(this.keyCodes[key],index);
     })
+    // this.debugButtons();
   }
   setButton(direction,index) {
     var points = [];
@@ -51,6 +51,14 @@ class Controls {
       polygon: new Phaser.Polygon(points),
       direction
     })
+  }
+  debugButtons() {
+    this.buttons.forEach((button) => {
+      button.graphics = this.game.add.graphics(0, 0);
+      button.graphics.beginFill(0x000000);
+      button.graphics.drawPolygon(button.polygon.points);
+      button.graphics.endFill();
+    });
   }
   rotatePoint(point, origin, angle) {
     angle = angle * Math.PI / 180.0;
