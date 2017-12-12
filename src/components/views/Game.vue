@@ -1,9 +1,9 @@
 <template>
-  <div id="game">
+  <div class="page" id="game">
     <div v-if="showGame" class="top-bar">{{ score }} {{ time }}</div>
     <div v-if="!showGame" class="preload">
-      <div class="level">Level {{ levelConfig.id }}</div>
-      <div class="level-name">{{ levelConfig.name }}</div>
+      <div class="level" :class="{'level--transition': transition}">Level {{ levelConfig.id }}</div>
+      <div class="level-name" :class="{'level-name--transition': transition}">{{ levelConfig.name }}</div>
     </div>
   </div>
 </template>
@@ -15,6 +15,9 @@ import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   mounted () {
+    setTimeout(() => {
+      this.transition = true;
+    }, 500);
     this.game = new Main(this.levelConfig, this.selectedCharacter, this.$el);
     this.game.onStart.add(() => {
       this.showGame = true;
@@ -60,12 +63,19 @@ export default {
   data: () => ({
     score: 0,
     showGame: false,
-    time: 0
+    time: 0,
+    transition: false
   })
 }
 </script>
 
 <style lang="scss" scoped>
+  .page {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    -webkit-backface-visibility: hidden;
+  }
   .top-bar {
     height: 6.6vw;
   }
@@ -86,9 +96,22 @@ export default {
     font: 4.3vw/1.4 Minecraft;
   }
   .level {
+    width: 100%;
+    text-align: center;
     text-transform: uppercase;
+    transform: translateX(100%);
+    transition: all .4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    &--transition {
+      transform: translateX(0);
+    }
   }
   .level-name {
-
+    width: 100%;
+    text-align: center;
+    transform: translateX(100%);
+    transition: all .4s .2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    &--transition {
+      transform: translateX(0);
+    }
   }
 </style>
