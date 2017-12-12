@@ -25,6 +25,7 @@ export default {
     height: 100vw;
     top: 0;
     left: 0;
+    overflow: hidden;
     position: absolute;
     background-color: #ddd;
   }
