@@ -208,7 +208,7 @@ export default {
     border-radius: 50%;
     transition: border .1s;
     &--selected {
-      border: 4px solid #5ba329;
+      border: calc(1px + 0.5vw) solid #5ba329;
     }
     &::before {
       content: '';
