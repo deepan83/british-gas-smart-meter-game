@@ -1,6 +1,12 @@
 <template>
   <div class="page" id="game">
-    <div v-if="showGame" class="top-bar">{{ score }} {{ time }}</div>
+    <div v-if="showGame" class="top-bar">
+      <div class="top-bar__level">Level {{ levelConfig.id }} - {{ levelConfig.short }}</div>
+      <div class="top-bar__stats">
+        <span class="top-bar__score-holder">{{ score }}</span>
+        <span class="top-bar__time-holder"><span class="top-bar__time" :style="{width: timeWidth}"></span></span>
+      </div>
+    </div>
     <div class="preload" :class="{ 'preload--transition': showGame }">
       <div class="level" :class="{'level--transition': transition}">Level {{ levelConfig.id }}</div>
       <div class="level-name" :class="{'level-name--transition': transition}">{{ levelConfig.name }}</div>
@@ -61,6 +67,9 @@ export default {
     },
     levelConfig() {
       return levelConfig.levels[this.level];
+    },
+    timeWidth() {
+      return (14 + (this.time / 600 * 86)) + '%';
     }
   },
   data: () => ({
@@ -80,7 +89,49 @@ export default {
     -webkit-backface-visibility: hidden;
   }
   .top-bar {
+    color: #fff;
+    padding: 0 2.5vw;
+    background-color: #000;
     height: 6.6vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &__level {
+      padding-top: 1.4vw;
+      font: 4.3vw/1 Minecraft;
+      text-transform: capitalize;
+    }
+    &__stats {
+      display: flex;
+    }
+    &__score-holder {
+      width: 17.3vw;
+      height: 3.83vw;
+      display: inline-flex;
+      align-items: center;
+      padding-left: 4.3vw;
+      margin-right: 2.6vw;
+      font: 2.6vw/1 Minecraft;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-image: url('~img/score-holder.png')
+    }
+    &__time-holder {
+      width: 23vw;
+      height: 3.83vw;
+      display: inline-flex;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-image: url('~img/time-holder.png');
+    }
+    &__time {
+      display: inline-flex;
+      width: 14%;
+      height: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-image: url('~img/time.png');
+    }
   }
   .preload {
     top: 0;

@@ -7,7 +7,7 @@ import BulbCollection from '../objects/BulbCollection'
 
 class Game extends Phaser.State {
   gameTime = 0;
-  gameLength = 60;
+  gameLength = 600;
   create() {
     this.endGameTimerAudio = this.game.add.audio('end-game-timer');
     this.endGameAudio = this.game.add.audio('end-game');
@@ -24,7 +24,7 @@ class Game extends Phaser.State {
       this.game.onStart.dispatch();
       this.game.objectsPaused = false;
       this.gameTimer = this.game.time.create(false);
-      this.gameTimer.loop(1000, () => {
+      this.gameTimer.loop(100, () => {
         this.gameTime++;
         this.checkTime();
       });
@@ -36,7 +36,7 @@ class Game extends Phaser.State {
     if (this.gameTime <= this.gameLength) {
       this.game.onTime.dispatch();
     }
-    if (this.gameTime == this.gameLength - 6) {
+    if (this.gameTime == this.gameLength - 60) {
       this.endGameTimerAudio.play();
       this.game.aboutToStop = true;
     }
@@ -45,7 +45,7 @@ class Game extends Phaser.State {
       this.game.objectsPaused = true;
       this.game.onFinish.dispatch();
     }
-    if (this.gameTime == this.gameLength + 5) {
+    if (this.gameTime == this.gameLength + 50) {
       this.game.paused = true;
       this.game.onComplete.dispatch();
     }
