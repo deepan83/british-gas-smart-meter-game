@@ -3,7 +3,7 @@ import PathFinderPlugin from 'phaser_plugin_pathfinding/bin/phaser_pathfinding-0
 import getFrameKeys from '../util/getFrameKeys'
 
 class Enemy extends Phaser.Sprite {
-  frozen = false;
+  frozen = true;
   followingPath = false;
   pathToFollow = [];
   hitting = [];
@@ -31,6 +31,13 @@ class Enemy extends Phaser.Sprite {
     this.movingTween.onComplete.add(() => {
         this.followingPath = false;
         this.followPath();
+    });
+    this.game.onStart.add(() => {
+      this.frozen = false;
+    });
+    this.game.onFinish.add(() => {
+      this.frozen = true;
+      this.animations.stop();
     });
   }
   update() {
@@ -90,6 +97,7 @@ class Enemy extends Phaser.Sprite {
     }
 
     var direction = '';
+
     if (next.x > current.x) {
       direction = Phaser.RIGHT;
     } else if (next.x < current.x) {

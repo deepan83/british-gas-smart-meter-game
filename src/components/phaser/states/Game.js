@@ -6,31 +6,51 @@ import EnemyCollection from '../objects/EnemyCollection'
 import BulbCollection from '../objects/BulbCollection'
 
 class Game extends Phaser.State {
+  gameTime = 0;
+  gameLength = 60;
   create() {
-    this.gameTimer = this.game.time.create(false);
-    this.gameTime = 0;
-    this.gameLength = 60;
     this.endGameTimerAudio = this.game.add.audio('end-game-timer');
     this.endGameAudio = this.game.add.audio('end-game');
-    //  Set a TimerEvent to occur after 2 seconds
-    this.gameTimer.loop(1000, () => {
-      this.gameTime++;
-      this.game.onTime.dispatch();
-      if (this.gameTime == this.gameLength - 6) {
-        this.endGameTimerAudio.play();
-      }
-      if (this.gameTime == this.gameLength) {
-        this.game.paused = true;
-        this.gameTimer.stop();
-        this.game.onFinish.dispatch();
-      }
-    });
 
-    //  Start the timer running - this is important!
-    //  It won't start automatically, allowing you to hook it to button events and the like.
-    this.gameTimer.start();
+    this.initGameClock();
 
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
+    this.initGameObjects();
+    this.game.onReady.dispatch();
+  }
+  initGameClock() {
+    this.startTimer = this.game.time.create(false);
+    this.startTimer.create(2000, false, 0, () => {
+      this.game.onStart.dispatch();
+      this.game.objectsPaused = false;
+      this.gameTimer = this.game.time.create(false);
+      this.gameTimer.loop(1000, () => {
+        this.gameTime++;
+        this.checkTime();
+      });
+      this.gameTimer.start();
+    });
+    this.startTimer.start();
+  }
+  checkTime() {
+    if (this.gameTime <= this.gameLength) {
+      this.game.onTime.dispatch();
+    }
+    if (this.gameTime == this.gameLength - 6) {
+      this.endGameTimerAudio.play();
+      this.game.aboutToStop = true;
+    }
+    if (this.gameTime == this.gameLength) {
+      this.endGameAudio.play();
+      this.game.objectsPaused = true;
+      this.game.onFinish.dispatch();
+    }
+    if (this.gameTime == this.gameLength + 5) {
+      this.game.paused = true;
+      this.game.onComplete.dispatch();
+    }
+  }
+  initGameObjects() {
     let gameMap = new GameMap(this.game, 'map');
     let controls = new Controls(this.game);
 
@@ -50,7 +70,6 @@ class Game extends Phaser.State {
     this.game.world.bringToTop(character);
     controls.bringToTop();
   }
-
 }
 
 export default Game;

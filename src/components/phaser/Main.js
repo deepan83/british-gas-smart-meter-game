@@ -6,10 +6,14 @@ import Game from './states/Game';
 
 export default class Main extends Phaser.Game {
 
+  onReady = new Phaser.Signal();
   onStart = new Phaser.Signal();
   onTime = new Phaser.Signal();
   onFinish = new Phaser.Signal();
+  onComplete = new Phaser.Signal();
   onScore = new Phaser.Signal();
+  objectsPaused = true;
+  aboutToStop = false;
 
   constructor(levelConfig, selectedCharacter, element) {
     super(600, 560, Phaser.AUTO, element, null);

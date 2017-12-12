@@ -1,6 +1,7 @@
 import Bonus from './Bonus'
 
 class BonusCollection extends Phaser.Group {
+  timerStarted = false;
   constructor(game, gameMap, character, levelConfig) {
     super(game, undefined, 'bonusCollection', true);
     this.gameMap = gameMap;
@@ -8,10 +9,18 @@ class BonusCollection extends Phaser.Group {
     this.levelConfig = levelConfig;
 
     this.timer = this.game.time.create(false);
-    this.timer.loop(10000, this.addBonus, this);
-    this.timer.start();
+    this.timer.loop(10000, () => {
+      if (!this.game.aboutToStop) {
+        this.addBonus();
+      } else {
+        this.timer.stop();
+      }
+    }, this);
   }
   addBonus() {
+    if (this.game.objectsPaused) {
+      return;
+    }
     let spawn = this.gameMap.getRandomSpawnByType('bonus');
     let position = {
       x: spawn.worldX + this.gameMap.halfTile,
@@ -27,6 +36,15 @@ class BonusCollection extends Phaser.Group {
       this.bonus = null;
     })
     this.add(this.bonus);
+  }
+  update() {
+    if (!this.timerStarted && !this.game.objectsPaused) {
+      this.timerStarted = true;
+      this.timer.start();
+    }
+    if (this.bonus) {
+      this.bonus.update();
+    }
   }
 }
 export default BonusCollection

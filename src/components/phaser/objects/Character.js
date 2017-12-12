@@ -80,6 +80,9 @@ class Character extends Phaser.Sprite {
     }
   }
   move(direction) {
+    if (this.game.objectsPaused) {
+      return;
+    }
     var speed = this.speed;
 
     if (direction === Phaser.LEFT || direction === Phaser.UP) {

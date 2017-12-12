@@ -21,7 +21,6 @@ class Preload extends Phaser.State {
     this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     let holdTime = 4000 - (Math.floor(Date.now()) - this.initTime);
     setTimeout(() => {
-      this.game.onStart.dispatch();
       this.game.state.start('Game')
     }, (holdTime > 0 ? holdTime : 0));
   }

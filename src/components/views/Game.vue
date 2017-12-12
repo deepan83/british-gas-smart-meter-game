@@ -1,7 +1,7 @@
 <template>
   <div class="page" id="game">
     <div v-if="showGame" class="top-bar">{{ score }} {{ time }}</div>
-    <div v-if="!showGame" class="preload">
+    <div class="preload" :class="{ 'preload--transition': showGame }">
       <div class="level" :class="{'level--transition': transition}">Level {{ levelConfig.id }}</div>
       <div class="level-name" :class="{'level-name--transition': transition}">{{ levelConfig.name }}</div>
     </div>
@@ -19,13 +19,16 @@ export default {
       this.transition = true;
     }, 500);
     this.game = new Main(this.levelConfig, this.selectedCharacter, this.$el);
-    this.game.onStart.add(() => {
+    this.game.onReady.add(() => {
       this.showGame = true;
+    });
+    this.game.onStart.add(() => {
+      // this.showGame = true;
     });
     this.game.onTime.add(() => {
       this.time++;
     });
-    this.game.onFinish.add(() => {
+    this.game.onComplete.add(() => {
       this.finished();
     });
     this.game.onScore.add(score => {
@@ -94,6 +97,10 @@ export default {
     align-items: center;
     color: #fff;
     font: 4.3vw/1.4 Minecraft;
+    transition: all 1s;
+    &--transition {
+      top: -100%;
+    }
   }
   .level {
     width: 100%;
