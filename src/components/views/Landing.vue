@@ -11,13 +11,13 @@
         <img src="~img/washer.png" alt="">
         <img src="~img/girl-character.gif" alt="">
       </div>
-      <div class="page-transition-content" :class="{ 'page-transition-content--transition': transition }">
-        <p class="description" v-html="description"></p>
-        <label class="chose-player-label">Choose Player</label>
-        <div class="player-select">
+      <div class="page-transition-content">
+        <p class="description" :class="{ 'description--transition': transition }" v-html="description"></p>
+        <label class="chose-player-label" :class="{ 'chose-player-label--transition': transition }">Choose Player</label>
+        <div class="player-select" :class="{ 'player-select--transition': transition }">
           <button v-for="character in ['mum', 'dad']" class="player-select-button" :class="playerSelectClasses(character)" @click.prevent="changeCharacter(character)"></button>
         </div>
-        <button class="start" @click.prevent="start"></button>
+        <button class="start" :class="{ 'start--transition': transition }" @click.prevent="start"></button>
       </div>
     </div>
   </div>
@@ -120,7 +120,7 @@ export default {
     justify-content: center;
     align-items: center;
     text-shadow: 0 2px 2px #000;
-    transition: all 1s 1s;
+    transition: all 1s .5s;
     transform: translate(-50%, 275%);
     &--typewriting {
       &::after {
@@ -151,48 +151,47 @@ export default {
     position: absolute;
     width: 100%;
     justify-content: center;
+    transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     &--transition {
-      animation: objects-transition 1.5s forwards;
-      @keyframes objects-transition {
-        0%   {
-          transform: translate(0, 0);
-        }
-        30%   {
-          transform: translate(10%, 0);
-        }
-        100% {
-          transform: translate(-100%, 30%);
-          opacity: 0;
-        }
-      }
+      transform: translate(-100%, 30%);
+      opacity: 0;
     }
   }
   .page-transition-content {
     position: absolute;
     top: 20.83vw;
-    opacity: 0;
-    &--transition {
-      transform: translate(10%, 50%) scale(.5);
-      animation: page-content-transition 1s 2s forwards;
-      @keyframes page-content-transition {
-        100% {
-          transform: translate(0, 0) scale(1);
-          opacity: 1;
-        }
-      }
-    }
   }
   .description {
-
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all .8s 2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    &--transition {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
   .chose-player-label {
     display: block;
     margin-bottom: 3.3vw;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all .8s 2.1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    &--transition {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
   .player-select {
     display: flex;
     margin-bottom: 5.5vw;
     justify-content: center;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all .8s 2.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    &--transition {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
   .player-select-button {
     display: flex;
@@ -234,5 +233,12 @@ export default {
     outline: 0;
     background-size: cover;
     background-image: url('~img/start-button.png');
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all .8s 2.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    &--transition {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 </style>
