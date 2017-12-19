@@ -69,7 +69,7 @@ export default {
       return levelConfig.levels[this.level];
     },
     timeWidth() {
-      return (14 + (this.time / 600 * 86)) + '%';
+      return (100 - (this.time / 600 * 86)) + '%';
     }
   },
   data: () => ({
