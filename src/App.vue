@@ -27,6 +27,5 @@ export default {
     left: 0;
     overflow: hidden;
     position: absolute;
-    background-color: #ddd;
   }
 </style>

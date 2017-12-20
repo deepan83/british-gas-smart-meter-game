@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36px" height="35px" viewBox="0 0 36 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>Rectangle 4</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="6.3 23.3333333 12.6 23.3333333 12.6 0 6.3 0 0 0 0 23.3333333"></polygon>
+    </defs>
+    <g id="Design-Final" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Score-Page---replicated-after-the-first-4-rounds" transform="translate(-515.000000, -14.000000)">
+            <g id="Group-2" transform="translate(515.000000, 14.000000)">
+                <rect id="Rectangle-4" x="0" y="0" width="36" height="35"></rect>
+                <g id="Page-1" transform="translate(12.000000, 5.833333)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Clip-2"></g>
+                    <path d="M8.17794472,23.3333333 L8.17794472,12.6896366 L11.8909709,12.6896366 L12.4481928,8.54278633 L8.17794472,8.54278633 L8.17794472,5.89388697 C8.17794472,4.69140347 8.52263643,3.87371469 10.3139617,3.87371469 L12.6,3.87371469 L12.6,0.163194189 C12.2017293,0.113377015 10.84618,0 9.2691708,0 C5.97763288,0 3.72374203,1.93256276 3.72374203,5.48332474 L3.72374203,8.54278633 L0,8.54278633 L0,12.6896366 L3.72374203,12.6896366 L3.72374203,23.3333333 L8.17794472,23.3333333 Z" id="Fill-1" fill="#007DC4" mask="url(#mask-2)"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
