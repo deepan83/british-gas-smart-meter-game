@@ -1,5 +1,5 @@
-export function score(state) {
-  return state.score;
+export function scores(state) {
+  return state.scores;
 }
 export function character(state) {
   return state.character;

@@ -3,7 +3,7 @@
     <div v-if="showGame" class="top-bar">
       <div class="top-bar__level">Level {{ levelConfig.id }} - {{ levelConfig.short }}</div>
       <div class="top-bar__stats">
-        <span class="top-bar__score-holder">{{ score }}</span>
+        <v-score-holder :score="score"></v-score-holder>
         <span class="top-bar__time-holder"><span class="top-bar__time" :style="{width: timeWidth}"></span></span>
       </div>
     </div>
@@ -18,8 +18,12 @@
 import Main from 'components/phaser/Main'
 import levelConfig from '@/assets/levels.json'
 import { mapGetters, mapMutations } from 'vuex'
+import ScoreHolder from 'components/ScoreHolder'
 
 export default {
+  components: {
+    'v-score-holder': ScoreHolder,
+  },
   mounted () {
     setTimeout(() => {
       this.transition = true;
@@ -46,7 +50,7 @@ export default {
       changeRoute: 'router/change'
     }),
     finished() {
-      this.$store.commit('updateScore', this.score);
+      this.$store.commit('updateScores', {score: this.score, level: this.level});
       if (this.level === Object.keys(levelConfig.levels).length) {
         this.changeRoute({name: 'finish'});
       } else {
@@ -103,18 +107,6 @@ export default {
     }
     &__stats {
       display: flex;
-    }
-    &__score-holder {
-      width: 17.3vw;
-      height: 3.83vw;
-      display: inline-flex;
-      align-items: center;
-      padding-left: 4.3vw;
-      margin-right: 2.6vw;
-      font: 2.6vw/1 Minecraft;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-image: url('~img/score-holder.png')
     }
     &__time-holder {
       width: 23vw;
