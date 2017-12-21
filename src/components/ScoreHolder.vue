@@ -12,6 +12,7 @@ export default {
 .score-holder {
   width: 17.3vw;
   height: 3.83vw;
+  color: #fff;
   display: inline-flex;
   align-items: center;
   padding-left: 4.3vw;

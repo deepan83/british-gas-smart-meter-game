@@ -52,7 +52,7 @@ export default {
     finished() {
       this.$store.commit('updateScores', {score: this.score, level: this.level});
       if (this.level === Object.keys(levelConfig.levels).length) {
-        this.changeRoute({name: 'finish'});
+        this.changeRoute({name: 'score', params: {level: this.level}});
       } else {
         this.changeRoute({name: 'video', params: {level: this.level}});
       }
@@ -64,7 +64,7 @@ export default {
   computed: {
     ...mapGetters({
       selectedCharacter: 'character',
-      routerParams: 'router/params'
+      routerParams: 'router/params',
     }),
     level() {
       return this.routerParams.level;

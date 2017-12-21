@@ -4,13 +4,15 @@
     <v-share></v-share>
     <v-wilbur-looking-up></v-wilbur-looking-up>
     <v-smart-meter :score="score"></v-smart-meter>
-    <p class="copy">Better luck in Level {{ nextLevel }}</p>
-    <button @click.prevent="next" class="button">Play level {{ nextLevel }}</button>
+    <p v-if="!isLastLevel" class="copy">Better luck in Level {{ nextLevel }}</p>
+    <button v-if="!isLastLevel" @click.prevent="next" class="button">Play level {{ nextLevel }}</button>
+    <button v-if="isLastLevel" @click.prevent="finish" class="button">Continue</button>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
+import levelConfig from '@/assets/levels.json'
 import Logo from 'components/Logo'
 import Share from 'components/Share'
 import WilburLookingUp from 'components/WilburLookingUp'
@@ -22,19 +24,15 @@ export default {
     'v-wilbur-looking-up': WilburLookingUp,
     'v-smart-meter': SmartMeter,
   },
-  methods: {
-    ...mapMutations({
-      changeRoute: 'router/change'
-    }),
-    next() {
-      this.changeRoute({name: 'game', params: {level: this.nextLevel}});
-    }
-  },
   computed: {
     ...mapGetters({
       routerParams: 'router/params',
-      scores: 'scores'
+      scores: 'scores',
+      totalScore: 'totalScore'
     }),
+    isLastLevel() {
+      return this.level === Object.keys(levelConfig.levels).length;
+    },
     level() {
       return this.routerParams.level;
     },
@@ -42,7 +40,22 @@ export default {
       return this.level + 1;
     },
     score() {
-      return this.scores[this.level];
+      if (this.isLastLevel) {
+        return this.totalScore;
+      } else {
+        return this.scores[this.level - 1];
+      }
+    }
+  },
+  methods: {
+    ...mapMutations({
+      changeRoute: 'router/change'
+    }),
+    next() {
+      this.changeRoute({name: 'game', params: {level: this.nextLevel}});
+    },
+    finish() {
+      this.changeRoute({name: 'finish'});
     }
   }
 }
