@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.5.0</string>
+        <string>4.6.0</string>
         <key>fileName</key>
         <string>/Users/richard/Sites/british-gas-smart-meter-game/static/objects.tps</string>
         <key>autoSDSettings</key>
