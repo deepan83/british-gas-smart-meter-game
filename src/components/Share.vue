@@ -1,16 +1,15 @@
 <template>
   <div class="share">Share<!--
-    --><a :href="'https://www.facebook.com/sharer/sharer.php?u=' + siteUrl" class="share__button -facebook" target="_blank"></a><!--
-    --><a :href="'https://twitter.com/intent/tweet?text=Play the free \'Smart Meter Maze\' game&url=' + siteUrl" class="share__button -twitter" target="_blank"></a><!--
+    --><v-share-button network="facebook"></v-share-button><!--
+    --><v-share-button network="twitter"></v-share-button><!--
     --></div>
 </template>
 
 <script>
+import ShareButton from 'components/ShareButton'
 export default {
-  computed: {
-    siteUrl() {
-      return window.location.origin;
-    }
+  components: {
+    'v-share-button': ShareButton,
   }
 }
 </script>
@@ -25,24 +24,5 @@ export default {
   position: absolute;
   font: 2.6vw/1 Minecraft;
   letter-spacing: 0.16vw;
-  &__button {
-    display: inline-block;
-    width: 6vw;
-    height: 6vw;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    transition: transform .4s;
-    &:hover {
-      transform: rotate(10deg);
-    }
-    &.-facebook {
-      margin-left: 0.6vw;
-      background-image: url('~img/facebook.svg');
-    }
-    &.-twitter {
-      background-image: url('~img/twitter.svg');
-    }
-  }
 }
 </style>

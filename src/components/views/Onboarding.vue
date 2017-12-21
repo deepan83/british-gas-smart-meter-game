@@ -8,7 +8,6 @@
         </div>
       </div>
       <button class="skip" @click.prevent="skip">Skip</button>
-      <!-- <router-link :to="{name: 'game', params: {level: 1}}" class="skip">Skip</router-link> -->
     </div>
   </div>
 </template>
