@@ -14,7 +14,8 @@ class Preload extends Phaser.State {
     this.game.load.audio('light-off', '/static/audio/light-off.mp3');
     this.game.load.audio('freeze', '/static/audio/freeze.mp3');
     this.game.load.audio('end-game', '/static/audio/end-game.mp3');
-    this.game.load.audio('end-game-timer', '/static/audio/end-game-timer.mp3');
+    this.game.load.audio('end-game-timer-1', '/static/audio/end-game-timer-1.mp3');
+    this.game.load.audio('end-game-timer-2', '/static/audio/end-game-timer-2.mp3');
   }
 
   create() {
