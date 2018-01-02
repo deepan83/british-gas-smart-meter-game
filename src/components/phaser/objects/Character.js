@@ -23,6 +23,8 @@ class Character extends Phaser.Sprite {
     this.game.add.existing(this);
     this.stepsAudio = this.game.add.audio('steps', .2, true);
 
+    this.blink();
+
     this.game.physics.arcade.enable(this);
     this.game.onFinish.add(() => {
       this.animations.stop();
@@ -30,6 +32,15 @@ class Character extends Phaser.Sprite {
       this.body.velocity.y = 0;
     });
     this.move(Phaser.DOWN)
+  }
+  blink() {
+    var tween = this.game.add.tween(this);
+    tween.to({alpha: 0}, 200, "Linear", false, 0, 10).yoyo(true, 0);
+    tween.start();
+    this.game.onStart.add(() => {
+      tween.stop();
+      this.alpha = 1;
+    });
   }
   initAnimations() {
     this.animations.add('walk' + Phaser.LEFT, getFrameKeys(this.selectedCharacter + '/left', this.game.cache.getFrameData('objects')));
