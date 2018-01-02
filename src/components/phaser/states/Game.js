@@ -62,6 +62,7 @@ class Game extends Phaser.State {
 
     let bulbCollection = new BulbCollection(this.game, gameMap, character, enemyCollection, this.game.levelConfig);
     bulbCollection.allBulbsCollected.add(() => {
+      this.endGameAudio.stop();
       this.endGameSplitAudio.play();
       this.game.objectsPaused = true;
       this.game.onFinish.dispatch();
