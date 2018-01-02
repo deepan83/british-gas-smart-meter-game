@@ -24,6 +24,11 @@ class Character extends Phaser.Sprite {
     this.stepsAudio = this.game.add.audio('steps', .2, true);
 
     this.game.physics.arcade.enable(this);
+    this.game.onFinish.add(() => {
+      this.animations.stop();
+      this.body.velocity.x = 0;
+      this.body.velocity.y = 0;
+    });
     this.move(Phaser.DOWN)
   }
   initAnimations() {
