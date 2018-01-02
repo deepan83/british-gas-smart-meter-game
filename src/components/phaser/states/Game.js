@@ -10,6 +10,7 @@ class Game extends Phaser.State {
   gameLength = 600;
   create() {
     this.endGameAudio = this.game.add.audio('end-game');
+    this.endGameSplitAudio = this.game.add.audio('end-game-split');
 
     this.initGameClock();
 
@@ -61,12 +62,12 @@ class Game extends Phaser.State {
 
     let bulbCollection = new BulbCollection(this.game, gameMap, character, enemyCollection, this.game.levelConfig);
     bulbCollection.allBulbsCollected.add(() => {
-      this.endGameAudio.play();
+      this.endGameSplitAudio.play();
       this.game.objectsPaused = true;
       this.game.onFinish.dispatch();
       this.gameTimer.stop();
       let finishTimer = this.game.time.create(false);
-      finishTimer.create(5000, false, 0, () => {
+      finishTimer.create(2000, false, 0, () => {
         this.game.paused = true;
         this.game.onComplete.dispatch();
       });
