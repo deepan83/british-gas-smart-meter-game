@@ -85,8 +85,7 @@ class Controls {
     });
   }
   pointerUp() {
-    this.direction = Phaser.NONE;
-    this.highlightButton(Phaser.NONE);
+    this.resetDirection();
   }
   keyPressesDown(event) {
     if (typeof this.keyCodes[event.key] !== 'undefined') {
@@ -95,11 +94,19 @@ class Controls {
     }
   }
   keyReleased() {
-    this.direction = Phaser.NONE;
-    this.highlightButton(Phaser.NONE);
+    this.resetDirection();
   }
   highlightButton(direction) {
     this.controls.frameName = this.frames[direction];
+  }
+  resetDirection() {
+    var resetHold = this.game.time.create(false);
+    resetHold.create(200, false, 0, () => {
+      this.direction = Phaser.NONE;
+      this.highlightButton(Phaser.NONE);
+
+    });
+    resetHold.start();
   }
 }
 export default Controls;
