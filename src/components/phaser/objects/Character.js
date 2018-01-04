@@ -1,7 +1,7 @@
 import getFrameKeys from '../util/getFrameKeys'
 
 class Character extends Phaser.Sprite {
-  threshold = 3;
+  threshold = 10;
   speed = 160;
   turnSpeed = 120;
   marker = new Phaser.Point();
@@ -78,8 +78,8 @@ class Character extends Phaser.Sprite {
     }
   }
   checkDirection(turnTo) {
-
-    if (this.turning === turnTo || this.directions[turnTo] === null || this.directions[turnTo].index !== this.gameMap.safetile) {
+    if (this.directions[turnTo] === null || this.directions[turnTo].index !== this.gameMap.safetile) {
+      console.log(this.turning, turnTo)
       //  Invalid direction if they're already set to turn that way
       //  Or there is no tile there, or the tile isn't index a floor tile
       return;

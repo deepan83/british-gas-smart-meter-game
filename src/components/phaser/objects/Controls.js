@@ -99,13 +99,14 @@ class Controls {
     this.controls.frameName = this.frames[direction];
   }
   resetDirection() {
-    var resetHold = this.game.time.create(false);
-    resetHold.create(1000, false, 0, () => {
+    if (this.resetHold) {
+      this.game.time.events.remove(this.resetHold);
+      this.resetHold = false;
+    }
+    this.resetHold = this.game.time.events.add(1000, () => {
       this.direction = Phaser.NONE;
       this.highlightButton(Phaser.NONE);
-
     });
-    resetHold.start();
   }
 }
 export default Controls;
