@@ -30,7 +30,7 @@ export default {
   background-repeat: no-repeat;
   transition: transform .4s;
   &:hover {
-    transform: rotate(10deg);
+    transform: scale(1.1);
   }
   &.-facebook {
     margin-left: 0.6vw;
