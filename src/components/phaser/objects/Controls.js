@@ -100,7 +100,7 @@ class Controls {
   }
   resetDirection() {
     var resetHold = this.game.time.create(false);
-    resetHold.create(200, false, 0, () => {
+    resetHold.create(1000, false, 0, () => {
       this.direction = Phaser.NONE;
       this.highlightButton(Phaser.NONE);
 
