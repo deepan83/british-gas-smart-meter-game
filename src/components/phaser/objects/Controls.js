@@ -20,14 +20,13 @@ class Controls {
       y: this.game.world.height - 190,
     }
     this.controls = this.game.add.sprite(this.position.x, this.position.y, 'objects', this.frames[Phaser.NONE]);
-    this.controls.alpha = .5;
-    this.origin = new Phaser.Point(this.position.x + 80, this.position.y + 80);
+    this.origin = new Phaser.Point(this.position.x + 90, this.position.y + 90);
     this.initialPoints = [
-      new Phaser.Point(this.position.x, this.position.y + 53),
-      new Phaser.Point(this.position.x + 53, this.position.y + 53),
-      new Phaser.Point(this.position.x + 80, this.position.y + 80),
-      new Phaser.Point(this.position.x + 53, this.position.y + 107),
-      new Phaser.Point(this.position.x, this.position.y + 107),
+      new Phaser.Point(this.position.x, this.position.y + 62),
+      new Phaser.Point(this.position.x + 56, this.position.y + 62),
+      new Phaser.Point(this.position.x + 84, this.position.y + 90),
+      new Phaser.Point(this.position.x + 56, this.position.y + 118),
+      new Phaser.Point(this.position.x, this.position.y + 118),
     ]
     this.setButtons();
     this.game.input.onDown.add(this.pointerDown, this);
