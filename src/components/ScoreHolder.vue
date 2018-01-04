@@ -17,7 +17,7 @@ export default {
   align-items: center;
   padding-left: 4.3vw;
   margin-right: 2.6vw;
-  font: 2.6vw/1 Minecraft;
+  font: 3vw/1 Minecraft;
   background-size: contain;
   background-repeat: no-repeat;
   background-image: url('~img/score-holder.png')
