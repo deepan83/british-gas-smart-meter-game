@@ -1,7 +1,7 @@
 import getFrameKeys from '../util/getFrameKeys'
 
 class Character extends Phaser.Sprite {
-  threshold = 10;
+  threshold = 5;
   speed = 160;
   turnSpeed = 120;
   marker = new Phaser.Point();
