@@ -26,7 +26,6 @@
 </template>
 
 <script>
-import Cookies from 'js-cookie';
 import {mapGetters, mapMutations} from 'vuex';
 import {getQueryVariable} from '@/util';
 
@@ -73,12 +72,7 @@ export default {
       changeRoute: 'router/change'
     }),
     start() {
-      if (!Cookies.get('onboarding') || getQueryVariable('onboarding_always')) {
-        Cookies.set('onboarding', true, { expires: 365 });
-        this.changeRoute({name: 'onboarding'});
-      } else {
-        this.changeRoute({name: 'game', params: {level: 1}});
-      }
+      this.changeRoute({name: 'onboarding'});
     },
     ...mapMutations([
       'changeCharacter'
