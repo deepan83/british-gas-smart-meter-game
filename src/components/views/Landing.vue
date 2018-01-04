@@ -12,7 +12,9 @@
         <img src="~img/girl-character.gif" alt="">
       </div>
       <div class="page-transition-content">
-        <p class="description" :class="{ 'description--transition': transition }" v-html="description"></p>
+        <p class="sub-title" :class="{ '-transition': transition }">{{ subTitle }}</p>
+        <p class="initial-description" :class="{ '-transition': transition }" v-html="initialDescription"></p>
+        <p class="description" :class="{ '-transition': transition }" v-html="description"></p>
         <label class="chose-player-label" :class="{ 'chose-player-label--transition': transition }">Choose Player</label>
         <div class="player-select" :class="{ 'player-select--transition': transition }">
           <button v-for="character in ['mum', 'dad']" class="player-select-button" :class="playerSelectClasses(character)" @click.prevent="changeCharacter(character)"></button>
@@ -37,7 +39,9 @@ export default {
       initialTitle: '&nbsp;',
       typewriting: true,
       transition: false,
-      description: 'A RACE TO SAVE ENERGY<br><br><br>It\'s a race against time and we need your help.<br>Locate and switch off as many energy draining appliances as you can spot in our Smart Meter Maze.<br>Faster than the teenagers switching them back on.<br><br>Good luck!<br><br>',
+      subTitle: 'A RACE TO SAVE ENERGY',
+      initialDescription: 'I\'s a race against time and we need your help.',
+      description: 'Locate and switch off as many energy draining appliances as you can spot in our Smart Meter Maze faster than the teenagers switching them back on.<br><br>Good luck!',
       canType: true
     }
   },
@@ -100,7 +104,7 @@ export default {
     text-align: center;
     color: #fff;
     width: 100%;
-    font: 2.7vw/1 Minecraft;
+    font: 2.7vw/1.4 Minecraft;
     letter-spacing: 0.04vw;
     text-shadow: 0 2px 4px rgba(#000, .5);
   }
@@ -110,7 +114,6 @@ export default {
     top: 11%;
     left: 50%;
     font: 9.6vw/1 Minecraft;
-    margin-bottom: 1.6vw;
     letter-spacing: 0.16vw;
     display: flex;
     justify-content: center;
@@ -155,13 +158,64 @@ export default {
   }
   .page-transition-content {
     position: absolute;
-    top: 20.83vw;
+    top: 18.43vw;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .sub-title {
+    opacity: 0;
+    margin-bottom: 6vw;
+    transform: translateX(100%);
+    transition: all .8s 1.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    &.-transition {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  .initial-description {
+    opacity: 0;
+    top: 22%;
+    position: absolute;
+    transform: translateX(100%);
+    // transition: all .8s 1.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    &.-transition {
+      animation: initial-description 2.6s 1.6s forwards;
+    }
+    @keyframes initial-description {
+      0% {
+        opacity: 0;
+        transform: translateX(100%);
+      }
+      22% {
+        transform: translateX(-10%);
+      }
+      29% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      74% {
+        transform: translateX(0);
+      }
+      76% {
+        opacity: 1;
+        transform: translateX(10%);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+    }
   }
   .description {
     opacity: 0;
+    max-width: 448px;
+    margin-bottom: 8vw;
     transform: translateX(100%);
-    transition: all .8s 1.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    &--transition {
+    transition: all .8s 3.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    &.-transition {
       opacity: 1;
       transform: translateX(0);
     }
@@ -171,7 +225,7 @@ export default {
     margin-bottom: 3.3vw;
     opacity: 0;
     transform: translateY(100%);
-    transition: all .8s 1.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: all .8s 1.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     &--transition {
       opacity: 1;
       transform: translateX(0);
@@ -183,7 +237,7 @@ export default {
     justify-content: center;
     opacity: 0;
     transform: translateX(100%);
-    transition: all .8s 1.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: all .8s 2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     &--transition {
       opacity: 1;
       transform: translateX(0);
