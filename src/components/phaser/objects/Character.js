@@ -79,7 +79,6 @@ class Character extends Phaser.Sprite {
   }
   checkDirection(turnTo) {
     if (this.directions[turnTo] === null || this.directions[turnTo].index !== this.gameMap.safetile) {
-      console.log(this.turning, turnTo)
       //  Invalid direction if they're already set to turn that way
       //  Or there is no tile there, or the tile isn't index a floor tile
       return;
