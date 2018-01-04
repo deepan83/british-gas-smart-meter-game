@@ -7,6 +7,9 @@
         <span class="top-bar__time-holder"><span class="top-bar__time" :style="{width: timeWidth}"></span></span>
       </div>
     </div>
+    <div class="finished" :class="{ '-show': gameFinished }">
+      <div class="finished__text">Level {{ levelConfig.id }}<br>complete</div>
+    </div>
     <div class="preload" :class="{ 'preload--transition': showGame }">
       <div class="level" :class="{'level--transition': transition}">Level {{ levelConfig.id }}</div>
       <div class="level-name" :class="{'level-name--transition': transition}">{{ levelConfig.name }}</div>
@@ -37,6 +40,9 @@ export default {
     });
     this.game.onTime.add(() => {
       this.time++;
+    });
+    this.game.onFinish.add(() => {
+      this.gameFinished = true;
     });
     this.game.onComplete.add(() => {
       this.finished();
@@ -79,6 +85,7 @@ export default {
   data: () => ({
     score: 0,
     showGame: false,
+    gameFinished: false,
     time: 0,
     transition: false
   })
@@ -145,12 +152,38 @@ export default {
       top: -100%;
     }
   }
+  .finished {
+    top: 6.6vw;
+    left: 100%;
+    position: absolute;
+    width: 100%;
+    height: 93.4vw;
+    background-color: rgba(#000000, .5);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font: 8vw/1.2 Minecraft;
+    &.-show {
+      left: 0;
+    }
+    &__text {
+      width: 100%;
+      text-align: center;
+    }
+  }
   .level {
     width: 100%;
     text-align: center;
     text-transform: uppercase;
     transform: translateX(100%);
     transition: all .4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    &.-no-transition {
+      text-transform: none;
+      transform: translateX(0);
+    }
     &--transition {
       transform: translateX(0);
     }
