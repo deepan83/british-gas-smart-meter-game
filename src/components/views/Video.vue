@@ -50,7 +50,7 @@ export default {
       return levelConfig.levels[this.level];
     },
     levelVideo() {
-      return this.levelConfig.video;
+      return 'https://www.youtube.com/embed/' + this.levelConfig.video + '?autoplay=1';
     }
   }
 }
