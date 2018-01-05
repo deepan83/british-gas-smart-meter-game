@@ -3,6 +3,7 @@
     <v-logo></v-logo>
     <v-share></v-share>
     <v-wilbur-looking-up></v-wilbur-looking-up>
+    <p class="copy -top">You Scored...</p>
     <v-smart-meter :score="score"></v-smart-meter>
     <p v-if="!isLastLevel" class="copy">Better luck in Level {{ nextLevel }}</p>
     <button v-if="!isLastLevel" @click.prevent="next" class="button">Play level {{ nextLevel }}</button>
@@ -74,6 +75,9 @@ export default {
   position: absolute;
   letter-spacing: 0.17vw;
   font: 3.5vw/1.4 Minecraft;
+  &.-top {
+    top: 14vw;
+  }
 }
 .button {
   top: 75.5vw;
