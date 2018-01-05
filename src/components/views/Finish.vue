@@ -18,6 +18,10 @@ export default {
   components: {
     'v-logo': Logo,
     'v-share-button': ShareButton,
+  },
+  mounted() {
+    var wilburCheerAudio = new Audio('/static/audio/wilbur-cheer.mp3');
+    wilburCheerAudio.play();
   }
 }
 </script>
