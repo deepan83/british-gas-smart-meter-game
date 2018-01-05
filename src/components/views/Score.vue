@@ -25,6 +25,10 @@ export default {
     'v-wilbur-looking-up': WilburLookingUp,
     'v-smart-meter': SmartMeter,
   },
+  mounted() {
+    var endScoreAudio = new Audio('/static/audio/end-score.mp3');
+    endScoreAudio.play();
+  },
   computed: {
     ...mapGetters({
       routerParams: 'router/params',
