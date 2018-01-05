@@ -10,8 +10,7 @@
     <div class="finished" :class="{ '-show': gameFinished }">
       <div class="finished__text">Level {{ levelConfig.id }}<br>complete</div>
     </div>
-    <!-- <div class="preload" :class="{ 'preload--transition': showGame }"> -->
-    <div class="preload">
+    <div class="preload" :class="{ 'preload--transition': showGame }">
       <div class="level-objects-holder" :class="{'-transition': transition}">
         <div class="level-objects" :style="{ 'background-image': 'url(' + levelObjects[levelConfig.id] + ')' }"></div>
       </div>
