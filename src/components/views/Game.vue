@@ -10,9 +10,16 @@
     <div class="finished" :class="{ '-show': gameFinished }">
       <div class="finished__text">Level {{ levelConfig.id }}<br>complete</div>
     </div>
-    <div class="preload" :class="{ 'preload--transition': showGame }">
+    <!-- <div class="preload" :class="{ 'preload--transition': showGame }"> -->
+    <div class="preload">
+      <div class="level-objects-holder" :class="{'-transition': transition}">
+        <div class="level-objects" :style="{ 'background-image': 'url(' + levelObjects[levelConfig.id] + ')' }"></div>
+      </div>
       <div class="level" :class="{'level--transition': transition}">Level {{ levelConfig.id }}</div>
       <div class="level-name" :class="{'level-name--transition': transition}">{{ levelConfig.name }}</div>
+      <div class="teens-holder" :class="{'-transition': transition}">
+        <img class="teens" src="~img/level-objects/teens.png">
+      </div>
     </div>
   </div>
 </template>
@@ -22,6 +29,11 @@ import Main from 'components/phaser/Main'
 import levelConfig from '@/assets/levels.json'
 import { mapGetters, mapMutations } from 'vuex'
 import ScoreHolder from 'components/ScoreHolder'
+import levelObject1 from 'img/level-objects/1.png'
+import levelObject2 from 'img/level-objects/2.png'
+import levelObject3 from 'img/level-objects/3.png'
+import levelObject4 from 'img/level-objects/4.png'
+import levelObject5 from 'img/level-objects/5.png'
 
 export default {
   components: {
@@ -87,7 +99,14 @@ export default {
     showGame: false,
     gameFinished: false,
     time: 0,
-    transition: false
+    transition: false,
+    levelObjects: {
+      1: levelObject1,
+      2: levelObject2,
+      3: levelObject3,
+      4: levelObject4,
+      5: levelObject5,
+    }
   })
 }
 </script>
@@ -174,16 +193,30 @@ export default {
       text-align: center;
     }
   }
+  .level-objects-holder {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    transform: translateX(100%);
+    transition: all .4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    &.-transition {
+      transform: translateX(0);
+    }
+  }
+  .level-objects {
+    width: 39vw;
+    height: 14vw;
+    margin-bottom: 5px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
   .level {
     width: 100%;
     text-align: center;
     text-transform: uppercase;
     transform: translateX(100%);
-    transition: all .4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    &.-no-transition {
-      text-transform: none;
-      transform: translateX(0);
-    }
+    transition: all .4s .2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     &--transition {
       transform: translateX(0);
     }
@@ -191,9 +224,20 @@ export default {
   .level-name {
     width: 100%;
     text-align: center;
+    margin-bottom: 20px;
     transform: translateX(100%);
-    transition: all .4s .2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: all .4s .4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     &--transition {
+      transform: translateX(0);
+    }
+  }
+  .teens-holder {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    transform: translateX(100%);
+    transition: all .4s .6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    &.-transition {
       transform: translateX(0);
     }
   }
