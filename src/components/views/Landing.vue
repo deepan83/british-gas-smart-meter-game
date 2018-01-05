@@ -282,7 +282,16 @@ export default {
     border: 0;
     outline: 0;
     background-size: cover;
-    background-image: url('~img/start-button.png');
+    background-image: url('~img/button.png');
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-image: url('~img/start.svg');
+    }
   }
   .start-holder {
     width: 100%;
