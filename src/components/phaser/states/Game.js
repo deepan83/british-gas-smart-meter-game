@@ -79,7 +79,7 @@ class Game extends Phaser.State {
     this.game.world.bringToTop(bonusCollection);
     this.game.world.bringToTop(bulbCollection);
     this.game.world.bringToTop(enemyCollection);
-    this.game.world.bringToTop(character);
+    character.bringToTop();
     controls.bringToTop();
   }
 }

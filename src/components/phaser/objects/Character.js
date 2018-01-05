@@ -23,7 +23,7 @@ class Character extends Phaser.Sprite {
     this.game.add.existing(this);
     this.stepsAudio = this.game.add.audio('steps', .2, true);
 
-    this.blink();
+    this.highlighter();
 
     this.game.physics.arcade.enable(this);
     this.game.onFinish.add(() => {
@@ -33,13 +33,21 @@ class Character extends Phaser.Sprite {
     });
     this.move(Phaser.DOWN)
   }
-  blink() {
-    var tween = this.game.add.tween(this);
-    tween.to({alpha: 0}, 200, "Linear", false, 0, 10).yoyo(true, 0);
-    tween.start();
+  highlighter() {
+    this.highlight = this.game.add.graphics(this.x, this.y);
+    this.highlight.anchor.set(.5);
+
+    this.highlight.beginFill(0xFFFFFF, 1);
+    this.highlight.drawCircle(0, 0, 60);
+
+    var alphaTween = this.game.add.tween(this.highlight);
+    var scaleTween = this.game.add.tween(this.highlight.scale);
+    alphaTween.to({alpha: 0}, 200, "Linear", true, 0, -1).yoyo(true, 0);
+    scaleTween.to({x: 0, y: 0}, 600, "Linear", true, 0, -1).yoyo(true, 0);
     this.game.onStart.add(() => {
-      tween.stop();
-      this.alpha = 1;
+      alphaTween.stop();
+      scaleTween.stop();
+      this.highlight.alpha = 0;
     });
   }
   initAnimations() {
@@ -139,6 +147,10 @@ class Character extends Phaser.Sprite {
     this.turning = Phaser.NONE;
 
     return true;
+  }
+  bringToTop() {
+    this.game.world.bringToTop(this.highlight);
+    this.game.world.bringToTop(this);
   }
 }
 export default Character
