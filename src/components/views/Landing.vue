@@ -282,7 +282,7 @@ export default {
     border: 0;
     outline: 0;
     background-size: cover;
-    background-image: url('~img/button.png');
+    background-image: url('~img/button.svg');
     &::after {
       content: '';
       display: inline-block;

@@ -94,6 +94,6 @@ export default {
   text-transform: uppercase;
   background-color: transparent;
   background-size: 100% 100%;
-  background-image: url('~img/button.png');
+  background-image: url('~img/button.svg');
 }
 </style>
