@@ -7,11 +7,29 @@
 <script>
 import {mapGetters} from 'vuex'
 export default {
+  data() {
+    return {
+      intoMusic: new Audio('/static/audio/intro.mp3')
+    }
+  },
   computed: {
     ...mapGetters({
-      view: 'router/view'
+      view: 'router/view',
+      route: 'router/route',
     }),
   },
+  mounted() {
+    if (this.route.name === 'landing' || this.route.name === 'onboarding') {
+      this.intoMusic.play();
+    }
+  },
+  watch: {
+    route() {
+      if (this.route.name === 'game') {
+        this.intoMusic.pause();
+      }
+    }
+  }
 }
 </script>
 
