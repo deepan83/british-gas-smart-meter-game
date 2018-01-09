@@ -36,6 +36,7 @@ class Bonus extends Phaser.Sprite {
     this.removeTimer = this.game.time.create(false);
     this.removeTimer.create(5000, false, 0, () => {
       this.tweens.puls.onComplete.add(() => {
+        this.bonusTimerAudio.stop();
         this.killAll();
         this.onRemove.dispatch();
       });
