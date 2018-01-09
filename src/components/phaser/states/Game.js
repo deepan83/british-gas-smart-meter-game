@@ -41,6 +41,8 @@ class Game extends Phaser.State {
       this.game.aboutToStop = true;
     }
     if (this.gameTime == this.gameLength) {
+      this.endGameAudio.stop();
+      this.endGameSplitAudio.play();
       this.game.objectsPaused = true;
       this.game.onFinish.dispatch();
     }
