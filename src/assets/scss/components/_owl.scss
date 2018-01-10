@@ -1,14 +1,15 @@
 .owl-nav {
   top: 50%;
   width: 100%;
-  padding: 0 33px;
+  padding: 0 5.5vw;
   display: flex;
   justify-content: space-between;
   position: absolute;
 }
 .owl-prev, .owl-next {
-  width: 14px;
-  height: 17px;
+  width: 2.3vw;
+  height: 2.8vw;
+  background-size: contain;
   background-image: url('~img/carousel-arrow.svg');
 }
 .owl-next {
@@ -16,21 +17,21 @@
 }
 .owl-dots {
   left: 50%;
-  bottom: 17px;
+  bottom: 2.8vw;
   display: flex;
   position: absolute;
   transform: translateX(-50%);
 }
 .owl-dot {
-  padding: 4px;
+  padding: 0.6vw;
   line-height: 0;
   font-size: 0;
   &::after {
     content: '';
     display: inline-block;
     border-radius: 50%;
-    width: 10px;
-    height: 10px;
+    width: 1.6vw;
+    height: 1.6vw;
     background-color: #d8d8d8;
     transition: background-color .2s;
   }
