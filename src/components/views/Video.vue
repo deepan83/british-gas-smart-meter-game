@@ -92,7 +92,7 @@ export default {
   padding: 1vw 1vw 1vw 0;
   color: #007bc7;
   letter-spacing: 0.16vw;
-  font: 12px/1 Gillsans;
+  font: 16px/1 Gillsans;
   border: 0;
   text-decoration: underline;
   background-color: transparent;
