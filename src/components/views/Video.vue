@@ -7,7 +7,7 @@
     <div class="video">
       <iframe class="video__iframe" width="560" height="315" :src="levelVideo" frameborder="0" allowfullscreen></iframe>
     </div>
-    <button v-if="showSkip" @click.prevent="skip" class="skip">Skip Video</button>
+    <button @click.prevent="skip" class="skip">Skip Video</button>
   </div>
 </template>
 
@@ -22,14 +22,6 @@ export default {
     'v-logo': Logo,
     'v-share': Share,
     'v-wilbur-looking-up': WilburLookingUp,
-  },
-  data: () => ({
-    showSkip: false
-  }),
-  mounted() {
-    setTimeout(() => {
-      this.showSkip = true;
-    }, 5000);
   },
   methods: {
     ...mapMutations({
