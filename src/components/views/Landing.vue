@@ -281,7 +281,8 @@ export default {
     background-color: transparent;
     border: 0;
     outline: 0;
-    background-size: cover;
+    background-repeat: no-repeat;
+    background-size: contain;
     background-image: url('~img/button.svg');
     &::after {
       content: '';
