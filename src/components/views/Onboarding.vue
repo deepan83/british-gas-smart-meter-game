@@ -115,7 +115,7 @@ export default {
     color: #fff;
     bottom: 2.83vw;
     position: absolute;
-    font: 2.3vw/1.15 Gillsans;
+    font: 16px/1.15 Gillsans;
     text-transform: uppercase;
     background-color: transparent;
     border: 0;
