@@ -1,11 +1,18 @@
 <template>
   <div class="page">
     <div class="my-slider">
-      <div class="owl-carousel">
+      <div class="slides" :style="slideStyle" v-touch:swipe.left="next" v-touch:swipe.right="prev">
         <div v-for="(instruction, index) in instructions" class="slide">
           <img class="slide__image" :class="'slide__image--' + index" :src="instruction.img" alt="">
           <p class="slide__instruction" v-html="instruction.text"></p>
         </div>
+      </div>
+      <div class="slider-nav">
+        <button class="slider-prev" :class="{'-inactive': isFirst }" @click="prev"></button>
+        <button class="slider-next" @click="next"></button>
+      </div>
+      <div class="slider-dots">
+        <div class="slider-dot" v-for="(instruction, index) in instructions" :class="{ '-active': current == index }" @click="select(index)"></div>
       </div>
       <button class="skip" @click.prevent="skip">Skip</button>
     </div>
@@ -14,7 +21,6 @@
 
 <script>
 import {mapMutations} from 'vuex'
-import 'owl.carousel'
 import image1 from 'img/instructions/1.png'
 import image2 from 'img/instructions/2.png'
 import image3 from 'img/instructions/3.png'
@@ -24,30 +30,36 @@ export default {
     instructions: [
       {
         img: image1,
-        text: 'Use arrow keys to move'
+        text: 'Use arrow keys to move',
+        percent: '0'
       },
       {
         img: image2,
-        text: 'Touch the bulbs to turn<br>them off before the<br>timer reaches 0.'
+        text: 'Touch the bulbs to turn<br>them off before the<br>timer reaches 0.',
+        percent: '25%'
       },
       {
         img: image3,
-        text: 'Teenagers will try to turn<br>the bulbs back on. Touch the<br>teenagers to freeze them.'
+        text: 'Teenagers will try to turn<br>the bulbs back on. Touch the<br>teenagers to freeze them.',
+        percent: '50%'
       },
       {
         img: image4,
-        text: 'Pick up appliances<br>for bonus points.'
+        text: 'Pick up appliances<br>for bonus points.',
+        percent: '75%'
       },
-    ]
+    ],
+    current: 0
   }),
-  mounted() {
-    $('.owl-carousel').owlCarousel({
-      loop:false,
-      nav:true,
-      autoplay: false,
-      items: 1,
-      navText: ['','']
-    })
+  computed: {
+    isFirst() {
+      return this.instructions[this.current-1] ? false: true;
+    },
+    slideStyle() {
+      return {
+        transform: `translateX(-${this.instructions[this.current].percent})`
+      }
+    }
   },
   methods: {
     ...mapMutations({
@@ -55,6 +67,20 @@ export default {
     }),
     skip() {
       this.changeRoute({name: 'game', params: {level: 1}});
+    },
+    prev() {
+      this.current = this.current-1 < 0 ? this.current : this.current-1;
+    },
+    next() {
+      var next = this.current+1;
+      if (next > this.instructions.length-1) {
+        this.skip();
+      } else {
+        this.current = next;
+      }
+    },
+    select(slide) {
+      this.current = slide;
     }
   }
 }
@@ -72,6 +98,7 @@ export default {
     left: 50%;
     width: 84.83vw;
     height: 67.3vw;
+    overflow: hidden;
     position: absolute;
     background-color: rgba(#ffffff, .5);
     transform: translate(-50%, -50%);
@@ -109,6 +136,11 @@ export default {
       text-align: center;
     }
   }
+  .slides {
+    width: 400%;
+    display: flex;
+    transition: .2s;
+  }
   .skip {
     z-index: 2;
     right: 2.3vw;
@@ -120,4 +152,54 @@ export default {
     background-color: transparent;
     border: 0;
   }
+  .slider-nav {
+    top: 50%;
+    width: 100%;
+    padding: 0 5.5vw;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+  }
+  .slider-prev, .slider-next {
+    width: 2.3vw;
+    height: 2.8vw;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    background-size: contain;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-image: url('~img/carousel-arrow.svg');
+    &.-inactive {
+      opacity: 0;
+    }
+  }
+  .slider-next {
+    transform: rotate(180deg);
+  }
+  .slider-dots {
+    left: 50%;
+    bottom: 2.8vw;
+    display: flex;
+    position: absolute;
+    transform: translateX(-50%);
+  }
+  .slider-dot {
+    padding: 0.6vw;
+    line-height: 0;
+    font-size: 0;
+    &::after {
+      content: '';
+      display: inline-block;
+      border-radius: 50%;
+      width: 1.6vw;
+      height: 1.6vw;
+      background-color: #d8d8d8;
+      transition: background-color .2s;
+    }
+    &.-active::after {
+      background-color: #bab9b9;
+    }
+  }
+
 </style>
