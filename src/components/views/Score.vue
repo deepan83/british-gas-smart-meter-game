@@ -26,14 +26,14 @@ export default {
     'v-smart-meter': SmartMeter,
   },
   mounted() {
-    var endScoreAudio = new Audio('/static/audio/end-score.mp3');
-    endScoreAudio.play();
+    this.audio.play('endScore');
   },
   computed: {
     ...mapGetters({
       routerParams: 'router/params',
       scores: 'scores',
-      totalScore: 'totalScore'
+      totalScore: 'totalScore',
+      audio: 'audio'
     }),
     isLastLevel() {
       return this.level === Object.keys(levelConfig.levels).length;

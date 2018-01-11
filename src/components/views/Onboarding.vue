@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import {mapMutations} from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 import image1 from 'img/instructions/1.png'
 import image2 from 'img/instructions/2.png'
 import image3 from 'img/instructions/3.png'
@@ -52,6 +52,9 @@ export default {
     current: 0
   }),
   computed: {
+    ...mapGetters([
+      'audio',
+    ]),
     isFirst() {
       return this.instructions[this.current-1] ? false: true;
     },
@@ -66,6 +69,7 @@ export default {
       changeRoute: 'router/change'
     }),
     skip() {
+      this.audio.stop('intro');
       this.changeRoute({name: 'game', params: {level: 1}});
     },
     prev() {

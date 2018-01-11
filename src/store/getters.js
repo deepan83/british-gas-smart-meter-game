@@ -9,3 +9,6 @@ export function totalScore(state) {
 export function character(state) {
   return state.character;
 }
+export function audio(state) {
+  return state.audio;
+}

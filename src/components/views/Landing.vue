@@ -65,7 +65,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'character'
+      'character',
+      'audio',
     ]),
     pageTitle() {
       return this.typewritingTitle.length < 1 ? this.initialTitle : this.typewritingTitle;
@@ -76,6 +77,8 @@ export default {
       changeRoute: 'router/change'
     }),
     start() {
+      this.audio.initiateAudio();
+      this.audio.play('intro');
       this.changeRoute({name: 'onboarding'});
     },
     ...mapMutations([

@@ -4,3 +4,6 @@ export function updateScores(state, {score, level}) {
 export function changeCharacter(state, character) {
   state.character = character;
 }
+export function setAudio(state, audio) {
+  state.audio = audio;
+}

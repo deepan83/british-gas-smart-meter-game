@@ -39,8 +39,7 @@ export default {
     'v-score-holder': ScoreHolder,
   },
   mounted () {
-    var levelChangeAudio = new Audio('/static/audio/level-change.mp3');
-    levelChangeAudio.play();
+    this.audio.play('levelChange');
     setTimeout(() => {
       this.transition = true;
     }, 500);
@@ -84,6 +83,7 @@ export default {
     ...mapGetters({
       selectedCharacter: 'character',
       routerParams: 'router/params',
+      audio: 'audio',
     }),
     level() {
       return this.routerParams.level;

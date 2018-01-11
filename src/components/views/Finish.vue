@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Logo from 'components/Logo'
 import ShareButton from 'components/ShareButton'
 export default {
@@ -20,8 +21,12 @@ export default {
     'v-share-button': ShareButton,
   },
   mounted() {
-    var wilburCheerAudio = new Audio('/static/audio/wilbur-cheer.mp3');
-    wilburCheerAudio.play();
+    this.audio.play('wilburCheer');
+  },
+  computed: {
+    ...mapGetters([
+      'audio',
+    ]),
   }
 }
 </script>

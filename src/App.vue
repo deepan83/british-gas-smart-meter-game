@@ -6,29 +6,20 @@
 
 <script>
 import {mapGetters} from 'vuex'
+import VAudio from './util/VAudio'
 export default {
-  data() {
-    return {
-      intoMusic: new Audio('/static/audio/intro.mp3')
-    }
-  },
   computed: {
     ...mapGetters({
       view: 'router/view',
-      route: 'router/route',
     }),
   },
   mounted() {
-    if (this.route.name === 'landing' || this.route.name === 'onboarding') {
-      this.intoMusic.play();
-    }
-  },
-  watch: {
-    route() {
-      if (this.route.name === 'game') {
-        this.intoMusic.pause();
-      }
-    }
+    var audio = new VAudio();
+    audio.add('/static/audio/intro.mp3', 'intro');
+    audio.add('/static/audio/level-change.mp3', 'levelChange');
+    audio.add('/static/audio/end-score.mp3', 'endScore');
+    audio.add('/static/audio/wilbur-cheer.mp3', 'wilburCheer');
+    this.$store.commit('setAudio', audio);
   }
 }
 </script>
