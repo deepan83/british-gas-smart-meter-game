@@ -8,8 +8,8 @@
         </div>
       </div>
       <div class="slider-nav">
-        <button class="slider-prev" :class="{'-inactive': isFirst }" @click="prev"></button>
-        <button class="slider-next" @click="next"></button>
+        <button class="slider-arrow -prev" :class="{'-inactive': isFirst }" @click="prev"></button>
+        <button class="slider-arrow -next" @click="next"></button>
       </div>
       <div class="slider-dots">
         <div class="slider-dot" v-for="(instruction, index) in instructions" :class="{ '-active': current == index }" @click="select(index)"></div>
@@ -164,22 +164,28 @@ export default {
     justify-content: space-between;
     position: absolute;
   }
-  .slider-prev, .slider-next {
-    width: 2.3vw;
-    height: 2.8vw;
-    padding: 0;
+  .slider-arrow {
+    padding: 3vw;
+    font-size: 0;
+    line-height: 0;
     outline: 0;
     border: 0;
-    background-size: contain;
     background-color: transparent;
-    background-repeat: no-repeat;
-    background-image: url('~img/carousel-arrow.svg');
     &.-inactive {
       opacity: 0;
     }
-  }
-  .slider-next {
-    transform: rotate(180deg);
+    &.-next {
+      transform: rotate(180deg);
+    }
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 3.3vw;
+      height: 3.8vw;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-image: url('~img/carousel-arrow.svg');
+    }
   }
   .slider-dots {
     left: 50%;
