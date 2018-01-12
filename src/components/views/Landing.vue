@@ -1,7 +1,9 @@
 <template>
   <div class="page">
     <div class="page-content">
-      <h1 class="title" :class="{ 'title--typewriting': typewriting, 'title--transition': transition }" v-html="pageTitle"></h1>
+      <div class="title-holder" :class="{ '-transition': transition }">
+        <h1 class="title" :class="{ '-typewriting': typewriting }" v-html="pageTitle"></h1>
+      </div>
       <div class="objects" :class="{ 'objects--transition': transition }">
         <img src="~img/dad-character.gif" alt="">
         <img src="~img/radio.png" alt="">
@@ -111,20 +113,28 @@ export default {
     letter-spacing: 0.04vw;
     text-shadow: 0 2px 4px rgba(#000, .5);
   }
-  .title {
+  .title-holder {
     position: absolute;
-    white-space: nowrap;
     top: 11%;
-    left: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    transition: all 1s .5s;
+    transform: translateY(275%);
+    &.-transition {
+      transform: translateY(0);
+    }
+  }
+  .title {
+    position: relative;
+    white-space: nowrap;
     font: 9.6vw/1 Minecraft;
     letter-spacing: 0.16vw;
     display: flex;
     justify-content: center;
     align-items: center;
     text-shadow: 0 2px 2px #000;
-    transition: all 1s .5s;
-    transform: translate(-50%, 275%);
-    &--typewriting {
+    &.-typewriting {
       &::after {
         left: 100%;
         top: -0.83vw;
@@ -142,9 +152,9 @@ export default {
         }
       }
     }
-    &--transition {
+    transition: all 1s .5s;
+    .-transition & {
       font-size: 6.3vw;
-      transform: translate(-50%, 0);
     }
   }
   .objects {
@@ -180,10 +190,10 @@ export default {
   }
   .initial-description {
     opacity: 0;
+    width: 100%;
     top: 22%;
     position: absolute;
     transform: translateX(100%);
-    // transition: all .8s 1.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     &.-transition {
       animation: initial-description 2.6s 1.6s forwards;
     }
