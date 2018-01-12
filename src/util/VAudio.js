@@ -6,8 +6,13 @@ class VAudio {
   add(file, name) {
     this.list[name] = new Audio(file);
   }
-  play(name) {
+  play(name, loop = false) {
     this.list[name].play();
+    if (loop) {
+      this.list[name].addEventListener('ended', () => {
+        this.play(name, true);
+      });
+    }
   }
   stop(name) {
     this.list[name].pause();
@@ -15,8 +20,8 @@ class VAudio {
   }
   initiateAudio() {
     Object.keys(this.list).forEach(key => {
-      this.list[key].play();
-      this.list[key].pause();
+      this.play(key);
+      this.stop(key);
     });
   }
 }

@@ -20,13 +20,13 @@ export default {
     'v-logo': Logo,
     'v-share-button': ShareButton,
   },
-  mounted() {
-    this.audio.play('wilburCheer');
-  },
   computed: {
-    ...mapGetters([
-      'audio',
-    ]),
+    ...mapGetters({
+      audio: 'audio',
+    }),
+  },
+  mounted() {
+    this.audio.play('wilburCheer', true);
   }
 }
 </script>

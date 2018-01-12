@@ -11,9 +11,10 @@ export default {
   computed: {
     ...mapGetters({
       view: 'router/view',
+      audio: 'audio'
     }),
   },
-  mounted() {
+  created() {
     var audio = new VAudio();
     audio.add('/static/audio/intro.mp3', 'intro');
     audio.add('/static/audio/level-change.mp3', 'levelChange');
