@@ -5,7 +5,7 @@
     <v-wilbur-looking-up></v-wilbur-looking-up>
     <p class="copy -top">You Scored...</p>
     <v-smart-meter :score="score"></v-smart-meter>
-    <p v-if="!isLastLevel" class="copy">Better luck in Level {{ nextLevel }}</p>
+    <p v-if="!isLastLevel" class="copy">Good luck in Level {{ nextLevel }}</p>
     <button v-if="!isLastLevel" @click.prevent="next" class="button">Play level {{ nextLevel }}</button>
     <button v-if="isLastLevel" @click.prevent="finish" class="button">Continue</button>
   </div>
