@@ -5,7 +5,7 @@
     <v-wilbur-looking-up></v-wilbur-looking-up>
     <p class="copy">Watch this video while we calculate your score and learn more about Smart Meters</p>
     <div class="video">
-      <iframe class="video__iframe" width="560" height="315" :src="levelVideo" frameborder="0" allowfullscreen></iframe>
+      <youtube class="video__iframe" :video-id="levelVideo" ref="youtube" :player-vars="{autoplay:1, width:560,height:315}" @ended="skip"></youtube>
     </div>
     <button @click.prevent="skip" class="skip">Skip Video</button>
   </div>
@@ -42,12 +42,21 @@ export default {
       return levelConfig.levels[this.level];
     },
     levelVideo() {
-      return 'https://www.youtube.com/embed/' + this.levelConfig.video + '?autoplay=1';
+      return this.levelConfig.video;
     }
   }
 }
 </script>
+<style lang="scss">
+  .video__iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 
+  }
+</style>
 <style lang="scss" scoped>
 .page {
   height: 100%;

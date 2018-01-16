@@ -3,8 +3,11 @@ import App from './App'
 import Promise from 'es6-promise/auto';
 import store from './store'
 import Vue2TouchEvents from 'vue2-touch-events'
+import VueYoutube from 'vue-youtube'
+
 Vue.config.productionTip = false
 
+Vue.use(VueYoutube)
 Vue.use(Vue2TouchEvents)
 
 if (window.h2c3()) {
