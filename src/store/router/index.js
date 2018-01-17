@@ -4,8 +4,7 @@ import * as getters from './getters';
 
 // initial state
 const state = {
-  // route: {name: 'landing'}
-  route: {name: 'video', params: {level:1}}
+  route: {name: 'landing'}
 }
 
 export default {
