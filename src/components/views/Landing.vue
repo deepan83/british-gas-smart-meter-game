@@ -193,24 +193,24 @@ export default {
     position: absolute;
     transform: translateX(100%);
     &.-transition {
-      animation: initial-description 2.6s 1.6s forwards;
+      animation: initial-description 5s 1.6s forwards;
     }
     @keyframes initial-description {
       0% {
         opacity: 0;
         transform: translateX(100%);
       }
-      22% {
+      12% {
         transform: translateX(-10%);
       }
-      29% {
+      19% {
         opacity: 1;
         transform: translateX(0);
       }
-      74% {
+      78% {
         transform: translateX(0);
       }
-      76% {
+      80% {
         opacity: 1;
         transform: translateX(10%);
       }
@@ -225,7 +225,7 @@ export default {
     max-width: 448px;
     margin-bottom: 8vw;
     transform: translateX(100%);
-    transition: all .8s 3.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: all .8s 5.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     &.-transition {
       opacity: 1;
       transform: translateX(0);
