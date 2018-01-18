@@ -1,6 +1,7 @@
 <template>
   <div class="page">
     <div class="my-slider">
+      <h1 class="title">How to play</h1>
       <div class="slides" :style="slideStyle" v-touch:swipe.left="next" v-touch:swipe.right="prev">
         <div v-for="(instruction, index) in instructions" class="slide">
           <img class="slide__image" :class="'slide__image--' + index" :src="instruction.img" alt="">
@@ -106,6 +107,15 @@ export default {
     position: absolute;
     background-color: rgba(#ffffff, .5);
     transform: translate(-50%, -50%);
+  }
+  .title {
+    top: 4vw;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    position: absolute;
+    font: 7vw/1 Minecraft;
+    text-shadow: 0 2px 4px rgba(#000, .5);
   }
   .slide {
     display: flex;
