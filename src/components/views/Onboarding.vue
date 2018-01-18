@@ -40,7 +40,7 @@ export default {
       },
       {
         img: image3,
-        text: 'Teenagers will try to turn<br>the bulbs back on. Touch the<br>teenagers to freeze them.',
+        text: 'Teenagers will try to turn<br>the bulbs back on. Run into<br>the teenagers to freeze them.',
         percent: '50%'
       },
       {
