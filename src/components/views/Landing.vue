@@ -79,8 +79,6 @@ export default {
       changeRoute: 'router/change'
     }),
     start() {
-      this.audio.initiateAudio();
-      this.audio.play('intro');
       this.changeRoute({name: 'onboarding'});
     },
     ...mapMutations([
