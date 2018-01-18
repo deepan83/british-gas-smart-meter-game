@@ -14,7 +14,7 @@
 // }
 
 // window.h2c3 = function() {
-//     return w34545l12.some((element) => {
+//     return w34545l12.some(function(element) {
 //         return element.indexOf(g2h112()) !== -1;
 //     })
 // }
