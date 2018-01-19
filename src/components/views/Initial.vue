@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="page-content">
-      <p class="instruction">{{ instruction }}</p>
+      <p class="instruction" v-html="instruction"></p>
       <h1 class="title" v-html="title"></h1>
       <p class="subtitle">{{ subTitle }}</p>
       <div class="start-holder">
@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       title: 'Smart Meter Maze',
-      instruction: 'Click START to play our exciting new game',
+      instruction: 'Click START to play our exciting new game<br>You have 5 levels to complete.',
       subTitle: 'A RACE TO SAVE ENERGY',
     }
   },
