@@ -6,6 +6,7 @@
     <p class="copy -top">You Scored...</p>
     <v-smart-meter :score="score"></v-smart-meter>
     <p v-if="!isLastLevel" class="copy" :class="{'-next-last': nextIsLast}"><span v-if="nextIsLast">Last level<br></span>Good luck in Level {{ nextLevel }}</p>
+    <!-- <p v-if="isLastLevel" class="copy">Congratulations</p> -->
     <button v-if="!isLastLevel" @click.prevent="next" class="button">Play level {{ nextLevel }}</button>
     <button v-if="isLastLevel" @click.prevent="finish" class="button">Continue</button>
   </div>
@@ -91,7 +92,8 @@ export default {
 }
 .button {
   top: 75.5vw;
-  left: 33.83vw;
+  left: 50%;
+  transform: translateX(-50%);
   position: absolute;
   border: 0;
   color: #d0021b;
