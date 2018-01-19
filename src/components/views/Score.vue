@@ -5,7 +5,7 @@
     <v-wilbur-looking-up></v-wilbur-looking-up>
     <p class="copy -top">You Scored...</p>
     <v-smart-meter :score="score"></v-smart-meter>
-    <p v-if="!isLastLevel" class="copy">Good luck in Level {{ nextLevel }}</p>
+    <p v-if="!isLastLevel" class="copy" :class="{'-next-last': nextIsLast}"><span v-if="nextIsLast">Last level<br></span>Good luck in Level {{ nextLevel }}</p>
     <button v-if="!isLastLevel" @click.prevent="next" class="button">Play level {{ nextLevel }}</button>
     <button v-if="isLastLevel" @click.prevent="finish" class="button">Continue</button>
   </div>
@@ -37,6 +37,9 @@ export default {
     }),
     isLastLevel() {
       return this.level === Object.keys(levelConfig.levels).length;
+    },
+    nextIsLast() {
+      return this.level === Object.keys(levelConfig.levels).length - 1;
     },
     level() {
       return this.routerParams.level;
@@ -81,6 +84,9 @@ export default {
   font: 3.5vw/1.4 Minecraft;
   &.-top {
     top: 14vw;
+  }
+  &.-next-last {
+    top: 64vw;
   }
 }
 .button {
