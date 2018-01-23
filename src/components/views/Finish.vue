@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <v-logo></v-logo>
-    <div class="share">Why not share and challenge your friends?
+    <div class="share">Congratulations.<br>Why not share and challenge your friends?
       <div class="share__buttons"><!--
         --><v-share-button class="share__button" network="facebook" large="true"></v-share-button><!--
         --><v-share-button class="share__button" network="twitter" large="true"></v-share-button><!--
@@ -40,7 +40,10 @@ export default {
 .share {
   color: #007dc4;
   top: 15.6vw;
-  left: 24vw;
+  left: 50%;
+  text-align: center;
+  white-space: nowrap;
+  transform: translateX(-50%);
   position: absolute;
   font: 3vw/1 Gillsans;
   &__buttons {
