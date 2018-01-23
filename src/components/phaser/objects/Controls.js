@@ -40,7 +40,7 @@ class Controls {
     Object.keys(this.keyCodes).forEach((key, index) => {
       this.setButton(this.keyCodes[key],index);
     })
-    this.debugButtons();
+    // this.debugButtons();
   }
   setButton(direction,index) {
     var points = [];
