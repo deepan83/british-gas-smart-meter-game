@@ -19,14 +19,14 @@ class Controls {
       x: this.game.world.width - 230,
       y: this.game.world.height - 230,
     }
-    this.controls = this.game.add.sprite(this.position.x, this.position.y, 'objects', this.frames[Phaser.NONE]);
+    this.controls = this.game.add.sprite(this.position.x + 20, this.position.y + 20, 'objects', this.frames[Phaser.NONE]);
     this.origin = new Phaser.Point(this.position.x + 110, this.position.y + 110);
     this.initialPoints = [
-      new Phaser.Point(this.position.x, this.position.y + 75),
-      new Phaser.Point(this.position.x + 66, this.position.y + 75),
-      new Phaser.Point(this.position.x + 100, this.position.y + 110),
-      new Phaser.Point(this.position.x + 66, this.position.y + 145),
-      new Phaser.Point(this.position.x, this.position.y + 145),
+      new Phaser.Point(this.position.x, this.position.y + 70),
+      new Phaser.Point(this.position.x + 70, this.position.y + 70),
+      new Phaser.Point(this.position.x + 110, this.position.y + 110),
+      new Phaser.Point(this.position.x + 70, this.position.y + 150),
+      new Phaser.Point(this.position.x, this.position.y + 150),
     ]
     this.setButtons();
     this.game.input.onDown.add(this.pointerDown, this);
@@ -55,6 +55,7 @@ class Controls {
   debugButtons() {
     this.buttons.forEach((button) => {
       button.graphics = this.game.add.graphics(0, 0);
+      button.graphics.lineStyle(2, 0xffd900, 1);
       button.graphics.beginFill(0x000000);
       button.graphics.drawPolygon(button.polygon.points);
       button.graphics.endFill();
