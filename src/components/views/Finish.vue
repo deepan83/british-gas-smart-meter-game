@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <v-logo></v-logo>
-    <div class="share">Congratulations.<br>Why not share and challenge your friends?
+    <div class="share">Congratulations!<br>Why not share and challenge your friends?
       <div class="share__buttons"><!--
         --><v-share-button class="share__button" network="facebook" large="true"></v-share-button><!--
         --><v-share-button class="share__button" network="twitter" large="true"></v-share-button><!--
