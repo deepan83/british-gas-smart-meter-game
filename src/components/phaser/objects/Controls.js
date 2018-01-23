@@ -1,10 +1,10 @@
 class Controls {
   direction = false;
   keyCodes = {
-    'ArrowLeft': Phaser.LEFT,
-    'ArrowUp': Phaser.UP,
-    'ArrowRight': Phaser.RIGHT,
-    'ArrowDown': Phaser.DOWN,
+    '37': Phaser.LEFT,
+    '38': Phaser.UP,
+    '39': Phaser.RIGHT,
+    '40': Phaser.DOWN,
   }
   frames = {
     [Phaser.LEFT]: 'd-pad/left',
@@ -87,8 +87,8 @@ class Controls {
     this.resetDirection();
   }
   keyPressesDown(event) {
-    if (typeof this.keyCodes[event.key] !== 'undefined') {
-      this.direction = this.keyCodes[event.key];
+    if (this.keyCodes.hasOwnProperty(event.keyCode)) {
+      this.direction = this.keyCodes[event.keyCode];
       this.highlightButton(this.direction);
     }
   }
