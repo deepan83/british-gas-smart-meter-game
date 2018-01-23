@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       title: 'Smart Meter Maze',
-      instruction: 'Click START to play our exciting new game<br>You have 5 levels to complete.',
+      instruction: 'Click START to play our exciting new game.<br>You have 5 levels to complete.',
       subTitle: 'A RACE TO SAVE ENERGY',
     }
   },
