@@ -16,17 +16,17 @@ class Controls {
   constructor(game) {
     this.game = game;
     this.position = {
-      x: this.game.world.width - 190,
-      y: this.game.world.height - 190,
+      x: this.game.world.width - 230,
+      y: this.game.world.height - 230,
     }
     this.controls = this.game.add.sprite(this.position.x, this.position.y, 'objects', this.frames[Phaser.NONE]);
-    this.origin = new Phaser.Point(this.position.x + 90, this.position.y + 90);
+    this.origin = new Phaser.Point(this.position.x + 110, this.position.y + 110);
     this.initialPoints = [
-      new Phaser.Point(this.position.x, this.position.y + 62),
-      new Phaser.Point(this.position.x + 56, this.position.y + 62),
-      new Phaser.Point(this.position.x + 84, this.position.y + 90),
-      new Phaser.Point(this.position.x + 56, this.position.y + 118),
-      new Phaser.Point(this.position.x, this.position.y + 118),
+      new Phaser.Point(this.position.x, this.position.y + 75),
+      new Phaser.Point(this.position.x + 66, this.position.y + 75),
+      new Phaser.Point(this.position.x + 100, this.position.y + 110),
+      new Phaser.Point(this.position.x + 66, this.position.y + 145),
+      new Phaser.Point(this.position.x, this.position.y + 145),
     ]
     this.setButtons();
     this.game.input.onDown.add(this.pointerDown, this);
@@ -40,7 +40,7 @@ class Controls {
     Object.keys(this.keyCodes).forEach((key, index) => {
       this.setButton(this.keyCodes[key],index);
     })
-    // this.debugButtons();
+    this.debugButtons();
   }
   setButton(direction,index) {
     var points = [];
