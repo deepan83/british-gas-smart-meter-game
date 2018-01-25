@@ -79,6 +79,14 @@ export default {
       changeRoute: 'router/change'
     }),
     start() {
+      var trackers = ga.getAll();
+      trackers.forEach((tracker) => {
+        tracker.send({
+          hitType: 'event',
+          eventCategory: 'Character Selection',
+          eventAction: 'Character: ' + this.character
+        });
+      })
       this.changeRoute({name: 'onboarding'});
     },
     ...mapMutations([
