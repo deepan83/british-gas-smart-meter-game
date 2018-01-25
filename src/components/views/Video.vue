@@ -5,7 +5,7 @@
     <v-wilbur-looking-up></v-wilbur-looking-up>
     <p class="copy">Watch this video while we calculate your score and learn more about Smart Meters</p>
     <div class="video">
-      <youtube class="video__iframe" :video-id="levelVideo" ref="youtube" :player-vars="{autoplay:1, width:560,height:315}" @ended="skip"></youtube>
+      <youtube class="video__iframe" :video-id="levelVideo" ref="youtube" :player-vars="{autoplay:1, width:560,height:315}" @ended="videoFinished"></youtube>
     </div>
     <button @click.prevent="skip" class="skip">Skip Video</button>
   </div>
@@ -27,7 +27,26 @@ export default {
     ...mapMutations({
       changeRoute: 'router/change'
     }),
+    videoTrack(action) {
+      var trackers = ga.getAll();
+      trackers.forEach((tracker) => {
+        tracker.send({
+          hitType: 'event',
+          eventCategory: 'Video',
+          eventAction: action,
+          eventLabel: 'Level: ' + this.level
+        });
+      })
+    },
+    videoFinished() {
+      this.videoTrack('finished');
+      this.gotoNextLevel();
+    },
     skip() {
+      this.videoTrack('skipped');
+      this.gotoNextLevel();
+    },
+    gotoNextLevel() {
       this.changeRoute({name: 'score', params: {level: this.level}});
     }
   },
