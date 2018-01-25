@@ -68,6 +68,15 @@ export default {
       changeRoute: 'router/change'
     }),
     finished() {
+      var trackers = ga.getAll();
+      trackers.forEach((tracker) => {
+        tracker.send({
+          hitType: 'event',
+          eventCategory: 'Level Complete',
+          eventAction: 'Level: ' + this.level,
+          eventLabel: 'Score: ' + this.score
+        });
+      })
       this.$store.commit('updateScores', {score: this.score, level: this.level});
       if (this.level === Object.keys(levelConfig.levels).length) {
         this.changeRoute({name: 'score', params: {level: this.level}});
