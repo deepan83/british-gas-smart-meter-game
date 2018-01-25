@@ -8,11 +8,12 @@
       --></div>
     </div>
     <a href="" class="link">Learn more about smart meters</a>
+    <button class="play-again" @click.prevent="playAgain">Play Again</button>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import Logo from 'components/Logo'
 import ShareButton from 'components/ShareButton'
 export default {
@@ -21,12 +22,23 @@ export default {
     'v-share-button': ShareButton,
   },
   computed: {
-    ...mapGetters({
-      audio: 'audio',
-    }),
+    ...mapGetters([
+      'audio',
+      'scores'
+    ]),
   },
   mounted() {
     this.audio.play('wilburCheer', true);
+  },
+  methods: {
+    ...mapMutations({
+      changeRoute: 'router/change',
+      resetScores: 'resetScores'
+    }),
+    playAgain() {
+      this.resetScores();
+      this.changeRoute({name: 'landing'});
+    }
   }
 }
 </script>
@@ -66,5 +78,35 @@ export default {
   top: 31.6vw;
   left: 21.5vw;
   background-color: rgba(#fff, .6);
+}
+.play-again {
+  right: 3vw;
+  top: 6vw;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  cursor: pointer;
+  position: absolute;
+  padding: 1vw 1vw 1vw 0;
+  color: #007bc7;
+  letter-spacing: 0.16vw;
+  font: 18px/1 Gillsans;
+  border: 0;
+  text-decoration: underline;
+  background-color: transparent;
+  transition: transform .4s;
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-left: 4px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('~img/play-again.svg');
+  }
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 </style>

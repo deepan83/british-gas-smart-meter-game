@@ -1,3 +1,6 @@
+export function resetScores(state) {
+  state.scores = [];
+}
 export function updateScores(state, {score, level}) {
   state.scores[level - 1] = score;
 }
