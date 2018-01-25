@@ -10,7 +10,7 @@ class VAudio {
     this.list[name].play();
     if (loop) {
       this.list[name].addEventListener('ended', () => {
-        this.play(name, true);
+        this.play(name);
       });
     }
   }
