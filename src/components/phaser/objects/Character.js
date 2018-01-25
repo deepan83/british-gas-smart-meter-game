@@ -60,7 +60,7 @@ class Character extends Phaser.Sprite {
   update() {
     if (this.activateCollision()) {
       this.animations.stop();
-      this.stepsAudio.pause();
+      this.stepsAudio.stop();
     }
 
     this.marker.x = this.game.math.snapToFloor(Math.floor(this.x), this.gameMap.tileSize) / this.gameMap.tileSize;
@@ -121,11 +121,7 @@ class Character extends Phaser.Sprite {
 
     this.animations.play('walk'+direction, 10, true);
 
-    if (!this.stepsAudio.isPlaying && !this.stepsAudio.paused) {
-      this.stepsAudio.play();
-    } else if (this.stepsAudio.paused) {
-      this.stepsAudio.resume();
-    }
+    this.stepsAudio.play('', 0);
 
     this.currentDirection = direction;
   }
