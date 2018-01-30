@@ -36,7 +36,7 @@ export default {
       },
       {
         img: image2,
-        text: 'Touch the bulbs to turn<br>them off before the<br>timer reaches 0.',
+        text: 'Touch the bulbs to<br>turn them off.',
         percent: '25%'
       },
       {
