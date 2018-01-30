@@ -43,7 +43,7 @@ export default {
       transition: false,
       subTitle: 'A RACE TO SAVE ENERGY',
       initialDescription: 'I\'s a race against time and we need your help.',
-      description: 'Locate and switch off as many energy draining appliances as you can spot in our Smart Meter Maze faster than the teenagers switching them back on.<br><br>Good luck!',
+      description: 'Locate and switch off as many energy-draining appliances as you can spot in our Smart Meter Maze faster than the teenagers switching them back on.<br><br>Good luck!',
       canType: true
     }
   },
