@@ -6,14 +6,14 @@
 export default {
   props: ['network', 'large'],
   computed: {
-    siteUrl() {
-      return window.location.origin;
+    shareUrl() {
+      return window.location.origin + '/share.html';
     },
     href() {
       if (this.network == 'facebook') {
-        return `https://www.facebook.com/sharer/sharer.php?u=${this.siteUrl}`;
+        return `https://www.facebook.com/sharer/sharer.php?u=${this.shareUrl}`;
       } else {
-        return `https://twitter.com/intent/tweet?text=Play the free 'Smart Meter Maze' game&url=${this.siteUrl}`;
+        return `https://twitter.com/intent/tweet?text=Play the free 'Smart Meter Maze' game&url=${this.shareUrl}`;
       }
     }
   }

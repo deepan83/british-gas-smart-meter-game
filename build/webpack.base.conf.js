@@ -83,6 +83,11 @@ module.exports = {
       filename: 'embed.html',
       template: 'embed.html',
       inject: false
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'share.html',
+      template: 'share.html',
+      inject: false
     })
   ]
 }
