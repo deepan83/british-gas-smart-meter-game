@@ -26,6 +26,7 @@ import image1 from 'img/instructions/1.png'
 import image2 from 'img/instructions/2.png'
 import image3 from 'img/instructions/3.png'
 import image4 from 'img/instructions/4.png'
+import image5 from 'img/instructions/5.png'
 export default {
   data: () => ({
     instructions: [
@@ -37,17 +38,22 @@ export default {
       {
         img: image2,
         text: 'Touch the bulbs to<br>turn them off.',
-        percent: '25%'
+        percent: '20%'
       },
       {
         img: image3,
         text: 'Teenagers will try to turn<br>the bulbs back on. Run into<br>the teenagers to freeze them.',
-        percent: '50%'
+        percent: '40%'
       },
       {
         img: image4,
         text: 'Pick up appliances<br>for bonus points.',
-        percent: '75%'
+        percent: '60%'
+      },
+      {
+        img: image5,
+        text: 'You have 60 seconds before<br>the energy timer reaches 0.',
+        percent: '80%'
       },
     ],
     current: 0
@@ -151,7 +157,7 @@ export default {
     }
   }
   .slides {
-    width: 400%;
+    width: 500%;
     display: flex;
     transition: .2s;
   }
