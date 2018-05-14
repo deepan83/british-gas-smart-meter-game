@@ -19,7 +19,7 @@ if (nonsupportedBrowser) {
   element.style.display = 'block';
 }
 
-if (window.h2c3() && !nonsupportedBrowser) {
+if (!nonsupportedBrowser) {
   /* eslint-disable no-new */
   new Vue({
       el: '#app',
@@ -28,4 +28,3 @@ if (window.h2c3() && !nonsupportedBrowser) {
       store
   })
 }
-
